@@ -3,7 +3,23 @@ package com.javaguide.ISAprojekat.model;
 import com.javaguide.ISAprojekat.dto.UserRegistrationDTO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Client extends User{
+    @Column
+    private int penalty;
+//    @Column
+//    private LoyaltyProgram loyaltyProgram;
+    @Column
+    private boolean gradedCenter;
+    @Column
+    private String occupation;
+    @Column
+    private String organizationInformation;
+    @Column
+    private boolean filledOutSurvey;
     public Client() {
     }
     public Client(UserRegistrationDTO userRegistrationDTO) {
@@ -20,5 +36,45 @@ public class Client extends User{
 //        this.setPassword(userRegistrationDTO.getPassword());
         this.setRole(new Role("ROLE_CLIENT"));
         this.setActive(false);
+    }
+
+    public int getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(int penalty) {
+        this.penalty = penalty;
+    }
+
+//    public LoyaltyProgram getLoyaltyProgram() {
+//        return loyaltyProgram;
+//    }
+//
+//    public void setLoyaltyProgram(LoyaltyProgram loyaltyProgram) {
+//        this.loyaltyProgram = loyaltyProgram;
+//    }
+
+    public boolean isGradedCenter() {
+        return gradedCenter;
+    }
+
+    public void setGradedCenter(boolean gradedCenter) {
+        this.gradedCenter = gradedCenter;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getOrganizationInformation() {
+        return organizationInformation;
+    }
+
+    public void setOrganizationInformation(String organizationInformation) {
+        this.organizationInformation = organizationInformation;
     }
 }

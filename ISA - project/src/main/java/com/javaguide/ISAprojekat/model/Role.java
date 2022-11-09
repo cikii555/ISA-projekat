@@ -2,20 +2,25 @@ package com.javaguide.ISAprojekat.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.*;
+
+@Entity
 public class Role implements GrantedAuthority {
-//    @Id
-//    @Column(name="id")
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-//    @Column(name="name")
+    @Column(name="name")
     String name;
 
-    Role() {}
+   public Role() {}
 
     Role(String role) {
         this.name = role;
     }
+
+
 
     public Long getId() {
         return id;

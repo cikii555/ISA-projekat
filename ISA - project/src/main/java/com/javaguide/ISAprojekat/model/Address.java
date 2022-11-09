@@ -1,25 +1,29 @@
 package com.javaguide.ISAprojekat.model;
 
+
+import javax.persistence.*;
+
+@Entity
 public class Address {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(name="country", nullable = false)
+   @Column(name="country", nullable = false)
     private String country;
 
-//    @Column(name = "city", nullable = false)
+    @Column(name = "city", nullable = false)
     private String city;
 
-//    @Column(name = "street", nullable = false)
+    @Column(name = "street", nullable = false)
     private String street;
-//    @Column(name = "streetNumber", nullable = false)
+    @Column(name = "streetNumber", nullable = false)
     private String streetNumber;
 
-//    @Column(name = "lon")
+    @Column(name = "lon")
     private String lon;
 
-//    @Column(name = "lat")
+    @Column(name = "lat")
     private String lat;
 
     public Address() {
@@ -30,5 +34,13 @@ public class Address {
         this.city = city;
         this.street = street;
         this.streetNumber = streetNumber;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

@@ -4,44 +4,49 @@ package com.javaguide.ISAprojekat.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User implements UserDetails {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Id
+@SequenceGenerator(name = "my_seq_gen_user", sequenceName = "my_seq_gen_user", initialValue = 1, allocationSize = 1)
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_user")
     private Long id;
-//    @Column
+
+    @Column
     private String password;
-//    @Column
+    @Column
     private String email;
-//    @Column
+    @Column
     private String firstName;
-//    @Column
+    @Column
     private String lastName;
-//    @Column
+    @Column
     private String phoneNumber;
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-//    @Column
+    @Column
     private String jmbg;
-//    @Column
+    @Column
     private String gender;
-//    @Column
-    private String occupation;
-//    @Column
-    private String organizationInformation;
-//    @Column
+
+    @Column
     private boolean isActive;
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private Role role;
+
 
     public User() {
     }
 
-    public User(String password, String email, String firstName, String lastName, String phoneNumber, Address address, String jmbg, String gender, String occupation, String organizationInformation, Role role) {
+    public User(String password, String email, String firstName, String lastName, String phoneNumber, Address address, String jmbg, String gender, Role role) {
         this.password = password;
         this.email = email;
         this.firstName = firstName;
@@ -50,8 +55,6 @@ public class User implements UserDetails {
         this.address = address;
         this.jmbg = jmbg;
         this.gender = gender;
-        this.occupation = occupation;
-        this.organizationInformation = organizationInformation;
         this.role = role;
     }
 
@@ -129,13 +132,6 @@ public class User implements UserDetails {
         this.gender = gender;
     }
 
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-    public void setOrganizationInformation(String organizationInformation) {
-        this.organizationInformation = organizationInformation;
-    }
 
     public void setActive(boolean active) {
         isActive = active;
@@ -177,13 +173,6 @@ public class User implements UserDetails {
         return gender;
     }
 
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public String getOrganizationInformation() {
-        return organizationInformation;
-    }
 
     public boolean isActive() {
         return isActive;
