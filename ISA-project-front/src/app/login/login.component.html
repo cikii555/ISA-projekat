@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="card">
+        <h1 class="cardTitle">  Sign in  </h1>
+        <table style="margin-left: 70px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput>
+            </mat-form-field><br>
+        </table>
+    <div class="additional">
+        <button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="SignIn()">
+            Sign in
+        </button>
+        <br>
+        <br>
+        <p>Don't have an account?</p> <a href="/registration" style="color:#e0e7ff">Sign up now.</a>
+    </div>
+    </div>
+</div>
