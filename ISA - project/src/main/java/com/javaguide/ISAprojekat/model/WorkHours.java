@@ -1,11 +1,16 @@
 package com.javaguide.ISAprojekat.model;
-
+import javax.persistence.*;
 import java.time.LocalTime;
-
+@Entity
 public class WorkHours {
-    //    @Id
-    //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private LocalTime startTime;
-    private LocalTime endTime;
+       @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+       @Column
+        private LocalTime startTime;
+       @Column
+        private LocalTime endTime;
+    @OneToOne(mappedBy = "workHours")
+    @JoinColumn(name="bloodTransfusionCenter_id")
+    private BloodTransfusionCenter bloodTransfusionCenter;
 }

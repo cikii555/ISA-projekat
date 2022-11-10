@@ -25,7 +25,8 @@ public class Address {
 
     @Column(name = "lat")
     private String lat;
-
+    @OneToOne(mappedBy = "address")
+    private BloodTransfusionCenter bloodTransfusionCenter;
     public Address() {
     }
 
