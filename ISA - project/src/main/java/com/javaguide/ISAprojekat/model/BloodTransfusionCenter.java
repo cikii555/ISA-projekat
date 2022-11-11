@@ -4,10 +4,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.*;
+
+
 @Entity
 public class BloodTransfusionCenter {
-      @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String name;
@@ -20,10 +22,10 @@ public class BloodTransfusionCenter {
     private double averageGrade;
     @OneToOne(cascade = CascadeType.ALL)
     private WorkHours workHours;
-    // ne ide u bazu
-    private ArrayList<Appointment> freeAppointment;
-    //ne ide u bazu
-    private ArrayList<MedicalStaff> medicalStaff;
+    @OneToMany(mappedBy = "bloodTransfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Appointment> freeAppointment;
+    @OneToMany(mappedBy = "bloodTransfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<MedicalStaff> medicalStaff;
     @OneToMany(mappedBy = "bloodTransfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<BloodBank> bloodBanks;
     @OneToMany(mappedBy = "bloodTransfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

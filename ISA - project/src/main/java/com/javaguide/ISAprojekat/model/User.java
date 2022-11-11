@@ -14,9 +14,9 @@ import java.util.Collection;
 public class User implements UserDetails {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-@Id
-@SequenceGenerator(name = "my_seq_gen_user", sequenceName = "my_seq_gen_user", initialValue = 1, allocationSize = 1)
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_user")
+    @Id
+    @SequenceGenerator(name = "my_seq_gen_user", sequenceName = "my_seq_gen_user", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_user")
     private Long id;
 
     @Column
@@ -40,7 +40,7 @@ public class User implements UserDetails {
     @Column
     private boolean isActive;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = true)
     private Role role;
 
 

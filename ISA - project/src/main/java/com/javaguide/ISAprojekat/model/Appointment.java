@@ -1,18 +1,31 @@
 package com.javaguide.ISAprojekat.model;
 
+import javax.persistence.*;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Set;
 
+@Entity
 public class Appointment {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private ArrayList<MedicalStaff> medicalStaff;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="medicalStaff_id")
+    private Set<MedicalStaff> medicalStaff;
+    @Column
     private LocalDateTime startTime;
+    @Column
     private LocalDateTime endTime;
+    @Column
     private boolean taken;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="bloodTransfusionCenter_id")
+    private BloodTransfusionCenter bloodTransfusionCenter;
 
     public Appointment() {
     }
