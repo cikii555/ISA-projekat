@@ -1,7 +1,7 @@
 package com.javaguide.ISAprojekat.service;
 
 import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
-import com.javaguide.ISAprojekat.repository.TransfusionCenterRepository;
+import com.javaguide.ISAprojekat.dto.repository.TransfusionCenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

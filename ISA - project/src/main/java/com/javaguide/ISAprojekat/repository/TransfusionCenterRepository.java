@@ -1,4 +1,4 @@
-package com.javaguide.ISAprojekat.repository;
+package com.javaguide.ISAprojekat.dto.repository;
 
 import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
 import org.springframework.data.jpa.repository.JpaRepository;
