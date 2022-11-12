@@ -6,6 +6,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput [(ngModel)]="registrationClient.email" placeholder="Ex. pat@example.com">
+                <div ></div>
             </mat-form-field><br>
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
@@ -68,6 +69,12 @@
                 <mat-label>Organization information</mat-label>
                 <input matInput  [(ngModel)]="registrationClient.organizationInformation">
             </mat-form-field><br>
+            <div class="err" *ngIf="validEmail!='OK'"><br>
+                <label style="color: red;">{{validEmail}}</label>
+             </div>
+            <div class="err" *ngIf="validInfo!= 'OK'"> <br>
+                   <label style="color: red;">{{validInfo}}</label>
+            </div>
         </table>
     <div class="additional">
         <button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="Registration()">

@@ -18,6 +18,9 @@ public class UserRegistrationDTO {
     private String occupation;
     private String organizationInformation;
 
+    public UserRegistrationDTO() {
+    }
+
     public UserRegistrationDTO(String password, String email, String firstName, String lastName, String phoneNumber, String country, String city, String street, String streetNumber, String jmbg, String gender, String occupation, String organizationInformation) {
         this.password = password;
         this.email = email;

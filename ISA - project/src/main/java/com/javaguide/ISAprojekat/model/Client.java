@@ -34,7 +34,6 @@ public class Client extends User{
         this.setPhoneNumber(userRegistrationDTO.getPhoneNumber());
         this.setPassword(new BCryptPasswordEncoder().encode(userRegistrationDTO.getPassword()));
 //        this.setPassword(userRegistrationDTO.getPassword());
-        this.setRole(new Role("ROLE_CLIENT"));
         this.setActive(false);
     }
 

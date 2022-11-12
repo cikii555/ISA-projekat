@@ -68,8 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-//        web.ignoring().antMatchers(HttpMethod.POST, "/api/auth/login",
-//                "/api/auth/register/client");
+        web.ignoring().antMatchers(HttpMethod.POST,
+                "/auth/register/client");
 //        web.ignoring().antMatchers(HttpMethod.GET, "");
     }
 }

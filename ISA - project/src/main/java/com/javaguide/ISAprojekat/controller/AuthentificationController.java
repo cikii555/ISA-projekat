@@ -1,6 +1,7 @@
 package com.javaguide.ISAprojekat.controller;
 
 import com.javaguide.ISAprojekat.dto.UserRegistrationDTO;
+import com.javaguide.ISAprojekat.model.Client;
 import com.javaguide.ISAprojekat.security.TokenUtils;
 import com.javaguide.ISAprojekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -31,11 +34,11 @@ public class AuthentificationController {
     }
     @PostMapping(consumes="application/json", value="/register/client")
     public ResponseEntity<HttpStatus> registerClient(@RequestBody UserRegistrationDTO data) {
-        if (!data.arePropsValid())
-            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
-
-        if (userService.findByEmail(data.getEmail()) != null)
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        if (!data.arePropsValid())
+//            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+//
+//        if (userService.findByEmail(data.getEmail()) != null)
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         try {
             userService.saveClient(data);
         } catch (Exception ignored) {
@@ -44,6 +47,17 @@ public class AuthentificationController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @GetMapping(consumes="application/json", value="/register/{email}")
+    public ResponseEntity<Client> emailExists(@PathVariable String email) {
+//        String email = tokenUtils.getEmailDirectlyFromHeader(request);
+        if (email == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        Client client = userService.findByEmail(email);
+        if (client==null)
+            return null;
+        return new ResponseEntity<>(client, HttpStatus.OK);
+    }
+
 //    @PostMapping(value="/login")
 //    @CrossOrigin(origins = ServerConfig.FRONTEND_ORIGIN)
 //    public ResponseEntity<UserTokenDTO> login(@RequestBody LoginDTO loginData) {

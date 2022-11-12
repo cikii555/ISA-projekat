@@ -1,3 +1,4 @@
+
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Balzakova','58','43.27','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Sekspirova','23','43.27','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Alekse Santica','12','43.27,','44.23');
@@ -39,18 +40,12 @@ insert into blood_bank (blood_type,quantity,blood_transfusion_center_id) values 
 insert into blood_bank (blood_type,quantity,blood_transfusion_center_id) values (7,16,5);
 
 
-insert into role( name) values ('Manager');
-insert into role( name) values ('ADMIN');
+INSERT INTO role (name) VALUES ('ROLE_CLIENT'),
+                               ('ROLE_ADMIN'),
+                               ('ROLE_MEDICALSTAFF'),
+                               ('ROLE_UNAUTH');
 
-
-
-insert into users(id,email, first_name, gender, is_active, jmbg, last_name, password, phone_number, address_id, role_id)
-values(1,'dussanstanimirovic@gmail.com','Dusan','male',false,'0908000120312','Stanimirovic','12345','066428369',1,1);
-insert into users(id,email, first_name, gender, is_active, jmbg, last_name, password, phone_number, address_id, role_id)
-values(2,'dijanamoc@gmail.com','Dijana','female',false,'0211000120312','Moc','ftn','063412245',2,1);
-insert into users(id,email, first_name, gender, is_active, jmbg, last_name, password, phone_number, address_id, role_id)
-values(3,'sasakos@gmail.com','Sasa','male',false,'1012000120312','Kosanovic','1234567','066241235',3,2);
-insert into users(id,email, first_name, gender, is_active, jmbg, last_name, password, phone_number, address_id, role_id)
-values(4,'despacito@gmail.com','Milan','male',false,'2108000120312','Stankovic','54321','066634321',1,null);
-insert into users(id,email, first_name, gender, is_active, jmbg, last_name, password, phone_number, address_id, role_id)
-values(5,'jivana@gmail.com','Jovana','female',false,'0508000120312','Ivanic','123','060234532',2,null);
+insert into client (id, email, password, first_name, last_name, address_id, phone_number, jmbg, gender,
+                    is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)
+values (nextval('my_seq_gen_user'), 'client@gmail.com', '$2a$10$34m5dosyTARXnOiqIEdM8uXyosZYQtDy75QBPPS7S91Iirn5ORQ8O',
+        'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 1 , 0, false, 'student', 'ftn', false);
