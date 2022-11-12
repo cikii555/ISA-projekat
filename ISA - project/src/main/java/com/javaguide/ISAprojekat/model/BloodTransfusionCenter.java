@@ -33,4 +33,43 @@ public class BloodTransfusionCenter {
 
   public BloodTransfusionCenter() {}
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getAverageGrade() {
+        return averageGrade;
+    }
+
+    public WorkHours getWorkHours() {
+        return workHours;
+    }
+
+    public Set<Appointment> getFreeAppointment() {
+        return freeAppointment;
+    }
+
+    public Set<MedicalStaff> getMedicalStaff() {
+        return medicalStaff;
+    }
+
+    public Set<BloodBank> getBloodBanks() {
+        return bloodBanks;
+    }
+
+    public Set<MedicalStaff> getCenterAdministrators() {
+        return centerAdministrators;
+    }
 }

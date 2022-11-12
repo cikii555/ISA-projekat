@@ -1,0 +1,49 @@
+<h1 class="title">Blood transfusion centers</h1>
+<table mat-table [dataSource]="dataSource" matSort #empTbSort="matSort" 
+    class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      Name
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Street and number">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+        Street and number
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.street}}  {{center.streetNumber}} </td>
+  </ng-container>
+  <ng-container matColumnDef="City">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      City
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.city}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Country">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      Country
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.country}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Discription" style="width: 80px;">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      Discription
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.description}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Average grade">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+      Average grade
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.averageGrade}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Work hours">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+      Work hours
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.startTime}} - {{center.endTime}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

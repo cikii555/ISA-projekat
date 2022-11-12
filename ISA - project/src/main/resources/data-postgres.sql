@@ -2,7 +2,8 @@
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Balzakova','58','43.27','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Sekspirova','23','43.27','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Alekse Santica','12','43.27,','44.23');
-
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Dunavksa','6','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Gogoljeva','22','43.27,','44.23');
 
 
 insert into work_hours (start_time,end_time) values ('8:00','16:00');
@@ -18,9 +19,9 @@ insert into work_hours (start_time,end_time) values ('10:00','12:00');
 
 insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('ISA-Center',1,5.0,'Best of all',1);
 insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Red Cross',2,4.0,'Bestest',2);
-insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Ambulance',3,2.0,'We are the nations most important blood detributor',1);
-insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Main Hospital',2,5.0,'We take good care of your blood',1);
-insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Center 14-1',3,5.0,'Your blood is safe with us',1);
+insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Ambulance',3,2.0,'We are the nations most important blood detributor',3);
+insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Main Hospital',4,5.0,'We take good care of your blood',4);
+insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Center 14-1',5,5.0,'Your blood is safe with us',5);
 
 
 

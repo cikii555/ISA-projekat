@@ -70,6 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(HttpMethod.POST,
                 "/auth/register/client");
-//        web.ignoring().antMatchers(HttpMethod.GET, "");
+        web.ignoring().antMatchers(HttpMethod.GET, "/center");
     }
 }

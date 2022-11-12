@@ -44,4 +44,32 @@ public class Address {
     public Long getId() {
         return id;
     }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getStreetNumber() {
+        return streetNumber;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public BloodTransfusionCenter getBloodTransfusionCenter() {
+        return bloodTransfusionCenter;
+    }
 }

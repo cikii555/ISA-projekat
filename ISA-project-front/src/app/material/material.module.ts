@@ -3,8 +3,11 @@ import { CommonModule } from '@angular/common';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select'
-import {MatIconModule} from '@angular/material/icon'
+import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+
 
 
 
@@ -16,7 +19,9 @@ import {MatIconModule} from '@angular/material/icon'
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatSortModule,
 
   ],
   exports: [
@@ -24,7 +29,10 @@ import {MatIconModule} from '@angular/material/icon'
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatSortModule
+
   ]
 })
 export class MaterialModule { }
