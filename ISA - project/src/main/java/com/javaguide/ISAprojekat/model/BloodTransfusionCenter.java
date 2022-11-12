@@ -8,7 +8,7 @@ import java.util.*;
 public class BloodTransfusionCenter {
       @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column
     private String name;
     @OneToOne(cascade = CascadeType.ALL)
@@ -31,4 +31,59 @@ public class BloodTransfusionCenter {
 
   public BloodTransfusionCenter() {}
 
+ public BloodTransfusionCenter(String name, Address address, String description, double averageGrade) {
+  this.name = name;
+  this.address = address;
+  this.description = description;
+  this.averageGrade = averageGrade;
+ }
+
+ public Integer getId() {
+  return id;
+ }
+
+ public void setId(Integer id) {
+  this.id = id;
+ }
+
+ public String getName() {
+  return name;
+ }
+
+ public void setName(String name) {
+  this.name = name;
+ }
+
+ public Address getAddress() {
+  return address;
+ }
+
+ public void setAddress(Address address) {
+  this.address = address;
+ }
+
+ public String getDescription() {
+  return description;
+ }
+
+ public void setDescription(String description) {
+  this.description = description;
+ }
+
+ public double getAverageGrade() {
+  return averageGrade;
+ }
+
+ public void setAverageGrade(double averageGrade) {
+  this.averageGrade = averageGrade;
+ }
+
+ public WorkHours getWorkHours() {
+  return workHours;
+ }
+
+ public void setWorkHours(WorkHours workHours) {
+  this.workHours = workHours;
+ }
 }
+

@@ -1,0 +1,24 @@
+<div>
+
+
+  <mat-sidenav-container>
+
+    <mat-sidenav mode="side" [opened]="true" >
+      <button mat-button class="menu-button" routerLink="edit">
+        <span>Edit profile</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-button class="menu-button" routerLink="password">
+
+        <span>Password</span>
+      </button>
+    </mat-sidenav>
+    <mat-sidenav-content >
+      <div class="content mat-elevation-z8">
+       <router-outlet ></router-outlet>
+      </div>
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>
