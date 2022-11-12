@@ -8,12 +8,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import {FormsModule} from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
+import { ProfileAdminComponent } from './profile-admin/profile-admin.component';
+import { TransfusionCenterProfileComponent } from './transfusion-center-profile/transfusion-center-profile.component';
+import {MatCardModule} from "@angular/material/card";
+import { AdminCenterDashboardComponent } from './admin-center-dashboard/admin-center-dashboard.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { PasswordComponentComponent } from './password-component/password-component.component';
+import {MatDividerModule} from "@angular/material/divider";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileAdminComponent,
+    TransfusionCenterProfileComponent,
+    AdminCenterDashboardComponent,
+    EditProfileComponent,
+    PasswordComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +35,11 @@ import { RegistrationComponent } from './registration/registration.component';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatDividerModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

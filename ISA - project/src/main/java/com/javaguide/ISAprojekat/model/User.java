@@ -14,10 +14,12 @@ import java.util.Collection;
 public class User implements UserDetails {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @SequenceGenerator(name = "my_seq_gen_user", sequenceName = "my_seq_gen_user", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_user")
-    private Long id;
+
+@Id
+@SequenceGenerator(name = "my_seq_gen_user", sequenceName = "my_seq_gen_user", initialValue = 1, allocationSize = 1)
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_user")
+    private Integer id;
+
 
     @Column
     private String password;
@@ -97,7 +99,7 @@ public class User implements UserDetails {
         return false;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -142,7 +144,7 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -182,4 +184,5 @@ public class User implements UserDetails {
     public Role getRole() {
         return role;
     }
+
 }
