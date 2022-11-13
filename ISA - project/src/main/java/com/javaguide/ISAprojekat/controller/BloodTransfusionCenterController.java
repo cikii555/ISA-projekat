@@ -3,15 +3,21 @@ package com.javaguide.ISAprojekat.controller;
 import com.javaguide.ISAprojekat.dto.AddressDTO;
 import com.javaguide.ISAprojekat.dto.BloodTransfusionCenterDTO;
 import com.javaguide.ISAprojekat.dto.CenterAdminDTO;
+import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
 import com.javaguide.ISAprojekat.model.Address;
+import com.javaguide.ISAprojekat.model.Appointment;
 import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
+import com.javaguide.ISAprojekat.model.Client;
 import com.javaguide.ISAprojekat.service.AddressService;
+import com.javaguide.ISAprojekat.service.AppointmentHistoryService;
 import com.javaguide.ISAprojekat.service.BloodTransfusionCenterService;
+import com.javaguide.ISAprojekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -22,6 +28,10 @@ public class BloodTransfusionCenterController {
     private BloodTransfusionCenterService bloodTransfusionCenterService;
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private AppointmentHistoryService appointmentHistoryService;
+    @Autowired
+    private UserService userService;
     @GetMapping(value = "/{id}")
     public ResponseEntity<BloodTransfusionCenterDTO> getBloodCenter(@PathVariable Integer id) {
 

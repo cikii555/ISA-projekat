@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import {FormsModule} from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
-<<<<<<< HEAD
 import { ProfileAdminComponent } from './profile-admin/profile-admin.component';
 import { TransfusionCenterProfileComponent } from './transfusion-center-profile/transfusion-center-profile.component';
 import {MatCardModule} from "@angular/material/card";
@@ -17,27 +16,21 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PasswordComponentComponent } from './password-component/password-component.component';
 import {MatDividerModule} from "@angular/material/divider";
-
-=======
 import { HomePageClientComponent } from './home-page-client/home-page-client.component';
 import { SurveyPageComponent } from './survey-page/survey-page.component';
->>>>>>> HomePageClient
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-<<<<<<< HEAD
     ProfileAdminComponent,
     TransfusionCenterProfileComponent,
     AdminCenterDashboardComponent,
     EditProfileComponent,
-    PasswordComponentComponent
-=======
+    PasswordComponentComponent,
     HomePageClientComponent,
     SurveyPageComponent
->>>>>>> HomePageClient
   ],
   imports: [
     BrowserModule,
