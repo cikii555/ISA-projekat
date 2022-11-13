@@ -9,13 +9,15 @@ import { MaterialModule } from './material/material.module';
 import {FormsModule} from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomePageClientComponent } from './home-page-client/home-page-client.component';
+import { SurveyPageComponent } from './survey-page/survey-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    HomePageClientComponent
+    HomePageClientComponent,
+    SurveyPageComponent
   ],
   imports: [
     BrowserModule,

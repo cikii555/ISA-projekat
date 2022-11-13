@@ -3,8 +3,8 @@ package com.javaguide.ISAprojekat.model;
 import com.javaguide.ISAprojekat.dto.UserRegistrationDTO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Client extends User{
@@ -20,6 +20,8 @@ public class Client extends User{
     private String organizationInformation;
     @Column
     private boolean filledOutSurvey;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<BloodTransfusionCenter> filledOutSurveys;
     public Client() {
     }
     public Client(UserRegistrationDTO userRegistrationDTO) {
@@ -75,5 +77,13 @@ public class Client extends User{
 
     public void setOrganizationInformation(String organizationInformation) {
         this.organizationInformation = organizationInformation;
+    }
+
+    public Set<BloodTransfusionCenter> getFilledOutSurveys() {
+        return filledOutSurveys;
+    }
+
+    public void setFilledOutSurveys(Set<BloodTransfusionCenter> filledOutSurveys) {
+        this.filledOutSurveys = filledOutSurveys;
     }
 }

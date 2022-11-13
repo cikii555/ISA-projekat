@@ -7,6 +7,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
+import { OrderModule } from 'ngx-order-pipe';
+import {MatRadioModule} from "@angular/material/radio";
+import {MatDividerModule} from '@angular/material/divider';
 
 
 
@@ -22,6 +25,9 @@ import {MatSortModule} from '@angular/material/sort';
     MatIconModule,
     MatTableModule,
     MatSortModule,
+    OrderModule,
+    MatRadioModule,
+    MatDividerModule
 
   ],
   exports: [
@@ -31,7 +37,10 @@ import {MatSortModule} from '@angular/material/sort';
     MatSelectModule,
     MatIconModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    OrderModule,
+    MatRadioModule,
+    MatDividerModule
 
   ]
 })
