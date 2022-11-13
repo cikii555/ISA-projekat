@@ -7,6 +7,7 @@ import {ProfileAdminComponent} from "./profile-admin/profile-admin.component";
 import {AdminCenterDashboardComponent} from "./admin-center-dashboard/admin-center-dashboard.component";
 import {PasswordComponentComponent} from "./password-component/password-component.component";
 import {EditProfileComponent} from "./edit-profile/edit-profile.component";
+import { EditClientComponent } from './edit-client/edit-client.component';
 
 const routes: Routes = [
   { path: 'login', component:LoginComponent},
@@ -17,6 +18,8 @@ const routes: Routes = [
       {path: 'edit',component: EditProfileComponent}
     ]},
   {path:'admin-center-dashboard',component:AdminCenterDashboardComponent},
+  {path:'edit',component:EditClientComponent},
+
 
 ];
 

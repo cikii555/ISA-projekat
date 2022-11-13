@@ -16,7 +16,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PasswordComponentComponent } from './password-component/password-component.component';
 import {MatDividerModule} from "@angular/material/divider";
-
+import { EditClientComponent } from './edit-client/edit-client.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import {MatDividerModule} from "@angular/material/divider";
     TransfusionCenterProfileComponent,
     AdminCenterDashboardComponent,
     EditProfileComponent,
-    PasswordComponentComponent
+    PasswordComponentComponent,
+    EditClientComponent,
   ],
   imports: [
     BrowserModule,
