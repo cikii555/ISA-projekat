@@ -63,13 +63,54 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                        BasicAuthenticationFilter.class
 //                );
 //
-//        http.csrf().disable();
+       http.cors().and().csrf().disable();
     }
 
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(HttpMethod.POST,
                 "/auth/register/client");
+        web.ignoring().antMatchers(HttpMethod.PUT,
+                "/auth/clients/update");
 //        web.ignoring().antMatchers(HttpMethod.GET, "");
     }
 }
+/*{
+    "id": 1,
+    "password": "$2a$10$34m5dosyTARXnOiqIEdM8uXyosZYQtDy75QBPPS7S91Iirn5ORQ8O",
+    "email": "client@gmail.com",
+    "firstName": "Marko",
+    "lastName": "Markovic",
+    "phoneNumber": "0601231231",
+    "address": {
+        "id": 1,
+        "country": "Srbija",
+        "city": "Novi Sad",
+        "street": "Balzakova",
+        "streetNumber": "58"
+    },
+    "jmbg": "439545",
+    "gender": "MALE",
+    "role": {
+        "id": 1,
+        "name": "ROLE_CLIENT",
+        "authority": "ROLE_CLIENT"
+    },
+    "penalty": 0,
+    "gradedCenter": false,
+    "occupation": "student",
+    "organizationInformation": "ftn",
+    "enabled": false,
+    "active": true,
+    "accountNonLocked": false,
+    "authorities": [
+        {
+            "id": 1,
+            "name": "ROLE_CLIENT",
+            "authority": "ROLE_CLIENT"
+        }
+    ],
+    "username": null,
+    "credentialsNonExpired": false,
+    "accountNonExpired": false
+}*/
