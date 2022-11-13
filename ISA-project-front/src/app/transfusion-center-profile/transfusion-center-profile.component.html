@@ -8,39 +8,41 @@
   <table class="tablecenter" >
     <mat-form-field appearance="outline">
       <mat-label> Name</mat-label>
-      <input matInput [value]="selectedCenter.name">
+      <input matInput [(ngModel)]="selectedCenter.name">
     </mat-form-field><br>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Last name</mat-label>
-      <input matInput [value] = "selectedCenter.name">
+      <input matInput [(ngModel)] = "selectedCenter.name">
     </mat-form-field><br>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Address</mat-label>
-      <input matInput [value] = "">
+      <input matInput [(ngModel)] = "selectedCenter.address.street">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+    <mat-label>Street number</mat-label>
+    <input matInput [(ngModel)] = "selectedCenter.address.streetNumber">
+    </mat-form-field>
+
+    <br>
+    <mat-card-content>City</mat-card-content>
+    <mat-form-field appearance="outline">
+      <input matInput [(ngModel)] = "selectedCenter.address.city">
+    </mat-form-field>
+    <mat-card-content>Country</mat-card-content>
+    <mat-form-field appearance="outline">
+      <input matInput [(ngModel)] = "selectedCenter.address.country">
     </mat-form-field><br>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
-      <input matInput [value] = "selectedCenter.description">
+      <input matInput [(ngModel)] = "selectedCenter.description">
     </mat-form-field><br>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Rating</mat-label>
-      <input matInput>
-    </mat-form-field><br>
-    <mat-form-field appearance="fill">
-      <mat-label>Phone number</mat-label>
-      <input matInput>
-    </mat-form-field><br>
-    <mat-form-field appearance="fill">
-      <mat-label>Username</mat-label>
-      <input matInput>
-    </mat-form-field><br>
-
-
-
-
-
+      <input matInput [(ngModel)] = "selectedCenter.rating">
+    </mat-form-field ><br>
   </table>
+    <button mat-stroked-button (click)="updateTransfusionCenter()"> Save changes</button>
   </div>
-  <div><button mat-stroked-button></button></div>
+
 
 </div>

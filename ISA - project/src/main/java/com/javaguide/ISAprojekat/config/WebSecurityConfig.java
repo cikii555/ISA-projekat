@@ -71,5 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(HttpMethod.POST,
                 "/auth/register/client");
 //        web.ignoring().antMatchers(HttpMethod.GET, "");
+        web.ignoring().antMatchers(HttpMethod.PUT,"/api/bloodtransfusioncenter/update");
+
     }
 }

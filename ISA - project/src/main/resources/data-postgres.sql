@@ -45,6 +45,9 @@ INSERT INTO role (name) VALUES ('ROLE_CLIENT'),
                                ('ROLE_MEDICALSTAFF'),
                                ('ROLE_UNAUTH');
 
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'markomarkovic@gmail.com', 'admin','Marko', 'Markovic', 1, '0601231231', 439545, 'MALE',1);
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'petarpetrovic@gmail.com', 'admin','Petar', 'Petrovic', 2, '0601231231', 439545, 'MALE',1);
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 3, '0601231231', 439545, 'MALE',1)
 /*insert into client (id, email, password, first_name, last_name, address_id, phone_number, jmbg, gender,
                     is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)
 values (nextval('my_seq_gen_user'), 'client@gmail.com', '$2a$10$34m5dosyTARXnOiqIEdM8uXyosZYQtDy75QBPPS7S91Iirn5ORQ8O',

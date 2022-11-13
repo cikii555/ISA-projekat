@@ -16,14 +16,19 @@ export class TransfusionCenterProfileComponent implements OnInit {
   ngOnInit(): void {
     this.transfusionCenterService.getBloodTransfusionCenter(1).subscribe(res=>{
       this.selectedCenter = res;
-      this.addres = this.transfusionCenterService.getAddress(this.selectedCenter.address.id)
-
+      //this.addres = this.transfusionCenterService.getAddress(this.selectedCenter.address.id)
+      this.transfusionCenterService.getAddress(this.selectedCenter.address.id).subscribe(res=>{
+        this.addres = res;})
     })
-    this.transfusionCenterService.getAddress(this.selectedCenter.address.id).subscribe(res=>{
-      this.addres = res;
-    })
+    //this.transfusionCenterService.getAddress(this.selectedCenter.address.id).subscribe(res=>{
+     // this.addres = res;
+    //})
 
 
+  }
+  updateTransfusionCenter(){
+    console.log(this.selectedCenter.name)
+    this.transfusionCenterService.updateBloodTransfusionCenter(this.selectedCenter);
   }
 
 }

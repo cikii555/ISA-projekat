@@ -9,13 +9,14 @@ import com.javaguide.ISAprojekat.service.AddressService;
 import com.javaguide.ISAprojekat.service.BloodTransfusionCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value = "api/bloodtransfusioncenter")
+@RequestMapping(value = "api/bloodtransfusioncenter",produces = MediaType.APPLICATION_JSON_VALUE)
 public class BloodTransfusionCenterController {
 
     @Autowired
@@ -76,6 +77,10 @@ public class BloodTransfusionCenterController {
         if (center == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+            center.setName(centerDTO.getName());
+            center.setAddress(centerDTO.getAddress());
+            center.setDescription(centerDTO.getDescription());
 
 
 

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class TransfusionCenterServiceService {
 
   constructor(private http:HttpClient) { }
-
+  data:any
   apiHost: string = 'http://localhost:8080/api';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -16,8 +16,11 @@ export class TransfusionCenterServiceService {
     return this.http.get(this.apiHost+'/bloodtransfusioncenter/'+id)
   }
 
-  updateBloodTransfusionCenter(center:any):Observable<any>{
-    return this.http.put<any>(this.apiHost+'/bloodtransfusioncenter/update',center,{headers: this.headers})
+  updateBloodTransfusionCenter(center:any){
+    console.log(center.name)
+     this.http.put<any>(this.apiHost+'/bloodtransfusioncenter/update',center,{headers: this.headers})
+       .subscribe(res=>{console.log(this.data = res)})
+    return this.data
   }
 
   getAddress(id:number):Observable<any>{

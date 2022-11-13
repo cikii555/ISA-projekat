@@ -22,6 +22,9 @@ public class BloodTransfusionCenterDTO {
         this(center.getName(),center.getDescription(),center.getAverageGrade(),center.getAddress(),center.getId());
     }
 
+    public BloodTransfusionCenterDTO() {
+    }
+
     public Integer getId() {
         return id;
     }
