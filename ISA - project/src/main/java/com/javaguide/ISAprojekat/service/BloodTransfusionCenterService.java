@@ -45,17 +45,28 @@ public class BloodTransfusionCenterService {
 //        return transfusionCenterRepository.getBloodTransfusionCenterByName(name);
 //    }
 
-    public List<BloodTransfusionCenter> searchByName(String query) {
-        List<BloodTransfusionCenter> rel= transfusionCenterRepository.searchBloodTransfusionCentersbyname(query);
-        System.out.println(rel.size());
-        return rel;
+    public List<TransfusionCenterDTO> searchByName(String query) {
+
+        List<BloodTransfusionCenter> centers= transfusionCenterRepository.searchBloodTransfusionCentersbyname(query);
+        List<TransfusionCenterDTO> dtos = new ArrayList<>();
+
+        for(BloodTransfusionCenter c:centers){
+            TransfusionCenterDTO dto = new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime());
+            dtos.add(dto);
+        }
+        return dtos;
 
     }
 
-    public List<BloodTransfusionCenter> searchByCityName(String query) {
-       List<BloodTransfusionCenter> rel=  transfusionCenterRepository.searchBloodTransfusionCentersbycityname(query);
-       System.out.println(rel.size());
-       return rel;
+    public List<TransfusionCenterDTO> searchByCityName(String query) {
+       List<BloodTransfusionCenter> centers=  transfusionCenterRepository.searchBloodTransfusionCentersbycityname(query);
+        List<TransfusionCenterDTO> dtos = new ArrayList<>();
+
+        for(BloodTransfusionCenter c:centers){
+            TransfusionCenterDTO dto = new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime());
+            dtos.add(dto);
+        }
+        return dtos;
     }
 
 
