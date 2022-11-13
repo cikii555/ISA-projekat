@@ -2,8 +2,8 @@ package com.javaguide.ISAprojekat.service;
 
 import com.javaguide.ISAprojekat.dto.UserRegistrationDTO;
 import com.javaguide.ISAprojekat.model.Client;
-import com.javaguide.ISAprojekat.dto.repository.ClientRepository;
-import com.javaguide.ISAprojekat.dto.repository.RoleRepository;
+import com.javaguide.ISAprojekat.repository.ClientRepository;
+import com.javaguide.ISAprojekat.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 @Service

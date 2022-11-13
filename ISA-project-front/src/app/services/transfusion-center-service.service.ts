@@ -20,6 +20,10 @@ export class TransfusionCenterServiceService {
     return this.http.put<any>(this.apiHost+'/bloodtransfusioncenter/update',center,{headers: this.headers})
   }
 
+  getAddress(id:number):Observable<any>{
+    return this.http.get(this.apiHost+'/bloodtransfusioncenter/address/'+id)
+  }
+
   /*getOtherCenterAdmins(id:number):Observable<any>{
     //return this.get
   }*/

@@ -10,12 +10,19 @@ import {Router} from "@angular/router";
 export class TransfusionCenterProfileComponent implements OnInit {
 
   selectedCenter:any
+  addres:any
   constructor(private transfusionCenterService:TransfusionCenterServiceService,private router:Router) { }
 
   ngOnInit(): void {
     this.transfusionCenterService.getBloodTransfusionCenter(1).subscribe(res=>{
       this.selectedCenter = res;
+      this.addres = this.transfusionCenterService.getAddress(this.selectedCenter.address.id)
+
     })
+    this.transfusionCenterService.getAddress(this.selectedCenter.address.id).subscribe(res=>{
+      this.addres = res;
+    })
+
 
   }
 

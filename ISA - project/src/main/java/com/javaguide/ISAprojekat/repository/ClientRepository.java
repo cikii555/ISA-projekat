@@ -1,4 +1,4 @@
-package com.javaguide.ISAprojekat.dto.repository;
+package com.javaguide.ISAprojekat.repository;
 
 import com.javaguide.ISAprojekat.model.Client;
 import com.javaguide.ISAprojekat.model.User;

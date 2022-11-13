@@ -48,4 +48,4 @@ INSERT INTO role (name) VALUES ('ROLE_CLIENT'),
 /*insert into client (id, email, password, first_name, last_name, address_id, phone_number, jmbg, gender,
                     is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)
 values (nextval('my_seq_gen_user'), 'client@gmail.com', '$2a$10$34m5dosyTARXnOiqIEdM8uXyosZYQtDy75QBPPS7S91Iirn5ORQ8O',
-        'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 1 , 0, false, 'student', 'ftn', false);
+        'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 1 , 0, false, 'student', 'ftn', false);*/
