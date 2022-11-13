@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit {
         }
         this.registrationService.registerUser(this.registrationClient).subscribe(res => {
           alert("Registration request successfully sent!")
-          this.router.navigate(['/']);
+          this.router.navigate(['/home-client']);
         });
         }
     })
