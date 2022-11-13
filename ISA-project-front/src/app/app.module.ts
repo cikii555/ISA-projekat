@@ -17,7 +17,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PasswordComponentComponent } from './password-component/password-component.component';
 import {MatDividerModule} from "@angular/material/divider";
 import { ViewOtherAdminsComponent } from './view-other-admins/view-other-admins.component';
-
+import { SurveyPageComponent } from './survey-page/survey-page.component';
+import { EditClientComponent } from './edit-client/edit-client.component';
+import { HomePageClientComponent } from './home-page-client/home-page-client.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,11 @@ import { ViewOtherAdminsComponent } from './view-other-admins/view-other-admins.
     AdminCenterDashboardComponent,
     EditProfileComponent,
     PasswordComponentComponent,
-    ViewOtherAdminsComponent
+    ViewOtherAdminsComponent,
+    HomePageClientComponent,
+    SurveyPageComponent,
+    EditClientComponent,
+
   ],
   imports: [
     BrowserModule,

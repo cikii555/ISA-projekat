@@ -47,7 +47,7 @@ public class AuthentificationController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping(consumes="application/json", value="/register/{email}")
+    @GetMapping(value="/register/{email}")
     public ResponseEntity<Client> emailExists(@PathVariable String email) {
 //        String email = tokenUtils.getEmailDirectlyFromHeader(request);
         if (email == null)

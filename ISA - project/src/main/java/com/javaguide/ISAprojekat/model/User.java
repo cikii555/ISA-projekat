@@ -12,12 +12,9 @@ import java.util.Collection;
 @Table(name="users")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User implements UserDetails {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-@Id
-@SequenceGenerator(name = "my_seq_gen_user", sequenceName = "my_seq_gen_user", initialValue = 1, allocationSize = 1)
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_user")
+    @Id
+    @SequenceGenerator(name = "my_seq_gen_user", sequenceName = "my_seq_gen_user", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_user")
     private Integer id;
 
 
@@ -99,9 +96,9 @@ public class User implements UserDetails {
         return false;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public void setPassword(String password) {
         this.password = password;

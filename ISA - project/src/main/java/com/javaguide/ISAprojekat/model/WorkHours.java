@@ -10,7 +10,23 @@ public class WorkHours {
         private LocalTime startTime;
        @Column
         private LocalTime endTime;
-    @OneToOne(mappedBy = "workHours")
-    @JoinColumn(name="bloodTransfusionCenter_id")
-    private BloodTransfusionCenter bloodTransfusionCenter;
+//    @OneToOne(mappedBy = "workHours")
+//    @JoinColumn(name="bloodTransfusionCenter_id")
+//    private BloodTransfusionCenter bloodTransfusionCenter;
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+//    public BloodTransfusionCenter getBloodTransfusionCenter() {
+//        return bloodTransfusionCenter;
+//    }
 }

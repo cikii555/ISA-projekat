@@ -1,11 +1,18 @@
 
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Balzakova','58','43.27','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Beograd','Alekse Santica','12','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Subotica','Alekse Santica','12','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Subotica','Aleka Santica','12','44.27,','45.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Sekspirova','23','43.27','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Moca Santica','12','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Dunavksa','6','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Gogoljeva','22','43.27,','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Alekse Santica','12','43.27,','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Mire Santica','18','45.27,','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Sime Milosevica','88','45.27,','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Mire Miroslavica','77','45.27,','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Cara Dusana','19','45.27,','44.23');
+
 
 
 
@@ -22,9 +29,9 @@ insert into work_hours (start_time,end_time) values ('10:00','12:00');
 
 insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('ISA-Center',1,5.0,'Best of all',1);
 insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Red Cross',2,4.0,'Bestest',2);
-insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Ambulance',3,2.0,'We are the nations most important blood detributor',1);
-insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Main Hospital',2,5.0,'We take good care of your blood',1);
-insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Center 14-1',3,5.0,'Your blood is safe with us',1);
+insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Ambulance',3,2.0,'We are the nations most important blood detributor',3);
+insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Main Hospital',4,5.0,'We take good care of your blood',4);
+insert into blood_transfusion_center(name,address_id,average_grade,description,work_hours_id) values('Center 14-1',5,5.0,'Your blood is safe with us',5);
 
 
 
@@ -49,10 +56,18 @@ INSERT INTO role (name) VALUES ('ROLE_CLIENT'),
                                ('ROLE_MEDICALSTAFF'),
                                ('ROLE_UNAUTH');
 
+
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'markomarkovic@gmail.com', 'admin','Marko', 'Markovic', 4, '0601231231', 439545, 'MALE',1,true, 2);
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'petarpetrovic@gmail.com', 'admin','Petar', 'Petrovic', 5, '0601231231', 439545, 'MALE',1,true, 2);
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 6, '0601231231', 439545, 'MALE',1,true, 2)
-/*insert into client (id, email, password, first_name, last_name, address_id, phone_number, jmbg, gender,
+/*
+
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'markomarkovic@gmail.com', 'admin','Marko', 'Markovic', 1, '0601231231', 439545, 'MALE',1);
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'petarpetrovic@gmail.com', 'admin','Petar', 'Petrovic', 2, '0601231231', 439545, 'MALE',1);
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 3, '0601231231', 439545, 'MALE',1);
+
+insert into client (id, email, password, first_name, last_name, address_id, phone_number, jmbg, gender,
+>>>>>>> e3236c1d82570d38504638dd159e0d18470054d1
                     is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)
 values (nextval('my_seq_gen_user'), 'client@gmail.com', '$2a$10$34m5dosyTARXnOiqIEdM8uXyosZYQtDy75QBPPS7S91Iirn5ORQ8O',
-        'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 1 , 0, false, 'student', 'ftn', false);*/
+        'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 1 , 0, false, 'student', 'ftn', false);

@@ -1,0 +1,93 @@
+<h1 class="title">Blood transfusion centers</h1>
+<table>
+<td>
+<input matInput [(ngModel)]="search"></td>
+<td><mat-label>Search option:</mat-label>
+                <mat-select  [(ngModel)]="searchOption">
+                    <mat-option value="NAME">Name</mat-option>
+                    <mat-option value="CITY">City</mat-option>
+                    </mat-select>
+</td>
+<td><button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="searchItems(search)">
+  Search
+</button></td>
+<tr><td>
+  <mat-label>Filter:</mat-label></td>
+  <td><mat-label>Lowest Grade:</mat-label>
+    <input matInput [(ngModel)]="low">
+    <td> <mat-label>Highest Grade:</mat-label>
+  <input matInput [(ngModel)]="high"></td>
+  <td><button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="FilterItems()">  
+    Filter
+  </button></td>
+</tr>
+</table>
+
+<!-- <table mat-table [dataSource]="dataSource" matSort
+    class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sort('name')">
+      Name
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Street and number">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+        Street and number
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.street}}  {{center.streetNumber}} </td>
+  </ng-container>
+  <ng-container matColumnDef="City">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      City
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.city}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Country">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      Country
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.country}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Discription" style="width: 80px;">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      Discription
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.description}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Average grade">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+      Average grade
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.averageGrade}} </td>
+  </ng-container>
+  <ng-container matColumnDef="Work hours">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+      Work hours
+    </th>
+    <td mat-cell *matCellDef="let center"> {{center.startTime}} - {{center.endTime}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> -->
+<table class="border-none">
+        <th class="out" (click)="sort('name')">Name</th>
+        <th  (click)="sort('street')">Street and number</th>
+        <th  (click)="sort('city')">City</th>
+        <th  (click)="sort('country')">Country</th>
+        <th  (click)="sort('description')">Description</th>
+        <th  (click)="sort('averageGrade')">Average grade</th>
+        <th  (click)="sort('startTime')">Work hours</th>
+        <th class="out">Survey</th>
+        <tr *ngFor="let center of centers | orderBy:key:reverse">
+          <td > {{center.name}}</td>
+          <td> {{center.street}}, {{center.streetNumber}}</td>
+          <td> {{center.city}}</td>
+          <td> {{center.country}}</td>
+          <td> {{center.description}}</td>
+          <td> {{center.averageGrade}}</td>
+          <td > {{center.startTime}} - {{center.endTime}}</td>
+          <td> <button class="survey" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width:150px; margin-left: 40px;" (click)="survey(center)">Fill out survey</button></td>
+        </tr>
+</table>

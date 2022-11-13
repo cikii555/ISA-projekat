@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="card">
+        <h1 class="cardTitle"> Please fill out the survey </h1>
+    <div style="margin-left:10px;">
+        1.Have you ever donated blood?
+        <mat-radio-button id="1" name="1" style="margin-left: 70px;" value="1">Yes</mat-radio-button>
+        <mat-radio-button id="1n" name="1" style='margin-left: 10px;' value="2">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div style="margin-left:10px;">
+        2.Are you curently feeling healthy enoughe to donate blood?
+        <mat-radio-button id="2" name="2" style="margin-left: 70px;" value="1">Yes</mat-radio-button>
+        <mat-radio-button id="2n" name="2" style='margin-left: 10px;' value="2">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div style="margin-left:10px;">
+        3.Are you curently taking any medication?
+        <mat-radio-button id="3" name="3" style="margin-left: 70px;" value="1">Yes</mat-radio-button>
+        <mat-radio-button id="3n" name="3" style='margin-left: 10px;' value="2">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div style="margin-left:10px;">
+        4.Have you taken antibiotics in the last 7 days?
+        <mat-radio-button id="4" name="4" style="margin-left: 70px;" value="1" [checked]="false" 
+        (change)="onQ4Change(1)">Yes</mat-radio-button>
+        <mat-radio-button id="4n" name="4" style='margin-left: 10px;' value="2" (change)="onQ4Change(2)">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div style="margin-left:10px;">
+        5.Do you have more than 50 kilograms?
+        <mat-radio-button id="5" name="5" style="margin-left: 70px;" [checked]="false" 
+        (change)="onQ5Change(1)" value="1">Yes</mat-radio-button>
+        <mat-radio-button id="5n" name="5" style='margin-left: 10px;' value="2" (change)="onQ5Change(2)">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div style="margin-left:10px;">
+        6.Have you taken out any teeth in the last 7 days?
+        <mat-radio-button id="6" name="6" style="margin-left: 70px;" [checked]="false" 
+        (change)="onQ6Change(1)" value="1">Yes</mat-radio-button>
+        <mat-radio-button id="6n" name="6" style='margin-left: 10px;' value="2" (change)="onQ6Change(2)">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div style="margin-left:10px;">
+        7.Have you been sick or had a fever in the last 7 days?
+        <mat-radio-button id="7" name="7" style="margin-left: 70px;" [checked]="false" 
+        (change)="onQ7Change(1)" value="1">Yes</mat-radio-button>
+        <mat-radio-button id="7n" name="7" style='margin-left: 10px;' value="2" (change)="onQ7Change(2)">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div style="margin-left:10px;">
+        8.Have you noticed any changes on your skin or had alergies?
+        <mat-radio-button id="8" name="8" style="margin-left: 70px;" [checked]="false" 
+        (change)="onQ8Change(1)" value="1">Yes</mat-radio-button>
+        <mat-radio-button id="8n" name="8" style='margin-left: 10px;' value="2" (change)="onQ8Change(2)">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div style="margin-left:10px;">
+        9.Have you gotten a tattoo or a piercing?
+        <mat-radio-button id="9" name="9" style="margin-left: 70px;" [checked]="false" 
+        (change)="onQ9Change(1)" value="1">Yes</mat-radio-button>
+        <mat-radio-button id="9n" name="9" style='margin-left: 10px;' value="2" (change)="onQ9Change(2)">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div style="margin-left:10px;">
+        10.Are you currently on your period?
+        <mat-radio-button id="10" name="10" style="margin-left: 70px;" [checked]="false" 
+        (change)="onQ10Change(1)" value="1">Yes</mat-radio-button>
+        <mat-radio-button id="10n" name="10" style='margin-left: 10px;' value="2" (change)="onQ10Change(2)">No</mat-radio-button>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <div class="err" *ngIf="errorMess!='OK'"><br>
+        <label style="color: red;">{{errorMess}}</label>
+     </div>
+    <div class="additional">
+        <button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="sendSurvey()">
+            Submit
+        </button>
+    </div>
+    </div>
+</div>

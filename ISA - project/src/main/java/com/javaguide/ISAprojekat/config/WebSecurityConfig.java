@@ -63,17 +63,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                        BasicAuthenticationFilter.class
 //                );
 //
-//        http.csrf().disable();
+    http.cors().and().csrf().disable();
     }
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(HttpMethod.POST,
-                "/auth/register/client");
+        web.ignoring().antMatchers(HttpMethod.POST,"/auth/register/client", "/center/addAppointmentHistory");
 //        web.ignoring().antMatchers(HttpMethod.GET, "");
         web.ignoring().antMatchers(HttpMethod.PUT,"/api/bloodtransfusioncenter/update");
         web.ignoring().antMatchers(HttpMethod.PUT,"/api/medical-staff/update");
         web.ignoring().antMatchers(HttpMethod.PUT,"/api/medical-staff/password");
+        web.ignoring().antMatchers(HttpMethod.GET, "/center");
 
     }
 }

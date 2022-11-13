@@ -53,4 +53,8 @@ public class Appointment {
     public void setTaken(boolean taken) {
         this.taken = taken;
     }
+
+    public void setBloodTransfusionCenter(BloodTransfusionCenter bloodTransfusionCenter) {
+        this.bloodTransfusionCenter = bloodTransfusionCenter;
+    }
 }

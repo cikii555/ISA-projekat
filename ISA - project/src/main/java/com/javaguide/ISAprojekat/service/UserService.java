@@ -26,6 +26,9 @@ public class UserService {
         client.setRole(roleRepository.findByName("ROLE_CLIENT"));
         clientRepository.save(client);
     }
+    public void updateClient(Client client) {
+        clientRepository.save(client);
+    }
     public Client findByEmail(String email) {
         return clientRepository.findByEmail(email);
     }

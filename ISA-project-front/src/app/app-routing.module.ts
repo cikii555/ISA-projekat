@@ -1,3 +1,5 @@
+import { SurveyPageComponent } from './survey-page/survey-page.component';
+import { HomePageClientComponent } from './home-page-client/home-page-client.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -8,6 +10,8 @@ import {AdminCenterDashboardComponent} from "./admin-center-dashboard/admin-cent
 import {PasswordComponentComponent} from "./password-component/password-component.component";
 import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 import {ViewOtherAdminsComponent} from "./view-other-admins/view-other-admins.component";
+import { EditClientComponent } from './edit-client/edit-client.component';
+
 
 const routes: Routes = [
   { path: 'login', component:LoginComponent},
@@ -18,7 +22,13 @@ const routes: Routes = [
       {path: 'edit',component: EditProfileComponent}
     ]},
   {path:'admin-center-dashboard',component:AdminCenterDashboardComponent},
-  {path:'admins', component:ViewOtherAdminsComponent}
+  {path:'admins', component:ViewOtherAdminsComponent},
+  { path: 'home-client', component:HomePageClientComponent},
+  { path: 'survey/:id', component:SurveyPageComponent},
+  {path:'edit',component:EditClientComponent},
+
+
+
 
 ];
 

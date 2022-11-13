@@ -15,14 +15,14 @@ public class BloodTransfusionCenter {
 
     @Column
     private String name;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     @Column
     private String description;
     @Column
     private double averageGrade;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private WorkHours workHours;
     @OneToMany(mappedBy = "bloodTransfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> freeAppointment;
@@ -90,6 +90,7 @@ public class BloodTransfusionCenter {
   this.workHours = workHours;
  }
 
+
     public Set<Appointment> getFreeAppointment() {
         return freeAppointment;
     }
@@ -121,6 +122,49 @@ public class BloodTransfusionCenter {
     public void setCenterAdministrators(Set<MedicalStaff> centerAdministrators) {
         this.centerAdministrators = centerAdministrators;
     }
+
+//=======
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public double getAverageGrade() {
+//        return averageGrade;
+//    }
+//
+//    public WorkHours getWorkHours() {
+//        return workHours;
+//    }
+//
+//    public Set<Appointment> getFreeAppointment() {
+//        return freeAppointment;
+//    }
+//
+//    public Set<MedicalStaff> getMedicalStaff() {
+//        return medicalStaff;
+//    }
+//
+//    public Set<BloodBank> getBloodBanks() {
+//        return bloodBanks;
+//    }
+//
+//    public Set<MedicalStaff> getCenterAdministrators() {
+//        return centerAdministrators;
+//    }
+//>>>>>>> HomePageClient
+
 }
 
 

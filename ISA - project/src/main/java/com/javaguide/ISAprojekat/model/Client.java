@@ -3,8 +3,8 @@ package com.javaguide.ISAprojekat.model;
 import com.javaguide.ISAprojekat.dto.UserRegistrationDTO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Client extends User{
@@ -76,4 +76,5 @@ public class Client extends User{
     public void setOrganizationInformation(String organizationInformation) {
         this.organizationInformation = organizationInformation;
     }
+
 }

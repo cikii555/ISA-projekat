@@ -3,18 +3,21 @@ package com.javaguide.ISAprojekat.controller;
 import com.javaguide.ISAprojekat.dto.AddressDTO;
 import com.javaguide.ISAprojekat.dto.BloodTransfusionCenterDTO;
 import com.javaguide.ISAprojekat.dto.CenterAdminDTO;
+import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
 import com.javaguide.ISAprojekat.model.Address;
+import com.javaguide.ISAprojekat.model.Appointment;
 import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
 import com.javaguide.ISAprojekat.model.MedicalStaff;
 import com.javaguide.ISAprojekat.service.AddressService;
+import com.javaguide.ISAprojekat.service.AppointmentHistoryService;
 import com.javaguide.ISAprojekat.service.BloodTransfusionCenterService;
 import com.javaguide.ISAprojekat.service.MedicalStaffService;
+import com.javaguide.ISAprojekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -29,7 +32,13 @@ public class BloodTransfusionCenterController {
     @Autowired
     private AddressService addressService;
     @Autowired
+
     private MedicalStaffService medicalStaffService;
+
+    private AppointmentHistoryService appointmentHistoryService;
+    @Autowired
+    private UserService userService;
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<BloodTransfusionCenterDTO> getBloodCenter(@PathVariable Integer id) {
 
@@ -50,6 +59,14 @@ public class BloodTransfusionCenterController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(new AddressDTO(address),HttpStatus.OK);
+    }
+    @GetMapping(value="/search/name={name}")
+    public ResponseEntity<List<TransfusionCenterDTO>> getCentersByName(@PathVariable String name){
+        return new ResponseEntity<>(bloodTransfusionCenterService.searchByName(name),HttpStatus.OK);
+    }
+    @GetMapping(value="/search/city_name={name}")
+    public ResponseEntity<List<TransfusionCenterDTO>> getCentersByCityName(@PathVariable String name){
+        return new ResponseEntity<>(bloodTransfusionCenterService.searchByCityName(name),HttpStatus.OK);
     }
 
     @GetMapping(value="/admins/{id}")
@@ -96,4 +113,5 @@ public class BloodTransfusionCenterController {
         center = bloodTransfusionCenterService.save(center);
         return new ResponseEntity<>(new BloodTransfusionCenterDTO(center), HttpStatus.OK);
     }
+
 }
