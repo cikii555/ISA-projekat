@@ -16,7 +16,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PasswordComponentComponent } from './password-component/password-component.component';
 import {MatDividerModule} from "@angular/material/divider";
-
+import { HomePageClientComponent } from './home-page-client/home-page-client.component';
+import { SurveyPageComponent } from './survey-page/survey-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import {MatDividerModule} from "@angular/material/divider";
     TransfusionCenterProfileComponent,
     AdminCenterDashboardComponent,
     EditProfileComponent,
-    PasswordComponentComponent
+    PasswordComponentComponent,
+    HomePageClientComponent,
+    SurveyPageComponent
   ],
   imports: [
     BrowserModule,

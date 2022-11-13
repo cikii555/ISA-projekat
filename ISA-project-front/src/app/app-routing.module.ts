@@ -1,3 +1,5 @@
+import { SurveyPageComponent } from './survey-page/survey-page.component';
+import { HomePageClientComponent } from './home-page-client/home-page-client.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -17,6 +19,8 @@ const routes: Routes = [
       {path: 'edit',component: EditProfileComponent}
     ]},
   {path:'admin-center-dashboard',component:AdminCenterDashboardComponent},
+  { path: 'home-client', component:HomePageClientComponent},
+  { path: 'survey/:id', component:SurveyPageComponent},
 
 ];
 
