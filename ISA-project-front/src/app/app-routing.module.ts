@@ -11,6 +11,7 @@ import {PasswordComponentComponent} from "./password-component/password-componen
 import {EditProfileComponent} from "./edit-profile/edit-profile.component";
 import {ViewOtherAdminsComponent} from "./view-other-admins/view-other-admins.component";
 import { EditClientComponent } from './edit-client/edit-client.component';
+import {TransfusionCenterPanelComponent} from "./transfusion-center-panel/transfusion-center-panel.component";
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   { path: 'home-client', component:HomePageClientComponent},
   { path: 'survey/:id', component:SurveyPageComponent},
   {path:'edit',component:EditClientComponent},
+  {path:'tc',component:TransfusionCenterPanelComponent,children:[
+      {path:'centerprofile', component:TransfusionCenterProfileComponent},
+      {path:'admins', component:ViewOtherAdminsComponent},
+    ]}
 
 
 

@@ -1,4 +1,4 @@
-<h1 class="title">Blood transfusion centers</h1>
+<h1 class="title"  xmlns:app="http://www.w3.org/1999/xhtml">Blood transfusion centers</h1>
 <table>
 <td>
 <input matInput [(ngModel)]="search"></td>
@@ -8,7 +8,7 @@
                     <mat-option value="CITY">City</mat-option>
                     </mat-select>
 </td>
-<td><button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="searchItems(search)">
+<td><button class="confirmButton" mat-stroked-button xmlns:app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="searchItems(search)">
   Search
 </button></td>
 <tr><td>
@@ -17,7 +17,7 @@
     <input matInput [(ngModel)]="low">
     <td> <mat-label>Highest Grade:</mat-label>
   <input matInput [(ngModel)]="high"></td>
-  <td><button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="FilterItems()">  
+  <td><button class="confirmButton" mat-stroked-button xmlns:app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="FilterItems()">
     Filter
   </button></td>
 </tr>

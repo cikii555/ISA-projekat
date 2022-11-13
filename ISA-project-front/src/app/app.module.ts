@@ -20,6 +20,7 @@ import { ViewOtherAdminsComponent } from './view-other-admins/view-other-admins.
 import { SurveyPageComponent } from './survey-page/survey-page.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
 import { HomePageClientComponent } from './home-page-client/home-page-client.component';
+import { TransfusionCenterPanelComponent } from './transfusion-center-panel/transfusion-center-panel.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { HomePageClientComponent } from './home-page-client/home-page-client.com
     HomePageClientComponent,
     SurveyPageComponent,
     EditClientComponent,
+    TransfusionCenterPanelComponent,
 
   ],
   imports: [

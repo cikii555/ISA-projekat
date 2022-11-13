@@ -12,7 +12,7 @@ export class AdminCenterDashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 goToTCPage(){
-this.router.navigateByUrl('centerprofile')
+this.router.navigateByUrl('tc')
 }
 goToNewAppointment(){
 
