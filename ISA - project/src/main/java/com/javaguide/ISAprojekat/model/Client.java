@@ -20,8 +20,6 @@ public class Client extends User{
     private String organizationInformation;
     @Column
     private boolean filledOutSurvey;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<BloodTransfusionCenter> filledOutSurveys;
     public Client() {
     }
     public Client(UserRegistrationDTO userRegistrationDTO) {
@@ -79,11 +77,4 @@ public class Client extends User{
         this.organizationInformation = organizationInformation;
     }
 
-    public Set<BloodTransfusionCenter> getFilledOutSurveys() {
-        return filledOutSurveys;
-    }
-
-    public void setFilledOutSurveys(Set<BloodTransfusionCenter> filledOutSurveys) {
-        this.filledOutSurveys = filledOutSurveys;
-    }
 }

@@ -25,4 +25,7 @@ public class TransfusionCenterService {
         }
         return  dtos;
     }
+    public BloodTransfusionCenter getByName(String name){
+        return transfusionCenterRepository.getBloodTransfusionCenterByName(name);
+    }
 }

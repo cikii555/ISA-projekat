@@ -4,4 +4,5 @@ import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TransfusionCenterRepository extends JpaRepository<BloodTransfusionCenter, Long> {
+    public BloodTransfusionCenter getBloodTransfusionCenterByName(String name);
 }
