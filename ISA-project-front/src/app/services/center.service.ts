@@ -16,6 +16,12 @@ export class CenterService {
   getCenters(): Observable<TransfusionCenter[]> {
     return this.http.get<TransfusionCenter[]>(this.apiHost + '/center', { headers: this.headers });
   }
+  searchCentersByName(query:string): Observable<TransfusionCenter[]> {
+    return this.http.get<TransfusionCenter[]>(this.apiHost + '/api/bloodtransfusioncenter/search/name='+query, { headers: this.headers });
+  }
+  searchCentersByCityName(query:string): Observable<TransfusionCenter[]> {
+    return this.http.get<TransfusionCenter[]>(this.apiHost + '/api/bloodtransfusioncenter/search/city_name='+query, { headers: this.headers });
+  }
   addAppointmentHistory(center: String): Observable<String> {
     return this.http.post<String>(this.apiHost + '/center/addAppointmentHistory/' + center, { headers: this.headers });
   }

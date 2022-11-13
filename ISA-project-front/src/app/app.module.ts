@@ -32,7 +32,7 @@ import { EditClientComponent } from './edit-client/edit-client.component';
     EditProfileComponent,
     PasswordComponentComponent,
     HomePageClientComponent,
-    SurveyPageComponent
+    SurveyPageComponent,
     EditClientComponent,
   ],
   imports: [
