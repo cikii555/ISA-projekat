@@ -25,8 +25,8 @@ public class Address {
 
     @Column(name = "lat")
     private String lat;
-    @OneToOne(mappedBy = "address")
-    private BloodTransfusionCenter bloodTransfusionCenter;
+   // @OneToOne(mappedBy = "address")
+   // private BloodTransfusionCenter bloodTransfusionCenter;
 
     public Address() {
     }
@@ -144,11 +144,11 @@ public class Address {
         this.lat = lat;
     }
 
-    public BloodTransfusionCenter getBloodTransfusionCenter() {
-        return bloodTransfusionCenter;
-    }
-
-    public void setBloodTransfusionCenter(BloodTransfusionCenter bloodTransfusionCenter) {
-        this.bloodTransfusionCenter = bloodTransfusionCenter;
-    }
+//    public BloodTransfusionCenter getBloodTransfusionCenter() {
+//        return bloodTransfusionCenter;
+//    }
+//
+//    public void setBloodTransfusionCenter(BloodTransfusionCenter bloodTransfusionCenter) {
+//        this.bloodTransfusionCenter = bloodTransfusionCenter;
+//    }
 }

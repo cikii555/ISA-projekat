@@ -54,6 +54,14 @@ public class BloodTransfusionCenterController {
         }
         return new ResponseEntity<>(new AddressDTO(address),HttpStatus.OK);
     }
+    @GetMapping(value="/search/name={name}")
+    public ResponseEntity<List<BloodTransfusionCenter>> getCentersByName(@PathVariable String name){
+        return new ResponseEntity<>(bloodTransfusionCenterService.searchByName(name),HttpStatus.OK);
+    }
+    @GetMapping(value="/search/city_name={name}")
+    public ResponseEntity<List<BloodTransfusionCenter>> getCentersByCityName(@PathVariable String name){
+        return new ResponseEntity<>(bloodTransfusionCenterService.searchByCityName(name),HttpStatus.OK);
+    }
 
    /* @GetMapping(value="/admins/{id}")
     public ResponseEntity<List<CenterAdminDTO>> getOtherCenterAdmins(@PathVariable Integer id){
@@ -97,4 +105,5 @@ public class BloodTransfusionCenterController {
         center = bloodTransfusionCenterService.save(center);
         return new ResponseEntity<>(new BloodTransfusionCenterDTO(center), HttpStatus.OK);
     }
+
 }

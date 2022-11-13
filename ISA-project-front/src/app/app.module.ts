@@ -19,6 +19,8 @@ import {MatDividerModule} from "@angular/material/divider";
 import { HomePageClientComponent } from './home-page-client/home-page-client.component';
 import { SurveyPageComponent } from './survey-page/survey-page.component';
 
+import { EditClientComponent } from './edit-client/edit-client.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +33,7 @@ import { SurveyPageComponent } from './survey-page/survey-page.component';
     PasswordComponentComponent,
     HomePageClientComponent,
     SurveyPageComponent
+    EditClientComponent,
   ],
   imports: [
     BrowserModule,

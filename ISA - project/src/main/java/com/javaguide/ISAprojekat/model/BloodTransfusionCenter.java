@@ -15,14 +15,14 @@ public class BloodTransfusionCenter {
 
     @Column
     private String name;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     @Column
     private String description;
     @Column
     private double averageGrade;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private WorkHours workHours;
     @OneToMany(mappedBy = "bloodTransfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> freeAppointment;

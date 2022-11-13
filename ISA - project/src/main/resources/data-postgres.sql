@@ -1,9 +1,15 @@
 
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Balzakova','58','43.27','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Beograd','Alekse Santica','12','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Subotica','Alekse Santica','12','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Subotica','Aleka Santica','12','44.27,','45.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Sekspirova','23','43.27','44.23');
-insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Alekse Santica','12','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Moca Santica','12','43.27,','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Dunavksa','6','43.27,','44.23');
 insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Gogoljeva','22','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Novi Sad','Alekse Santica','12','43.27,','44.23');
+insert  into  address (country,city,street,street_number,lon,lat) values ('Srbija','Subotica','Alekse Santica','12','43.27,','44.23');
+
 
 
 insert into work_hours (start_time,end_time) values ('8:00','16:00');
@@ -48,7 +54,7 @@ INSERT INTO role (name) VALUES ('ROLE_CLIENT'),
 
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'markomarkovic@gmail.com', 'admin','Marko', 'Markovic', 1, '0601231231', 439545, 'MALE',1);
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'petarpetrovic@gmail.com', 'admin','Petar', 'Petrovic', 2, '0601231231', 439545, 'MALE',1);
-insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 3, '0601231231', 439545, 'MALE',1)
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 3, '0601231231', 439545, 'MALE',1);
 
 insert into client (id, email, password, first_name, last_name, address_id, phone_number, jmbg, gender,
                     is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)

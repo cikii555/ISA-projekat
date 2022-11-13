@@ -1,0 +1,62 @@
+.cardTitle{
+    margin-top: 30px;
+    margin-left: 100px;
+    font-weight: 800;
+    font-size: 40px;
+    width: 350px;
+    color: rgb(0, 0, 0);
+}
+.additional{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+.nav-links{
+    flex: 1;
+    text-align: right;
+}
+
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+
+.nav-links ul li a {
+    font-weight: 800;
+    font-size: 20px;
+    width: 350px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.nav-links ul li::after{
+    content: '';
+    width: 0%;  /*postavi se underline na hidden, kad je 100 vidi se pa se stavi na reakciju da se uveca*/
+    height: 3px;
+    background-color: #bfdbfe;
+    display: block;
+    margin: auto;
+}
+
+.nav-links ul li:hover::after{
+    width: 100%;
+}
+.header{
+    top: 5;
+    left: 5;
+    width: 100%;
+    background: #fff;
+}
+.card{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #bfdbfe;
+    border-radius: 10px;
+}
+.container{
+   align-items: center;
+   display: flex;
+   justify-content: center
+}

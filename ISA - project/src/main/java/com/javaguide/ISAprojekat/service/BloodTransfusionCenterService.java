@@ -44,4 +44,19 @@ public class BloodTransfusionCenterService {
 //    public BloodTransfusionCenter getByName(String name){
 //        return transfusionCenterRepository.getBloodTransfusionCenterByName(name);
 //    }
+
+    public List<BloodTransfusionCenter> searchByName(String query) {
+        List<BloodTransfusionCenter> rel= transfusionCenterRepository.searchBloodTransfusionCentersbyname(query);
+        System.out.println(rel.size());
+        return rel;
+
+    }
+
+    public List<BloodTransfusionCenter> searchByCityName(String query) {
+       List<BloodTransfusionCenter> rel=  transfusionCenterRepository.searchBloodTransfusionCentersbycityname(query);
+       System.out.println(rel.size());
+       return rel;
+    }
+
+
 }

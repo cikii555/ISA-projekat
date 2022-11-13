@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                        BasicAuthenticationFilter.class
 //                );
 //
-        http.cors().and().csrf().disable();
+    http.cors().and().csrf().disable();
     }
 
     @Override
