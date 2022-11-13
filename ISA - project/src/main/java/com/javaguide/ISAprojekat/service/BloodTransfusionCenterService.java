@@ -6,6 +6,8 @@ import net.bytebuddy.build.BuildLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BloodTransfusionCenterService {
 
@@ -25,4 +27,18 @@ public class BloodTransfusionCenterService {
     public BloodTransfusionCenter findOneWithAdmins(Integer Id) {
         return transfusionCenterRepository.findOneWithAdmins(Id);
     }
+    public List<BloodTransfusionCenter> searchByName(String query) {
+        List<BloodTransfusionCenter> rel= transfusionCenterRepository.searchBloodTransfusionCentersbyname(query);
+        System.out.println(rel.size());
+        return rel;
+
+    }
+
+    public List<BloodTransfusionCenter> searchByCityName(String query) {
+       List<BloodTransfusionCenter> rel=  transfusionCenterRepository.searchBloodTransfusionCentersbycityname(query);
+       System.out.println(rel.size());
+       return rel;
+    }
+
+
 }

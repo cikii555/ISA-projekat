@@ -10,7 +10,5 @@ public class WorkHours {
         private LocalTime startTime;
        @Column
         private LocalTime endTime;
-    @OneToOne(mappedBy = "workHours")
-    @JoinColumn(name="bloodTransfusionCenter_id")
-    private BloodTransfusionCenter bloodTransfusionCenter;
+
 }
