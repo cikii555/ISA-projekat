@@ -11,19 +11,25 @@ public class CenterAdminDTO {
     private String email;
     private String phoneNumber;
     private Address address;
-    public CenterAdminDTO(String firstName, String lastName, String username, String email, String phoneNumber, Address address) {
+    private String password;
+    public CenterAdminDTO(Integer id,String firstName, String lastName, String username, String email, String phoneNumber, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.id = id;
     }
 
 
 
     public CenterAdminDTO(MedicalStaff centeradmin) {
-        this(centeradmin.getFirstName(), centeradmin.getLastName(),centeradmin.getUsername(),centeradmin.getEmail(),centeradmin.getPhoneNumber(),centeradmin.getAddress());
+        this(centeradmin.getId(),centeradmin.getFirstName(), centeradmin.getLastName(),centeradmin.getUsername(),centeradmin.getEmail(),centeradmin.getPhoneNumber(),centeradmin.getAddress());
+    }
+
+    public CenterAdminDTO() {
+
     }
 
     public String getFirstName() {

@@ -1,0 +1,20 @@
+<div>
+
+  <table class="styled-table">
+    <thead>
+    <tr>
+      <th>Full name</th>
+      <th> Address</th>
+      <th>Phone number</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let admin of listAdmins">
+      <td>{{admin.firstName}} {{admin.lastName}}</td>
+      <td> {{admin.address.street}} {{admin.address.streetNumber}} {{admin.address.city}} {{admin.address.country}}</td>
+      <td>{{admin.phoneNumber}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {IAdmin} from "../modelangular/admin";
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +28,7 @@ export class TransfusionCenterServiceService {
     return this.http.get(this.apiHost+'/bloodtransfusioncenter/address/'+id)
   }
 
-  /*getOtherCenterAdmins(id:number):Observable<any>{
-    //return this.get
-  }*/
+  getOtherCenterAdmins(id:number):Observable<IAdmin[]>{
+    return this.http.get<IAdmin[]>(this.apiHost+'/bloodtransfusioncenter/admins/'+id);
+  }
 }

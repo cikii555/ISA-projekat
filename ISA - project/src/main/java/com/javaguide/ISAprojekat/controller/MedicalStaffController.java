@@ -53,12 +53,15 @@ public class MedicalStaffController {
         if(centeradmin == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        else if(centeradmin.getPassword()!= passwordDTO.getOldPassword()){
+        else if((centeradmin.getPassword().equals(passwordDTO.getOldPassword()))){
+            centeradmin.setPassword(passwordDTO.getNewPassword());
+            centeradmin = medicalStaffService.save(centeradmin);
+            return new ResponseEntity<>(new CenterAdminDTO(centeradmin), HttpStatus.OK);
+        }
+        else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        centeradmin.setPassword(passwordDTO.getNewPassword());
-        centeradmin = medicalStaffService.save(centeradmin);
-        return new ResponseEntity<>(new CenterAdminDTO(centeradmin),HttpStatus.OK);
+
 
     }
 

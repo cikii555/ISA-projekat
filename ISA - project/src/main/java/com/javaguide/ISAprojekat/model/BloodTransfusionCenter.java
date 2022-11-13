@@ -89,5 +89,38 @@ public class BloodTransfusionCenter {
  public void setWorkHours(WorkHours workHours) {
   this.workHours = workHours;
  }
+
+    public Set<Appointment> getFreeAppointment() {
+        return freeAppointment;
+    }
+
+    public void setFreeAppointment(Set<Appointment> freeAppointment) {
+        this.freeAppointment = freeAppointment;
+    }
+
+    public Set<MedicalStaff> getMedicalStaff() {
+        return medicalStaff;
+    }
+
+    public void setMedicalStaff(Set<MedicalStaff> medicalStaff) {
+        this.medicalStaff = medicalStaff;
+    }
+
+    public Set<BloodBank> getBloodBanks() {
+        return bloodBanks;
+    }
+
+    public void setBloodBanks(Set<BloodBank> bloodBanks) {
+        this.bloodBanks = bloodBanks;
+    }
+
+    public Set<MedicalStaff> getCenterAdministrators() {
+        return centerAdministrators;
+    }
+
+    public void setCenterAdministrators(Set<MedicalStaff> centerAdministrators) {
+        this.centerAdministrators = centerAdministrators;
+    }
 }
+
 

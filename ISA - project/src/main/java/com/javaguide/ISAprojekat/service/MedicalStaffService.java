@@ -5,6 +5,8 @@ import com.javaguide.ISAprojekat.repository.MedicalStaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MedicalStaffService {
 
@@ -14,6 +16,9 @@ public class MedicalStaffService {
     public MedicalStaff findOne(Integer id) {
         return medicalStaffRepository.findById(id).orElseGet(null);
 
+    }
+    public List<MedicalStaff> findAll() {
+        return medicalStaffRepository.findAll();
     }
 
     public MedicalStaff save(MedicalStaff md){

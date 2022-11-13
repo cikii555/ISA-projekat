@@ -12,7 +12,8 @@ private Integer id;
         this.newPassword = newPassword;
     }
 
-
+    public PasswordDTO() {
+    }
 
     public String getOldPassword() {
         return oldPassword;

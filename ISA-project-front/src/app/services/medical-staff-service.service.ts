@@ -10,18 +10,21 @@ export class MedicalStaffServiceService {
   constructor(private http:HttpClient) { }
   apiHost: string = 'http://localhost:8080/api';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+  data:any
+  data1:any
   getCenterAdmin(id:number):Observable<any>{
 
     return this.http.get(this.apiHost+'/medical-staff/'+id)
   }
 
   updateCenterAdmin(center:any):Observable<any>{
-    return this.http.put<any>(this.apiHost+'/medical-staff/update',center,{headers: this.headers})
+    this.http.put<any>(this.apiHost+'/medical-staff/update',center,{headers: this.headers}).subscribe(res=>{console.log(this.data = res)})
+    return this.data
   }
 
-  changePasswordAdminCenter(center:any):Observable<any>{
-    return this.http.put<any>(this.apiHost+'/medical-staff/password',center,{headers:this.headers})
+  changePasswordAdminCenter(password:any){
+     this.http.put<any>(this.apiHost+'/medical-staff/password',password,{headers:this.headers}).subscribe(res=>{console.log(this.data1 = res)})
+
   }
 
 }

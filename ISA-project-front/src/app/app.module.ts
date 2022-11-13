@@ -16,6 +16,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PasswordComponentComponent } from './password-component/password-component.component';
 import {MatDividerModule} from "@angular/material/divider";
+import { ViewOtherAdminsComponent } from './view-other-admins/view-other-admins.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {MatDividerModule} from "@angular/material/divider";
     TransfusionCenterProfileComponent,
     AdminCenterDashboardComponent,
     EditProfileComponent,
-    PasswordComponentComponent
+    PasswordComponentComponent,
+    ViewOtherAdminsComponent
   ],
   imports: [
     BrowserModule,

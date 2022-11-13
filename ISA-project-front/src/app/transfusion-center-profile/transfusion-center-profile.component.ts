@@ -30,5 +30,8 @@ export class TransfusionCenterProfileComponent implements OnInit {
     console.log(this.selectedCenter.name)
     this.transfusionCenterService.updateBloodTransfusionCenter(this.selectedCenter);
   }
+  seeCenterAdmins(){
+    this.router.navigateByUrl('/admins')
+  }
 
 }
