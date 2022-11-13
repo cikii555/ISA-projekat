@@ -32,6 +32,10 @@ public class BloodTransfusionCenterService {
     public BloodTransfusionCenter findOneWithAdmins(Integer Id) {
         return transfusionCenterRepository.findOneWithAdmins(Id);
     }
+
+    public BloodTransfusionCenter insertBloodTransfusionCenter(BloodTransfusionCenter bloodTransfusionCenter){
+        return transfusionCenterRepository.save(bloodTransfusionCenter);
+    }
 //    public List<TransfusionCenterDTO> getAll(){
 //        List<BloodTransfusionCenter> centers= transfusionCenterRepository.findAll();
 //        List<TransfusionCenterDTO> dtos = new ArrayList<>();

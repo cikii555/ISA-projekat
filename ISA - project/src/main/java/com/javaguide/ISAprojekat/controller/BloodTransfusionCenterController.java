@@ -4,10 +4,7 @@ import com.javaguide.ISAprojekat.dto.AddressDTO;
 import com.javaguide.ISAprojekat.dto.BloodTransfusionCenterDTO;
 import com.javaguide.ISAprojekat.dto.CenterAdminDTO;
 import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
-import com.javaguide.ISAprojekat.model.Address;
-import com.javaguide.ISAprojekat.model.Appointment;
-import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
-import com.javaguide.ISAprojekat.model.Client;
+import com.javaguide.ISAprojekat.model.*;
 import com.javaguide.ISAprojekat.service.AddressService;
 import com.javaguide.ISAprojekat.service.AppointmentHistoryService;
 import com.javaguide.ISAprojekat.service.BloodTransfusionCenterService;
@@ -55,6 +52,7 @@ public class BloodTransfusionCenterController {
         return new ResponseEntity<>(new AddressDTO(address),HttpStatus.OK);
     }
 
+
    /* @GetMapping(value="/admins/{id}")
     public ResponseEntity<List<CenterAdminDTO>> getOtherCenterAdmins(@PathVariable Integer id){
         //traze se polozeni ispiti studenta, sto znaci da moramo uputiti JOIN FETCH upit
@@ -96,5 +94,9 @@ public class BloodTransfusionCenterController {
 
         center = bloodTransfusionCenterService.save(center);
         return new ResponseEntity<>(new BloodTransfusionCenterDTO(center), HttpStatus.OK);
+    }
+    @PostMapping("/registerCenter")
+    public ResponseEntity<BloodTransfusionCenter> registerCenter(@RequestBody BloodTransfusionCenter bloodTransfusionCenter){
+        return new ResponseEntity<BloodTransfusionCenter>(bloodTransfusionCenterService.insertBloodTransfusionCenter(bloodTransfusionCenter), HttpStatus.OK);
     }
 }
