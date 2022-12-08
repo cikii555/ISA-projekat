@@ -53,27 +53,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//                .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
-//                .authorizeRequests().antMatchers("/auth/**").permitAll()
-//                .anyRequest().authenticated().and()
-//                .cors().and()
-//                .addFilterBefore(
-//                        new TokenAuthFilter(tokenUtils, customUserDetailService),
-//                        BasicAuthenticationFilter.class
-//                );
-//
-    http.cors().and().csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
+                .authorizeRequests().antMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated().and()
+                .cors().and()
+                .addFilterBefore(
+                        new TokenAuthFilter(tokenUtils, customUserDetailService),
+                        BasicAuthenticationFilter.class
+                );
+
+    http.csrf().disable();
     }
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(HttpMethod.POST,"/auth/register/client", "/center/addAppointmentHistory");
-//        web.ignoring().antMatchers(HttpMethod.GET, "");
-        web.ignoring().antMatchers(HttpMethod.PUT,"/api/bloodtransfusioncenter/update");
-        web.ignoring().antMatchers(HttpMethod.PUT,"/api/medical-staff/update");
-        web.ignoring().antMatchers(HttpMethod.PUT,"/api/medical-staff/password");
-        web.ignoring().antMatchers(HttpMethod.GET, "/center");
+        web.ignoring().antMatchers(HttpMethod.POST,"/auth/register/client", "/center/addAppointmentHistory", "/auth/login");
+        web.ignoring().antMatchers(HttpMethod.GET, "/");
+//        web.ignoring().antMatchers(HttpMethod.PUT,"/api/bloodtransfusioncenter/update");
+//        web.ignoring().antMatchers(HttpMethod.PUT,"/api/medical-staff/update");
+//        web.ignoring().antMatchers(HttpMethod.PUT,"/api/medical-staff/password");
+//        web.ignoring().antMatchers(HttpMethod.GET, "/center");
 
     }
 }

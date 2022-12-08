@@ -1,6 +1,7 @@
 package com.javaguide.ISAprojekat.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -73,32 +74,14 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
+    // kad impl verifikaciju preko mejla promeniti na isActive i nije deleted
     @Override
     public boolean isEnabled() {
-        return false;
+        return isActive;
     }
-
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -182,4 +165,21 @@ public class User implements UserDetails {
         return role;
     }
 
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 }

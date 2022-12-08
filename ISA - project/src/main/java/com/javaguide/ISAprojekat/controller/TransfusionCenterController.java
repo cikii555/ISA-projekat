@@ -11,12 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/center", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TransfusionCenterController {
@@ -30,13 +31,12 @@ public class TransfusionCenterController {
         this.appointmentHistoryService = appointmentHistoryService;
     }
     @GetMapping()
+    @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<List<TransfusionCenterDTO>> all() {
         return new ResponseEntity<List<TransfusionCenterDTO>>(transfusionCenterService.getAll(), HttpStatus.OK);
     }
     @PostMapping(consumes="application/json", value="/addAppointmentHistory/{center}")
     public ResponseEntity<HttpStatus> addAppointmentHistory(@PathVariable String center) {
-        System.out.println("u funkciji smo???");
-        System.out.println(center);
         BloodTransfusionCenter centerT = transfusionCenterService.getByName(center);
         Client client = userService.findByEmail("client@gmail.com");
         Appointment appointment = new Appointment();

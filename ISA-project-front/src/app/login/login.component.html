@@ -4,11 +4,11 @@
         <table style="margin-left: 70px;">
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
-                <input matInput>
+                <input matInput [(ngModel)]="login.email">
             </mat-form-field><br>
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
-                <input matInput>
+                <input matInput [(ngModel)]="login.password">
             </mat-form-field><br>
         </table>
     <div class="additional">
