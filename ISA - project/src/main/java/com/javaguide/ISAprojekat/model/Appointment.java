@@ -1,5 +1,7 @@
 package com.javaguide.ISAprojekat.model;
 
+import com.javaguide.ISAprojekat.dto.AppointmentDTO;
+
 import javax.persistence.*;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
@@ -28,6 +30,11 @@ public class Appointment {
     private BloodTransfusionCenter bloodTransfusionCenter;
 
     public Appointment() {
+    }
+    public Appointment(AppointmentDTO appointmentDTO) {
+        this.setStartTime(appointmentDTO.getStartDate());
+        this.setEndTime(appointmentDTO.getEndDate());
+        this.taken=false;
     }
 
     public LocalDateTime getStartTime() {
