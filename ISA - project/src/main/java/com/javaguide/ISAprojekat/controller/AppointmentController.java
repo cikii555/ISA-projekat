@@ -1,20 +1,18 @@
 package com.javaguide.ISAprojekat.controller;
+import com.javaguide.ISAprojekat.dto.AppointmentDTO;
 import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
 import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
 import com.javaguide.ISAprojekat.model.Appointment;
 import com.javaguide.ISAprojekat.model.AppointmentHistory;
 import com.javaguide.ISAprojekat.model.Client;
 import com.javaguide.ISAprojekat.security.TokenUtils;
-import com.javaguide.ISAprojekat.service.AppointmentHistoryService;
-import com.javaguide.ISAprojekat.service.TransfusionCenterService;
-import com.javaguide.ISAprojekat.service.UserService;
+import com.javaguide.ISAprojekat.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import com.javaguide.ISAprojekat.service.EmailSenderService;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,11 +27,13 @@ public class AppointmentController {
     private TokenUtils tokenUtils;
     private final UserService userService;
     private final AppointmentHistoryService appointmentHistoryService;
+    private final AppointmentService appointmentService;
     private final EmailSenderService emailSenderService;
 
 
     public AppointmentController(UserService userService, AppointmentHistoryService appointmentHistoryService
-                                ,EmailSenderService emailSenderService) {
+                                ,EmailSenderService emailSenderService,AppointmentService appointmentService) {
+        this.appointmentService=appointmentService;
         this.userService = userService;
         this.appointmentHistoryService = appointmentHistoryService;
         this.emailSenderService=emailSenderService;
