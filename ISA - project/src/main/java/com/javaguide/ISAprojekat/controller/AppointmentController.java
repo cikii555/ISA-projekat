@@ -1,5 +1,4 @@
 package com.javaguide.ISAprojekat.controller;
-
 import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
 import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
 import com.javaguide.ISAprojekat.model.Appointment;
@@ -15,8 +14,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import com.javaguide.ISAprojekat.service.EmailSenderService;
+
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -26,10 +29,14 @@ public class AppointmentController {
     private TokenUtils tokenUtils;
     private final UserService userService;
     private final AppointmentHistoryService appointmentHistoryService;
+    private final EmailSenderService emailSenderService;
 
-    public AppointmentController(UserService userService, AppointmentHistoryService appointmentHistoryService) {
+
+    public AppointmentController(UserService userService, AppointmentHistoryService appointmentHistoryService
+                                ,EmailSenderService emailSenderService) {
         this.userService = userService;
         this.appointmentHistoryService = appointmentHistoryService;
+        this.emailSenderService=emailSenderService;
     }
     @GetMapping()
     @PreAuthorize("hasRole('CLIENT')")
@@ -45,6 +52,28 @@ public class AppointmentController {
     @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<HttpStatus> cancelAppointment(@PathVariable Long id, HttpServletRequest request) {
         appointmentHistoryService.cancelAppointment(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value="/sendemail/")
+    public ResponseEntity<HttpStatus> SendEmail(HttpServletRequest request) {
+        String email= tokenUtils.getEmailDirectlyFromHeader(request);
+            if (email==null) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        emailSenderService.sendEmail(email,"nesto","nesto");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping(consumes="application/json", value="/addAppointmentHistory")
+    public ResponseEntity<HttpStatus> addAppointmentHistory(@RequestBody AppointmentDTO appointment) {
+        System.out.println("u funkciji smo???");
+        System.out.println(appointment.getBloodTransfusionName());
+
+        try {
+            appointmentService.saveAppointment(appointment);
+        } catch (Exception ignored) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
