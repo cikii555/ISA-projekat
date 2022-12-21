@@ -57,4 +57,12 @@ public class Appointment {
     public void setBloodTransfusionCenter(BloodTransfusionCenter bloodTransfusionCenter) {
         this.bloodTransfusionCenter = bloodTransfusionCenter;
     }
+
+    public BloodTransfusionCenter getBloodTransfusionCenter() {
+        return bloodTransfusionCenter;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

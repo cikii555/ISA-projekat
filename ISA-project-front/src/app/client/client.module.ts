@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { SurveyPageComponent } from '../survey-page/survey-page.component';
+import { FutureAppointmentsComponent } from '../future-appointments/future-appointments.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
         { path: 'home', component:HomePageClientComponent},
         { path: 'edit',component:EditClientComponent},
         { path: 'survey/:id', component:SurveyPageComponent},
+        { path: 'future-appointments', component:FutureAppointmentsComponent},
     ]
   }
 ]
@@ -37,7 +39,8 @@ const routes: Routes = [
     ClientComponent,
     HomePageClientComponent,
     EditClientComponent,
-    SurveyPageComponent
+    SurveyPageComponent,
+    FutureAppointmentsComponent,
   ],
   imports: [
     CommonModule,

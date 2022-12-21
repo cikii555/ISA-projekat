@@ -27,6 +27,7 @@ import { AuthInterception } from './login/auth.interceptor';
 import { ClientComponent } from './client/client.component';
 import { AdminComponent } from './admin/admin.component';
 import { ClientModule } from './client/client.module';
+import { FutureAppointmentsComponent } from './future-appointments/future-appointments.component';
 
 @NgModule({
   declarations: [
