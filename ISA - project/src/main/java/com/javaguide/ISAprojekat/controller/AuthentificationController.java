@@ -6,12 +6,14 @@ import com.javaguide.ISAprojekat.dto.UserTokenState;
 import com.javaguide.ISAprojekat.model.Client;
 import com.javaguide.ISAprojekat.model.User;
 import com.javaguide.ISAprojekat.security.TokenUtils;
+import com.javaguide.ISAprojekat.service.EmailService;
 import com.javaguide.ISAprojekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,15 +30,17 @@ public class AuthentificationController {
     private UserService userService;
 
     private AuthenticationManager authenticationManager;
+    private EmailService emailService;
 
 
     @Autowired
     public AuthentificationController(TokenUtils tokenUtils, UserService userService,
-                                      AuthenticationManager authenticationManager) {
+                                      AuthenticationManager authenticationManager, EmailService emailService) {
         super();
         this.tokenUtils = tokenUtils;
         this.userService = userService;
         this.authenticationManager = authenticationManager;
+        this.emailService = emailService;
     }
     @PostMapping(consumes="application/json", value="/register/client")
     public ResponseEntity<HttpStatus> registerClient(@RequestBody UserRegistrationDTO data) {
@@ -50,7 +54,6 @@ public class AuthentificationController {
     }
     @GetMapping(value="/register/{email}")
     public ResponseEntity<Client> emailExists(@PathVariable String email) {
-//        String email = tokenUtils.getEmailDirectlyFromHeader(request);
         if (email == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         Client client = userService.findByEmail(email);
@@ -58,6 +61,31 @@ public class AuthentificationController {
             return null;
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
+    @GetMapping(value="/send-confirmation-mail/{email}")
+    @Async
+    public ResponseEntity<HttpStatus> sendAccountConfirmationMail(@PathVariable String email) {
+        try {
+            emailService.sendMail(email, "Confirmation mail",
+                    "Click here to activate your account: http://localhost:8080/auth/confirm-mail/" + email
+            );
+        } catch(Exception ignored){
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value="/confirm-mail/{email}")
+    public ResponseEntity<HttpStatus> activateClientAccount(@PathVariable String email){
+        Client client = userService.findByEmail(email);
+        if (client == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        client.setActive(true);
+        userService.updateClient(client);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @PostMapping(value="/login")
     //@CrossOrigin(origins = ServerConfig.FRONTEND_ORIGIN)
@@ -69,8 +97,6 @@ public class AuthentificationController {
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-//                loginData.getEmail(), loginData.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         User user = (User) authentication.getPrincipal();
 
