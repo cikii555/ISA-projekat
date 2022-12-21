@@ -67,3 +67,8 @@ insert into client (id, email, password, first_name, last_name, address_id, phon
                     is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)
 values (nextval('my_seq_gen_user'), 'client@gmail.com', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq',
         'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 1 , 0, false, 'student', 'ftn', false);
+insert into client (id, email, password, first_name, last_name, address_id, phone_number, jmbg, gender,
+
+                    is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)
+values (nextval('my_seq_gen_user'), 'client1@gmail.com', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq',
+        'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 2 , 0, false, 'student', 'ftn', false);
