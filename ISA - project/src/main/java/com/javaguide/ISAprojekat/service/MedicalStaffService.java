@@ -1,6 +1,7 @@
 package com.javaguide.ISAprojekat.service;
 
 import com.javaguide.ISAprojekat.model.MedicalStaff;
+import com.javaguide.ISAprojekat.model.MedicalStaffType;
 import com.javaguide.ISAprojekat.repository.MedicalStaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,10 @@ public class MedicalStaffService {
 
     public MedicalStaff save(MedicalStaff md){
         return medicalStaffRepository.save(md);
+    }
+
+    public List<MedicalStaff> getMedicalStaff(Integer centerId)
+    {
+        return medicalStaffRepository.findMedicalStaffByBloodTransfusionCenterId(centerId);
     }
 }

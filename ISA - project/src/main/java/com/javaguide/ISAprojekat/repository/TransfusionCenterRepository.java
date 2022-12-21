@@ -17,6 +17,7 @@ public interface TransfusionCenterRepository extends JpaRepository<BloodTransfus
     @Query("select c from BloodTransfusionCenter c join fetch c.medicalStaff e where c.id =?1")
     public BloodTransfusionCenter findOneWithAdmins(Integer studentId);
 
+    //public BloodTransfusionCenter findOneWithBloodBanks(Integer id);
     public BloodTransfusionCenter getBloodTransfusionCenterByName(String name);
 //=======
 //

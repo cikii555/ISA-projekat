@@ -1,13 +1,7 @@
 package com.javaguide.ISAprojekat.controller;
 
-import com.javaguide.ISAprojekat.dto.AddressDTO;
-import com.javaguide.ISAprojekat.dto.BloodTransfusionCenterDTO;
-import com.javaguide.ISAprojekat.dto.CenterAdminDTO;
-import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
-import com.javaguide.ISAprojekat.model.Address;
-import com.javaguide.ISAprojekat.model.Appointment;
-import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
-import com.javaguide.ISAprojekat.model.MedicalStaff;
+import com.javaguide.ISAprojekat.dto.*;
+import com.javaguide.ISAprojekat.model.*;
 import com.javaguide.ISAprojekat.service.AddressService;
 import com.javaguide.ISAprojekat.service.AppointmentHistoryService;
 import com.javaguide.ISAprojekat.service.BloodTransfusionCenterService;
@@ -97,6 +91,24 @@ public class BloodTransfusionCenterController {
         }
         return new ResponseEntity<>(adminss, HttpStatus.OK);
     }
+    @GetMapping(value="/blood/{centerId}")
+    public ResponseEntity<List<BloodBank>> getBloodbanks(@PathVariable Integer centerId){
+        //traze se polozeni ispiti studenta, sto znaci da moramo uputiti JOIN FETCH upit
+        //kako bismo dobili sve trazene podatke
+
+
+        //ako je podesen fetchType LAZY i pozovemo findOne umesto findOneWithExams,
+        //na poziv getExams bismo dobili LazyInitializationException
+        List<BloodBank> bloodbanks = bloodTransfusionCenterService.getTransfusionCenterBloodBanks(centerId);
+        List<BloodBank> bloodBankList = new ArrayList<>();
+        for (BloodBank b : bloodbanks) {
+
+
+            bloodBankList.add(b);
+
+                     }
+        return new ResponseEntity<>(bloodBankList, HttpStatus.OK);
+    }
 
     @PutMapping(path = "/update",consumes = "application/json")
     @PreAuthorize("hasRole('MEDICALSTAFF')")
@@ -118,5 +130,10 @@ public class BloodTransfusionCenterController {
         center = bloodTransfusionCenterService.save(center);
         return new ResponseEntity<>(new BloodTransfusionCenterDTO(center), HttpStatus.OK);
     }
+
+    /*@PostMapping(value="/search")
+    public ResponseEntity<BloodTransfusionCenterDTO> searchCenters(@RequestBody searchDTO){
+
+    }*/
 
 }

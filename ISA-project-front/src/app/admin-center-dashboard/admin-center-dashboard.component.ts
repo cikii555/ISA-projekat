@@ -15,7 +15,7 @@ goToTCPage(){
 this.router.navigateByUrl('medical-staff/tc')
 }
 goToNewAppointment(){
-
+this.router.navigateByUrl('createappointment')
 }
 goToProfile(){
 this.router.navigateByUrl('medical-staff/admincenter')

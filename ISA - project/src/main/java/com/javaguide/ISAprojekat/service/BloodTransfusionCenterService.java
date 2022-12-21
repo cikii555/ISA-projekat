@@ -1,10 +1,10 @@
 package com.javaguide.ISAprojekat.service;
 
 import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
+import com.javaguide.ISAprojekat.model.BloodBank;
 import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
+import com.javaguide.ISAprojekat.repository.BloodBankRepository;
 import com.javaguide.ISAprojekat.repository.TransfusionCenterRepository;
-import net.bytebuddy.build.BuildLogger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,9 +14,11 @@ import java.util.List;
 public class BloodTransfusionCenterService {
 
     private final TransfusionCenterRepository transfusionCenterRepository;
+    private final BloodBankRepository bloodBankRepository;
 
-    public BloodTransfusionCenterService(TransfusionCenterRepository transfusionCenterRepository) {
+    public BloodTransfusionCenterService(TransfusionCenterRepository transfusionCenterRepository, BloodBankRepository bloodBankRepository) {
         this.transfusionCenterRepository = transfusionCenterRepository;
+        this.bloodBankRepository = bloodBankRepository;
     }
 
 
@@ -32,6 +34,12 @@ public class BloodTransfusionCenterService {
     public BloodTransfusionCenter findOneWithAdmins(Integer Id) {
         return transfusionCenterRepository.findOneWithAdmins(Id);
     }
+
+    public List<BloodBank> getTransfusionCenterBloodBanks(Integer transfusionCenterId){
+        return bloodBankRepository.findBloodBankByBloodTransfusionCenterId(transfusionCenterId);
+    }
+
+
 //    public List<TransfusionCenterDTO> getAll(){
 //        List<BloodTransfusionCenter> centers= transfusionCenterRepository.findAll();
 //        List<TransfusionCenterDTO> dtos = new ArrayList<>();
