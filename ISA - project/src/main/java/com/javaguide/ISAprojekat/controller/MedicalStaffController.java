@@ -9,6 +9,7 @@ import com.javaguide.ISAprojekat.service.MedicalStaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,7 @@ public class MedicalStaffController {
     private MedicalStaffService medicalStaffService;
 
     @GetMapping(value="/{id}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<CenterAdminDTO> getCenterAdmin(@PathVariable  Integer id){
 
         MedicalStaff centeradmin = medicalStaffService.findOne(id);
@@ -29,6 +31,7 @@ public class MedicalStaffController {
     }
 
     @PutMapping( path="/update",consumes = "application/json")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<CenterAdminDTO> updateCenterAdmin(@RequestBody CenterAdminDTO centeradminDTO){
         MedicalStaff admin = medicalStaffService.findOne(centeradminDTO.getId());
 
@@ -47,6 +50,7 @@ public class MedicalStaffController {
         return new ResponseEntity<>(new CenterAdminDTO(admin), HttpStatus.OK);
     }
     @PutMapping(path="/password",consumes = "application/json")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<CenterAdminDTO> updateCenterAdminPassword(@RequestBody PasswordDTO passwordDTO){
         MedicalStaff centeradmin = medicalStaffService.findOne(passwordDTO.getId());
 

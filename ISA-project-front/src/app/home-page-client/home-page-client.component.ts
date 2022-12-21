@@ -46,7 +46,7 @@ export class HomePageClientComponent implements OnInit {
 
   }
   survey(center:any){
-    this.router.navigate(['survey/' + center.name]);
+    this.router.navigate(['client/survey/' + center.name]);
   }
   searchItems(Search:string){
     if(Search===null)

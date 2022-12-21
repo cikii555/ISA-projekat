@@ -36,6 +36,7 @@ public class TransfusionCenterController {
         return new ResponseEntity<List<TransfusionCenterDTO>>(transfusionCenterService.getAll(), HttpStatus.OK);
     }
     @PostMapping(consumes="application/json", value="/addAppointmentHistory/{center}")
+    @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<HttpStatus> addAppointmentHistory(@PathVariable String center) {
         BloodTransfusionCenter centerT = transfusionCenterService.getByName(center);
         Client client = userService.findByEmail("client@gmail.com");

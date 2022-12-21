@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class BloodTransfusionCenterController {
     private UserService userService;
 
     @GetMapping(value = "/{id}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<BloodTransfusionCenterDTO> getBloodCenter(@PathVariable Integer id) {
 
         BloodTransfusionCenter center = bloodTransfusionCenterService.findOne(id);
@@ -52,6 +54,7 @@ public class BloodTransfusionCenterController {
         return new ResponseEntity<>(new BloodTransfusionCenterDTO(center), HttpStatus.OK);
     }
     @GetMapping(value="/address/{id}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<AddressDTO> getAdressCenter(@PathVariable String id){
         Integer id1 = Integer.parseInt(id);
         Address address = addressService.findOne(id1);
@@ -70,6 +73,7 @@ public class BloodTransfusionCenterController {
     }
 
     @GetMapping(value="/admins/{id}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<List<CenterAdminDTO>> getOtherCenterAdmins(@PathVariable Integer id){
         //traze se polozeni ispiti studenta, sto znaci da moramo uputiti JOIN FETCH upit
         //kako bismo dobili sve trazene podatke
@@ -95,6 +99,7 @@ public class BloodTransfusionCenterController {
     }
 
     @PutMapping(path = "/update",consumes = "application/json")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<BloodTransfusionCenterDTO> updateCenter(@RequestBody BloodTransfusionCenterDTO centerDTO) {
 
         // a student must exist

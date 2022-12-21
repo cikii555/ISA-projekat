@@ -8,6 +8,7 @@ import com.javaguide.ISAprojekat.model.User;
 import com.javaguide.ISAprojekat.security.TokenUtils;
 import com.javaguide.ISAprojekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -61,8 +62,15 @@ public class AuthentificationController {
     @PostMapping(value="/login")
     //@CrossOrigin(origins = ServerConfig.FRONTEND_ORIGIN)
     public ResponseEntity<UserTokenState> login(@RequestBody LoginDTO loginData) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginData.getEmail(), loginData.getPassword()));
+        Authentication authentication;
+        try {
+            authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    loginData.getEmail(), loginData.getPassword()));
+        } catch (Exception ignored) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+//                loginData.getEmail(), loginData.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         User user = (User) authentication.getPrincipal();
 
@@ -70,16 +78,8 @@ public class AuthentificationController {
             return new ResponseEntity<>(null, HttpStatus.LOCKED);
 
         String userRole = user.getRole().getName().substring(5);
-//        return new ResponseEntity<>(
-//                new UserTokenState(
-//                        tokenUtils.generateToken(user.getEmail(), userRole),
-//                        tokenUtils.getExpiredIn(),
-//                        userRole
-//                ),
-//                HttpStatus.OK
-//        );
-        String jwt = tokenUtils.generateToken(user.getEmail(),userRole);
+        String jwt = tokenUtils.generateToken(user.getEmail(), userRole);
         int expiresIn = tokenUtils.getExpiredIn();
-        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
+        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, userRole));
     }
 }

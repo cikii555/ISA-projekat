@@ -12,13 +12,18 @@ export class AdminCenterDashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 goToTCPage(){
-this.router.navigateByUrl('tc')
+this.router.navigateByUrl('medical-staff/tc')
 }
 goToNewAppointment(){
 
 }
 goToProfile(){
-this.router.navigateByUrl('/admincenter')
+this.router.navigateByUrl('medical-staff/admincenter')
+}
+LogOut(){
+  localStorage.removeItem('token');
+  localStorage.removeItem('role');
+  this.router.navigate(["/"]);
 }
 
 }

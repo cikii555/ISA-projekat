@@ -1,6 +1,8 @@
+import { SystemAdminModule } from './system-admin/system-admin.module';
+import { AdminModule } from './admin/admin.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -21,22 +23,16 @@ import { SurveyPageComponent } from './survey-page/survey-page.component';
 import { EditClientComponent } from './edit-client/edit-client.component';
 import { HomePageClientComponent } from './home-page-client/home-page-client.component';
 import { TransfusionCenterPanelComponent } from './transfusion-center-panel/transfusion-center-panel.component';
+import { AuthInterception } from './login/auth.interceptor';
+import { ClientComponent } from './client/client.component';
+import { AdminComponent } from './admin/admin.component';
+import { ClientModule } from './client/client.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    ProfileAdminComponent,
-    TransfusionCenterProfileComponent,
-    AdminCenterDashboardComponent,
-    EditProfileComponent,
-    PasswordComponentComponent,
-    ViewOtherAdminsComponent,
-    HomePageClientComponent,
-    SurveyPageComponent,
-    EditClientComponent,
-    TransfusionCenterPanelComponent,
 
   ],
   imports: [
@@ -49,9 +45,16 @@ import { TransfusionCenterPanelComponent } from './transfusion-center-panel/tran
     MatCardModule,
     MatSidenavModule,
     MatDividerModule,
-
+    ClientModule,
+    AdminModule,
+    SystemAdminModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterception,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

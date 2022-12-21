@@ -16,15 +16,20 @@ export class LoginComponent implements OnInit {
   SignIn() {
     this.authService.signIn(this.login).subscribe(res => {
       console.log(res);
-      var token = res.accessToken;
-      var role = res.
-      // var token = res.split('')[0];
-      // var role = res.split('')[1];
-      // localStorage.setItem('token',token);
-      // localStorage.setItem('role',role);
-      localStorage.setItem("jwt", res.body.accessToken)
-      this.router.navigate(['/']);
-    })
+      console.log(res.accessToken);
+      console.log(res.role);
+      let role = res.role
+      localStorage.setItem('token', res.accessToken);
+      localStorage.setItem('role', role);
+
+      if (role == 'CLIENT') this.router.navigate(['/client/home']);
+      else if (role == 'MEDICALSTAFF') this.router.navigate(['/medical-staff/admin-center-dashboard']);
+      else if (role == 'ADMIN') this.router.navigate(['/admin/']);
+      else {
+           localStorage.removeItem('token');
+           this.router.navigate(['/']);
+         }
+      });
    
     }
 

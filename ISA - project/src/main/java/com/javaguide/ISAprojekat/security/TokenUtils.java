@@ -1,5 +1,6 @@
 package com.javaguide.ISAprojekat.security;
 
+import com.javaguide.ISAprojekat.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -47,7 +48,6 @@ public class TokenUtils {
 
     public String getToken(HttpServletRequest request) {
         String authHeader = getAuthHeaderFromHeader(request);
-
         // Bearer sklj.blab.labal
         if (authHeader != null && authHeader.startsWith("Bearer "))
             return authHeader.substring(7);
