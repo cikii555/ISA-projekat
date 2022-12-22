@@ -1,0 +1,42 @@
+<h1 class="title"  xmlns:app="http://www.w3.org/1999/xhtml">Blood transfusion centers</h1>
+<table>
+<td>
+<input matInput [(ngModel)]="search"></td>
+<td><mat-label>Search option:</mat-label>
+                <mat-select  [(ngModel)]="searchOption">
+                    <mat-option value="NAME">Name</mat-option>
+                    <mat-option value="CITY">City</mat-option>
+                    </mat-select>
+</td>
+<td><button class="confirmButton" mat-stroked-button xmlns:app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="searchItems(search)">
+  Search
+</button></td>
+<tr><td>
+  <mat-label>Filter:</mat-label></td>
+  <td><mat-label>Lowest Grade:</mat-label>
+    <input matInput [(ngModel)]="low">
+    <td> <mat-label>Highest Grade:</mat-label>
+  <input matInput [(ngModel)]="high"></td>
+  <td><button class="confirmButton" mat-stroked-button xmlns:app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="FilterItems()">
+    Filter
+  </button></td>
+</tr>
+</table>
+<table class="border-none">
+    <th class="out" (click)="sort('name')">Name</th>
+    <th  (click)="sort('street')">Street and number</th>
+    <th  (click)="sort('city')">City</th>
+    <th  (click)="sort('country')">Country</th>
+    <th  (click)="sort('description')">Description</th>
+    <th  (click)="sort('averageGrade')">Average grade</th>
+    <th  (click)="sort('startTime')">Work hours</th>
+    <tr *ngFor="let center of centers | orderBy:key:reverse">
+      <td > {{center.name}}</td>
+      <td> {{center.street}}, {{center.streetNumber}}</td>
+      <td> {{center.city}}</td>
+      <td> {{center.country}}</td>
+      <td> {{center.description}}</td>
+      <td> {{center.averageGrade}}</td>
+      <td > {{center.startTime}} - {{center.endTime}}</td>
+    </tr>
+</table>

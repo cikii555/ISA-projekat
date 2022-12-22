@@ -1,9 +1,10 @@
+import { UnauthCentersComponent } from './unauth-centers/unauth-centers.component';
 import { SystemAdminComponent } from './system-admin/system-admin.component';
 import { SurveyPageComponent } from './survey-page/survey-page.component';
 import { HomePageClientComponent } from './home-page-client/home-page-client.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {TransfusionCenterProfileComponent} from "./transfusion-center-profile/transfusion-center-profile.component";
 import {ProfileAdminComponent} from "./profile-admin/profile-admin.component";
@@ -23,6 +24,7 @@ import {BloodBanksComponent} from "./blood-banks/blood-banks.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'centers', component: UnauthCentersComponent},
   { path: 'client', component: ClientComponent,
     data: {
     allowedRoles: ['CLIENT']
@@ -41,22 +43,22 @@ const routes: Routes = [
     canActivate: [AuthorizationGuard] },
   { path: 'registration', component:RegistrationComponent},
 
-  {path:'centerprofile', component:TransfusionCenterProfileComponent},
-  {path:'admincenter',component:ProfileAdminComponent,children: [
-      {path: 'password',component: PasswordComponentComponent },
-      {path: 'edit',component: EditProfileComponent}
-    ]},
-  {path:'admin-center-dashboard',component:AdminCenterDashboardComponent},
-  {path:'admins', component:ViewOtherAdminsComponent},
-  { path: 'home-client', component:HomePageClientComponent},
-  { path: 'survey/:id', component:SurveyPageComponent},
-  {path:'edit',component:EditClientComponent},
-  {path:'tc',component:TransfusionCenterPanelComponent,children:[
-      {path:'centerprofile', component:TransfusionCenterProfileComponent},
-      {path:'admins', component:ViewOtherAdminsComponent},
-      {path:'createappointment', component:BloodDonationAppointmentComponent},
-      {path:'bloodbanks',component:BloodBanksComponent}
-    ]},
+  // {path:'centerprofile', component:TransfusionCenterProfileComponent},
+  // {path:'admincenter',component:ProfileAdminComponent,children: [
+  //     {path: 'password',component: PasswordComponentComponent },
+  //     {path: 'edit',component: EditProfileComponent}
+  //   ]},
+  // {path:'admin-center-dashboard',component:AdminCenterDashboardComponent},
+  // {path:'admins', component:ViewOtherAdminsComponent},
+  // { path: 'home-client', component:HomePageClientComponent},
+  // { path: 'survey/:id', component:SurveyPageComponent},
+  // {path:'edit',component:EditClientComponent},
+  // {path:'tc',component:TransfusionCenterPanelComponent,children:[
+  //     {path:'centerprofile', component:TransfusionCenterProfileComponent},
+  //     {path:'admins', component:ViewOtherAdminsComponent},
+  //     {path:'createappointment', component:BloodDonationAppointmentComponent},
+  //     {path:'bloodbanks',component:BloodBanksComponent}
+  //   ]},
 
 
 
