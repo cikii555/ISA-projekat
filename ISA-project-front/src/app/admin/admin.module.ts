@@ -67,7 +67,8 @@ const routes: Routes = [
     EditProfileComponent,
     TransfusionCenterPanelComponent,
     BloodBanksComponent,
-    BloodDonationAppointmentComponent
+    BloodDonationAppointmentComponent,
+    CreateNewAppointmentComponent
   ],
   imports: [
     CommonModule,
@@ -79,6 +80,7 @@ const routes: Routes = [
     HttpClientModule,
     MatCardModule,
     MatSidenavModule,
+    MaterialModule,            // <----- this module will be deprecated in the future version.
     MatDatepickerModule,
     MatDividerModule,
     RouterModule.forChild(routes),
