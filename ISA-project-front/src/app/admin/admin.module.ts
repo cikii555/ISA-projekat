@@ -25,6 +25,7 @@ import {SearchPatientAppointmentComponent} from "../search-patient-appointment/s
 import {AppointmentPatientDetailsComponent} from "../appointment-patient-details/appointment-patient-details.component";
 import { CreateNewAppointmentComponent } from '../create-new-appointment/create-new-appointment.component';
 import { MatDatepickerModule }  from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const routes: Routes = [
   {
@@ -79,9 +80,9 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     MatCardModule,
-    MatSidenavModule,
-    MaterialModule,            // <----- this module will be deprecated in the future version.
+    MatSidenavModule, 
     MatDatepickerModule,
+    MatNativeDateModule,
     MatDividerModule,
     RouterModule.forChild(routes),
     MatDatepickerModule,
