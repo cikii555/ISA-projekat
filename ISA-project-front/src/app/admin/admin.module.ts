@@ -21,9 +21,10 @@ import { TransfusionCenterPanelComponent } from '../transfusion-center-panel/tra
 import { ViewOtherAdminsComponent } from '../view-other-admins/view-other-admins.component';
 import {BloodDonationAppointmentComponent} from "../blood-donation-appointment/blood-donation-appointment.component";
 import {BloodBanksComponent} from "../blood-banks/blood-banks.component";
-import {MatDatepickerModule} from "@angular/material/datepicker";
 import {SearchPatientAppointmentComponent} from "../search-patient-appointment/search-patient-appointment.component";
 import {AppointmentPatientDetailsComponent} from "../appointment-patient-details/appointment-patient-details.component";
+import { CreateNewAppointmentComponent } from '../create-new-appointment/create-new-appointment.component';
+import { MatDatepickerModule }  from '@angular/material/datepicker';
 
 const routes: Routes = [
   {
@@ -50,7 +51,8 @@ const routes: Routes = [
                 {path:'report/:id',component:BloodDonationAppointmentComponent},
                 {path:'start/:id',component:AppointmentPatientDetailsComponent}
               ]}
-        ]}
+        ]},
+        {path:'new-appointment',component:CreateNewAppointmentComponent},
     ]
   }
 ]
@@ -77,6 +79,7 @@ const routes: Routes = [
     HttpClientModule,
     MatCardModule,
     MatSidenavModule,
+    MatDatepickerModule,
     MatDividerModule,
     RouterModule.forChild(routes),
     MatDatepickerModule,

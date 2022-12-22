@@ -22,6 +22,7 @@ import { BloodDonationReportComponent } from './blood-donation-report/blood-dona
 import { AppointmentPatientDetailsComponent } from './appointment-patient-details/appointment-patient-details.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { UnauthCentersComponent } from './unauth-centers/unauth-centers.component';
+import { CreateNewAppointmentComponent } from './create-new-appointment/create-new-appointment.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,6 @@ import { UnauthCentersComponent } from './unauth-centers/unauth-centers.componen
     BloodDonationReportComponent,
     AppointmentPatientDetailsComponent,
     UnauthCentersComponent,
-
-
   ],
 
     imports: [
