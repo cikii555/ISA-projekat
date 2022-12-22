@@ -27,7 +27,7 @@ public class AppointmentService {
     public void saveAppointment(AppointmentDTO appointmentDTO) {
         Appointment appointment = new Appointment(appointmentDTO);
         appointment.setBloodTransfusionCenter
-                (transfusionCenterRepository.getBloodTransfusionCenterByName(appointmentDTO.getBloodTransfusionName()));
+                (transfusionCenterRepository.getBloodTransfusionCenterById(appointmentDTO.getBloodTransfusionId().intValue()));
         appointmentRepository.save(appointment);
     }
 

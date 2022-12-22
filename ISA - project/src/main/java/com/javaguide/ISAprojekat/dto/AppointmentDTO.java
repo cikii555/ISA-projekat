@@ -5,17 +5,17 @@ import java.time.LocalDateTime;
 public class AppointmentDTO {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private String bloodTransfusionName;
+    private Long bloodTransfusionId;
 
 
     public AppointmentDTO(){
 
     }
 
-    public AppointmentDTO(LocalDateTime startDate, LocalDateTime endDate, String bloodTransfusionCenter) {
+    public AppointmentDTO(LocalDateTime startDate, LocalDateTime endDate, Long bloodTransfusionCenter) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.bloodTransfusionName = bloodTransfusionCenter;
+        this.bloodTransfusionId = bloodTransfusionCenter;
     }
 
     public LocalDateTime getStartDate() {
@@ -34,11 +34,11 @@ public class AppointmentDTO {
         this.endDate = endDate;
     }
 
-    public String getBloodTransfusionName() {
-        return bloodTransfusionName;
+    public Long getBloodTransfusionId() {
+        return bloodTransfusionId;
     }
 
-    public void setBloodTransfusionName(String bloodTransfusionName) {
-        this.bloodTransfusionName = bloodTransfusionName;
+    public void setBloodTransfusionName(Long bloodTransfusionId) {
+        this.bloodTransfusionId = bloodTransfusionId;
     }
 }
