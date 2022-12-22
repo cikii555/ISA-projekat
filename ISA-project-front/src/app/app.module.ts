@@ -10,30 +10,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
-import { ProfileAdminComponent } from './profile-admin/profile-admin.component';
-import { TransfusionCenterProfileComponent } from './transfusion-center-profile/transfusion-center-profile.component';
 import {MatCardModule} from "@angular/material/card";
-import { AdminCenterDashboardComponent } from './admin-center-dashboard/admin-center-dashboard.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { PasswordComponentComponent } from './password-component/password-component.component';
 import {MatDividerModule} from "@angular/material/divider";
-import { ViewOtherAdminsComponent } from './view-other-admins/view-other-admins.component';
-import { SurveyPageComponent } from './survey-page/survey-page.component';
-import { EditClientComponent } from './edit-client/edit-client.component';
-import { HomePageClientComponent } from './home-page-client/home-page-client.component';
-import { TransfusionCenterPanelComponent } from './transfusion-center-panel/transfusion-center-panel.component';
-
 import { AuthInterception } from './login/auth.interceptor';
-import { ClientComponent } from './client/client.component';
-import { AdminComponent } from './admin/admin.component';
 import { ClientModule } from './client/client.module';
-import { FutureAppointmentsComponent } from './future-appointments/future-appointments.component';
-
-import { BloodDonationAppointmentComponent } from './blood-donation-appointment/blood-donation-appointment.component';
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import { BloodBanksComponent } from './blood-banks/blood-banks.component';
-import {MatNativeDateModule} from "@angular/material/core";
+import { MatSortModule } from '@angular/material/sort';
 import { SearchBloodCenterComponent } from './search-blood-center/search-blood-center.component';
 import { SearchPatientAppointmentComponent } from './search-patient-appointment/search-patient-appointment.component';
 import { BloodDonationReportComponent } from './blood-donation-report/blood-donation-report.component';
@@ -52,6 +34,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
   ],
+
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -62,11 +45,15 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
         MatCardModule,
         MatSidenavModule,
         MatDividerModule,
-        ClientModule,
+        ClientModule  ,
         AdminModule,
         SystemAdminModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatSortModule,
     ],
+
+
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

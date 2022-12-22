@@ -45,8 +45,8 @@ export class HomePageClientComponent implements OnInit {
     this.reverse = !this.reverse;
 
   }
-  survey(center:any){
-    this.router.navigate(['client/survey/' + center.name]);
+  Appointments(center:any){
+    this.router.navigate(['client/appointments/' + center.name]);
   }
   searchItems(Search:string){
     if(Search===null)

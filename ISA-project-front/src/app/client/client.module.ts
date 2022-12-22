@@ -1,3 +1,4 @@
+import { CenterAppointmentsComponent } from './../center-appointments/center-appointments.component';
 import { AuthorizationGuard } from './../login/authorization.guard';
 import { ClientComponent } from './client.component';
 import { NgModule } from '@angular/core';
@@ -29,18 +30,21 @@ const routes: Routes = [
     children: [
         { path: 'home', component:HomePageClientComponent},
         { path: 'edit',component:EditClientComponent},
-        { path: 'survey/:id', component:SurveyPageComponent},
+        { path: 'survey', component:SurveyPageComponent},
         { path: 'future-appointments', component:FutureAppointmentsComponent},
+        { path: 'appointments/:id', component: CenterAppointmentsComponent},
     ]
   }
 ]
 @NgModule({
+
     declarations: [
         ClientComponent,
         HomePageClientComponent,
         EditClientComponent,
         SurveyPageComponent,
         FutureAppointmentsComponent,
+      CenterAppointmentsComponent
     ],
     exports: [
         HomePageClientComponent
@@ -58,5 +62,9 @@ const routes: Routes = [
         MatSidenavModule,
         MatDividerModule,
     ]
+
+
+
+
 })
 export class ClientModule { }

@@ -21,6 +21,8 @@ public interface TransfusionCenterRepository extends JpaRepository<BloodTransfus
 
     //public BloodTransfusionCenter findOneWithBloodBanks(Integer id);
     public BloodTransfusionCenter getBloodTransfusionCenterByName(String name);
+    public BloodTransfusionCenter getBloodTransfusionCenterById(Integer id);
+
 //=======
 //
 //public interface TransfusionCenterRepository extends JpaRepository<BloodTransfusionCenter, Long> {

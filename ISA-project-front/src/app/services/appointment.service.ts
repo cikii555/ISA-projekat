@@ -2,6 +2,7 @@ import { FutureAppointments } from './../model/future-appointments.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Appointment } from '../model/center-appointment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class AppointmentService {
     return this.http.patch<any>(this.apiHost + '/appointment/cancel/' + id, { headers: this.headers });
   }
 
+
   addReportForAppointment(report:any){
     return this.http.post<any>(this.apiHost+'/appointment/report',report)
   }
@@ -37,4 +39,17 @@ export class AppointmentService {
   getAppointment(id:number):any{
 
   }
+
+
+  getCenterAppointments(id:any): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(this.apiHost + '/appointment/center/'+id, {headers: this.headers});
   }
+  takeAppointment(id:any): Observable<any> {
+    return this.http.post<any>(this.apiHost + '/appointment/schedule/' + id, { headers: this.headers });
+  }
+  canDonate(): Observable<boolean>{
+    return this.http.get<boolean>(this.apiHost + '/appointment/canDonate', {headers: this.headers});
+  }
+
+}
+

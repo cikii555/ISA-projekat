@@ -13,8 +13,7 @@ public class EmailSenderService {
 
     public void sendEmail(String toEmail,String subject,String body){
         SimpleMailMessage message=new SimpleMailMessage();
-        //ovo cu promeniti kad napravim mejl bas za isu, do tad nek bude ovako
-        message.setFrom("dussanstanimirovic@gmail.com");
+        message.setFrom("isa.hospitall@gmail.com");
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
