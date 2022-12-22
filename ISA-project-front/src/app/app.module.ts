@@ -34,6 +34,7 @@ import { CreateNewAppointmentComponent } from './create-new-appointment/create-n
     BloodDonationReportComponent,
     AppointmentPatientDetailsComponent,
     UnauthCentersComponent,
+
   ],
 
     imports: [

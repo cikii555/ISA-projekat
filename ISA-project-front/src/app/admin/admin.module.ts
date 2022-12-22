@@ -51,11 +51,12 @@ const routes: Routes = [
             {path:'scheduled',component: SearchPatientAppointmentComponent,children:[
                 {path:'report/:id',component:BloodDonationAppointmentComponent},
                 {path:'start/:id',component:AppointmentPatientDetailsComponent}
-              ]}
-        ]},
-        {path:'new-appointment',component:CreateNewAppointmentComponent},
-    ]
-  }
+              ]},
+            {path:'new-appointment',component:CreateNewAppointmentComponent},
+
+        ]}
+      ]
+}
 ]
 
 @NgModule({
