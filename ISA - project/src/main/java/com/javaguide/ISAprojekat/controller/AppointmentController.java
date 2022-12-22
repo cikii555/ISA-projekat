@@ -107,6 +107,7 @@ public class AppointmentController {
     }
     @PostMapping(consumes="application/json", value="/addAppointmentHistory")
     public ResponseEntity<HttpStatus> addAppointmentHistory(@RequestBody AppointmentDTO appointment) {
+        appointment.setEndDate(appointment.getStartDate().plusMinutes(appointment.getDuration()));
         System.out.println(appointment.getBloodTransfusionId());
 
         try {

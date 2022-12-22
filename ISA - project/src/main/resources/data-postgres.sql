@@ -61,7 +61,7 @@ insert into medical_staff (id,email, password, first_name, last_name, address_id
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 6, '0601231231', 439545, 'MALE',1,true, 2);
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (11,'dussanstanimirovic@gmail.com', '123','Dusan', 'Stanimirovic', 6, '0601231231', 439545, 'MALE',1,true, 2
 
-);
+                                                                                                                                                                    );
 
 insert into client (id, email, password, first_name, last_name, address_id, phone_number, jmbg, gender,
                     is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)

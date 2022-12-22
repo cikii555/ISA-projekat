@@ -8,9 +8,10 @@ import { AppointmentService } from '../services/appointment.service';
 
 
 export class newAppointment {
-  public startTime: Date = new Date; 
-  public endTime: Date = new Date;
+  public startDate: Date = new Date; 
+  public endDate: Date = new Date;
   public bloodTransfusionId: String = '';
+  public duration:number;
 };
 
 @Component({
@@ -38,17 +39,15 @@ export class CreateNewAppointmentComponent implements OnInit {
   Create(){
     var a=this.time.split(":")
     this.datepicker.setHours(parseInt(a[0]));
-    const num2=+this.dur;
+    this.Appointment.duration=+this.dur;
     this.datepicker.setMinutes(+a[1]);
     this.datepicker.setSeconds(0);
 
-    this.Appointment.startTime=this.datepicker;
-    var end=this.datepicker;
-    end.setMinutes(parseInt(a[1])+num2);
-    this.Appointment.endTime=end;
+    this.Appointment.startDate=this.datepicker;
+
     this.Appointment.bloodTransfusionId=this.centerId;
-    this.appointmentService.addAppointment(this.Appointment);
+    this.appointmentService.addAppointment(this.Appointment).subscribe(res =>{this.router.navigateByUrl('medical-staff/admin-center-dashboard');})
   }
-}
+};
   
 
