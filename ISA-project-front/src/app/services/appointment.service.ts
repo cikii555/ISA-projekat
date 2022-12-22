@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Appointment } from '../model/center-appointment.model';
-
+import { newAppointment } from '../create-new-appointment/create-new-appointment.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +21,9 @@ export class AppointmentService {
     return this.http.patch<any>(this.apiHost + '/appointment/cancel/' + id, { headers: this.headers });
   }
 
-
+  addAppointment(appointment:newAppointment){
+    return this.http.post<newAppointment>(this.apiHost+'/appointment/addAppointmentHistory',appointment);
+  }
   addReportForAppointment(report:any){
     return this.http.post<any>(this.apiHost+'/appointment/report',report)
   }

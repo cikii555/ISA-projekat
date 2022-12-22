@@ -107,8 +107,7 @@ public class AppointmentController {
     }
     @PostMapping(consumes="application/json", value="/addAppointmentHistory")
     public ResponseEntity<HttpStatus> addAppointmentHistory(@RequestBody AppointmentDTO appointment) {
-        System.out.println("u funkciji smo???");
-        System.out.println(appointment.getBloodTransfusionName());
+        System.out.println(appointment.getBloodTransfusionId());
 
         try {
             appointmentService.saveAppointment(appointment);
