@@ -73,15 +73,14 @@ insert into client (id, email, password, first_name, last_name, address_id, phon
 values (nextval('my_seq_gen_user'), 'dussanstanimirovic@gmail.com', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq',
         'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 2 , 0, false, 'student', 'ftn', false);
 
+INSERT INTO public.appointment(id, start_time, end_time, taken, blood_transfusion_center_id)
+VALUES (nextval('my_seq_gen_app'), '2022-12-22T10:00:00', '2022-12-22T11:00:00', false, 1);
 INSERT INTO public.appointment(
     id, start_time, end_time, taken, blood_transfusion_center_id)
-VALUES (1, '2017-01-13T17:09:42.411', '2022-01-13T17:09:42.411', false, 1);
+VALUES (nextval('my_seq_gen_app'), '2022-12-22T12:00:00', '2022-12-22T12:30:00', false, 1);
 INSERT INTO public.appointment(
     id, start_time, end_time, taken, blood_transfusion_center_id)
-VALUES (2, '2017-01-13T17:09:42.411', '2022-01-13T17:09:42.411', false, 1);
+VALUES (nextval('my_seq_gen_app'), '2022-12-22T13:00:00', '2022-12-22T13:30:00', false, 1);
 INSERT INTO public.appointment(
     id, start_time, end_time, taken, blood_transfusion_center_id)
-VALUES (3, '2012-01-13T17:09:42.411', '2022-01-13T17:09:42.411', false, 1);
-INSERT INTO public.appointment(
-    id, start_time, end_time, taken, blood_transfusion_center_id)
-VALUES (4, '2018-01-13T17:09:42.411', '2022-01-13T17:09:42.411', false, 1);
+VALUES (nextval('my_seq_gen_app'), '2022-12-22T14:30:00', '2022-12-22T15:00:00', false, 1);

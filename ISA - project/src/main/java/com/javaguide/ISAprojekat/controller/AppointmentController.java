@@ -5,6 +5,7 @@ import com.javaguide.ISAprojekat.dto.AppointmentPresentationDTO;
 import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
 import com.javaguide.ISAprojekat.model.Appointment;
 import com.javaguide.ISAprojekat.model.AppointmentHistory;
+import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
 import com.javaguide.ISAprojekat.model.Client;
 import com.javaguide.ISAprojekat.security.TokenUtils;
 import com.javaguide.ISAprojekat.service.*;
@@ -65,11 +66,21 @@ public class AppointmentController {
         emailSenderService.sendEmail(email,"nesto","nesto");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping(value="/getAllAppointments/")
+    @GetMapping(value="/getAllAppointments/{}")
     public ResponseEntity<ArrayList<AppointmentPresentationDTO>> GetAllAppointments() {
         System.out.println(1);
         try {
             ArrayList<AppointmentPresentationDTO> a=appointmentService.GetAllByCenter(1);
+            return new ResponseEntity<>(a,HttpStatus.OK);
+        } catch (Exception ignored) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+    }
+    @GetMapping(value="/getBanksForDate/{dateTime}")
+    public ResponseEntity<ArrayList<TransfusionCenterDTO>> GetBanksForDate(@PathVariable String dateTime) {
+        LocalDateTime dateTime1=LocalDateTime.parse(dateTime);
+        try {
+            ArrayList<TransfusionCenterDTO> a=appointmentService.GetBloodBanksWithFreeSlots(dateTime1);
             return new ResponseEntity<>(a,HttpStatus.OK);
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);

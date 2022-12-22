@@ -12,7 +12,8 @@ import java.util.Set;
 @Entity
 public class Appointment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "my_seq_gen_app", sequenceName = "my_seq_gen_app", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_app")
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY)
