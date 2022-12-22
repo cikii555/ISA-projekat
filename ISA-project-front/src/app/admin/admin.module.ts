@@ -10,7 +10,7 @@ import { PasswordComponentComponent } from '../password-component/password-compo
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -19,6 +19,11 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { TransfusionCenterPanelComponent } from '../transfusion-center-panel/transfusion-center-panel.component';
 import { ViewOtherAdminsComponent } from '../view-other-admins/view-other-admins.component';
+import {BloodDonationAppointmentComponent} from "../blood-donation-appointment/blood-donation-appointment.component";
+import {BloodBanksComponent} from "../blood-banks/blood-banks.component";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {SearchPatientAppointmentComponent} from "../search-patient-appointment/search-patient-appointment.component";
+import {AppointmentPatientDetailsComponent} from "../appointment-patient-details/appointment-patient-details.component";
 
 const routes: Routes = [
   {
@@ -39,6 +44,12 @@ const routes: Routes = [
         {path:'tc',component:TransfusionCenterPanelComponent,children:[
           {path:'centerprofile', component:TransfusionCenterProfileComponent},
           {path:'admins', component:ViewOtherAdminsComponent},
+            {path:'createappointment', component:BloodDonationAppointmentComponent},
+            {path:'bloodbanks',component:BloodBanksComponent},
+            {path:'scheduled',component: SearchPatientAppointmentComponent,children:[
+                {path:'report/:id',component:BloodDonationAppointmentComponent},
+                {path:'start/:id',component:AppointmentPatientDetailsComponent}
+              ]}
         ]}
     ]
   }
@@ -53,6 +64,8 @@ const routes: Routes = [
     PasswordComponentComponent,
     EditProfileComponent,
     TransfusionCenterPanelComponent,
+    BloodBanksComponent,
+    BloodDonationAppointmentComponent
   ],
   imports: [
     CommonModule,
@@ -66,6 +79,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatDividerModule,
     RouterModule.forChild(routes),
+    MatDatepickerModule,
+    ReactiveFormsModule,
   ]
 })
 export class AdminModule { }

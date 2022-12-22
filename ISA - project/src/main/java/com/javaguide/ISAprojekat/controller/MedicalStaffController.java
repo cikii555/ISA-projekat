@@ -36,6 +36,7 @@ public class MedicalStaffController {
     }
 
     @GetMapping(value="/medicalstaff/{centerId}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<List<MedicalStaffDTO>> getMedicalStaff(@PathVariable Integer centerId){
         List<MedicalStaff> medicalStaff = medicalStaffService.getMedicalStaff(centerId);
         for(MedicalStaff med:medicalStaff){

@@ -34,40 +34,39 @@ import { BloodDonationAppointmentComponent } from './blood-donation-appointment/
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { BloodBanksComponent } from './blood-banks/blood-banks.component';
 import {MatNativeDateModule} from "@angular/material/core";
+import { SearchBloodCenterComponent } from './search-blood-center/search-blood-center.component';
+import { SearchPatientAppointmentComponent } from './search-patient-appointment/search-patient-appointment.component';
+import { BloodDonationReportComponent } from './blood-donation-report/blood-donation-report.component';
+import { AppointmentPatientDetailsComponent } from './appointment-patient-details/appointment-patient-details.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    ProfileAdminComponent,
-    TransfusionCenterProfileComponent,
-    AdminCenterDashboardComponent,
-    EditProfileComponent,
-    PasswordComponentComponent,
-    ViewOtherAdminsComponent,
-    HomePageClientComponent,
-    SurveyPageComponent,
-    EditClientComponent,
-    TransfusionCenterPanelComponent,
-    BloodDonationAppointmentComponent,
-    BloodBanksComponent
+    SearchBloodCenterComponent,
+    SearchPatientAppointmentComponent,
+    BloodDonationReportComponent,
+    AppointmentPatientDetailsComponent,
+
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    HttpClientModule,
-    MatCardModule,
-    MatSidenavModule,
-    MatDividerModule,
-    ClientModule,
-    AdminModule,
-    SystemAdminModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        FormsModule,
+        HttpClientModule,
+        MatCardModule,
+        MatSidenavModule,
+        MatDividerModule,
+        ClientModule,
+        AdminModule,
+        SystemAdminModule,
+        MatCheckboxModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

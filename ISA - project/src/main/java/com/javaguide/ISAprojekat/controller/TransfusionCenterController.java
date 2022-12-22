@@ -31,7 +31,6 @@ public class TransfusionCenterController {
         this.appointmentHistoryService = appointmentHistoryService;
     }
     @GetMapping()
-    @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<List<TransfusionCenterDTO>> all() {
         return new ResponseEntity<List<TransfusionCenterDTO>>(transfusionCenterService.getAll(), HttpStatus.OK);
     }

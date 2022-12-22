@@ -1,7 +1,9 @@
 package com.javaguide.ISAprojekat.controller;
 
 
+import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
 import com.javaguide.ISAprojekat.dto.BloodDonationAppointmentDTO;
+import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
 import com.javaguide.ISAprojekat.model.Appointment;
 import com.javaguide.ISAprojekat.service.BloodDonationAppointmentService;
 import org.springframework.http.HttpStatus;
@@ -9,12 +11,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "api/appointment",produces = MediaType.APPLICATION_JSON_VALUE)
 public class BloodDonationAppointmentController {
 
     private final BloodDonationAppointmentService bloodDonationAppointmentService;
+
 
     public BloodDonationAppointmentController(BloodDonationAppointmentService bloodDonationAppointmentService) {
         this.bloodDonationAppointmentService = bloodDonationAppointmentService;

@@ -20,6 +20,10 @@ this.router.navigateByUrl('createappointment')
 goToProfile(){
 this.router.navigateByUrl('medical-staff/admincenter')
 }
+
+goToScheduledAppointments(){
+    this.router.navigateByUrl('scheduled')
+}
 LogOut(){
   localStorage.removeItem('token');
   localStorage.removeItem('role');

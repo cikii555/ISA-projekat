@@ -9,12 +9,44 @@ public class AppointmentHistoryDTO {
     private Long appointmentId;
     private Long historyId;
 
+    private String patientName;
+
+    private String patientSurname;
+
+private Integer clientId;
     public AppointmentHistoryDTO(LocalDateTime startTime, LocalDateTime endTime, String bloodCenterName, Long appointmentId, Long historyId) {
         this.startTime = startTime.toString();
         this.endTime = endTime.toString();
         this.bloodCenterName = bloodCenterName;
         this.appointmentId = appointmentId;
         this.historyId = historyId;
+    }
+
+    public AppointmentHistoryDTO(LocalDateTime startTime, LocalDateTime endTime, String bloodCenterName, Long appointmentId, String patientName, String patientSurname,Integer id,Long ahId) {
+        this.startTime = startTime.toString();
+        this.endTime = endTime.toString();
+        this.bloodCenterName = bloodCenterName;
+        this.appointmentId = appointmentId;
+        this.patientName = patientName;
+        this.patientSurname = patientSurname;
+        this.clientId = id;
+        this.historyId = ahId;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getPatientSurname() {
+        return patientSurname;
+    }
+
+    public void setPatientSurname(String patientSurname) {
+        this.patientSurname = patientSurname;
     }
 
     public String getBloodCenterName() {

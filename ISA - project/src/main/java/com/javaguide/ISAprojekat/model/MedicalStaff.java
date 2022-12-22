@@ -13,7 +13,7 @@ public class MedicalStaff extends User{
     @ManyToMany( cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
     @JoinTable(name = "taking_blood", joinColumns = @JoinColumn(name = "appointment_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "staff_id", referencedColumnName = "id"))
     private Set<Appointment> appointments;
-    private MedicalStaffType medicalStaffType;
+
     public MedicalStaff() {
     }
 
@@ -33,11 +33,5 @@ public class MedicalStaff extends User{
         this.appointments = appointments;
     }
 
-    public MedicalStaffType getMedicalStaffType() {
-        return medicalStaffType;
-    }
 
-    public void setMedicalStaffType(MedicalStaffType medicalStaffType) {
-        this.medicalStaffType = medicalStaffType;
-    }
 }

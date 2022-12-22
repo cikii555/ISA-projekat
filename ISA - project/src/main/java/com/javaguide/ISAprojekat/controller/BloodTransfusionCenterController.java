@@ -2,6 +2,7 @@ package com.javaguide.ISAprojekat.controller;
 
 import com.javaguide.ISAprojekat.dto.*;
 import com.javaguide.ISAprojekat.model.*;
+import com.javaguide.ISAprojekat.security.TokenUtils;
 import com.javaguide.ISAprojekat.service.AddressService;
 import com.javaguide.ISAprojekat.service.AppointmentHistoryService;
 import com.javaguide.ISAprojekat.service.BloodTransfusionCenterService;
@@ -13,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +24,8 @@ import java.util.Set;
 @RestController
 @RequestMapping(value = "api/bloodtransfusioncenter",produces = MediaType.APPLICATION_JSON_VALUE)
 public class BloodTransfusionCenterController {
-
+    @Autowired
+    private TokenUtils tokenUtils;
     @Autowired
     private BloodTransfusionCenterService bloodTransfusionCenterService;
     @Autowired
@@ -56,6 +60,22 @@ public class BloodTransfusionCenterController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(new AddressDTO(address),HttpStatus.OK);
+    }
+    @GetMapping(value="/blood-centers")
+
+    public ResponseEntity<List<BloodTransfusionCenterDTO>> getBloodCenters(){
+        List<BloodTransfusionCenter> bloodTransfusionCenters = bloodTransfusionCenterService.findAll();
+        List<BloodTransfusionCenterDTO> bloodTransfusionCenterDTOS = new ArrayList<>();
+        for(BloodTransfusionCenter center: bloodTransfusionCenters){
+            BloodTransfusionCenterDTO dto = new BloodTransfusionCenterDTO();
+            dto.setName(center.getName());
+            dto.setAddress(center.getAddress());
+            dto.setRating(center.getAverageGrade());
+
+            bloodTransfusionCenterDTOS.add(dto);
+
+        }
+        return new ResponseEntity<>(bloodTransfusionCenterDTOS,HttpStatus.OK);
     }
     @GetMapping(value="/search/name={name}")
     public ResponseEntity<List<TransfusionCenterDTO>> getCentersByName(@PathVariable String name){
@@ -92,6 +112,7 @@ public class BloodTransfusionCenterController {
         return new ResponseEntity<>(adminss, HttpStatus.OK);
     }
     @GetMapping(value="/blood/{centerId}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<List<BloodBank>> getBloodbanks(@PathVariable Integer centerId){
         //traze se polozeni ispiti studenta, sto znaci da moramo uputiti JOIN FETCH upit
         //kako bismo dobili sve trazene podatke
@@ -108,6 +129,25 @@ public class BloodTransfusionCenterController {
 
                      }
         return new ResponseEntity<>(bloodBankList, HttpStatus.OK);
+    }
+    @GetMapping(value="/equipment/{centerId}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
+    public ResponseEntity<List<Equipment>> getEquipment(@PathVariable Integer centerId){
+        //traze se polozeni ispiti studenta, sto znaci da moramo uputiti JOIN FETCH upit
+        //kako bismo dobili sve trazene podatke
+
+
+        //ako je podesen fetchType LAZY i pozovemo findOne umesto findOneWithExams,
+        //na poziv getExams bismo dobili LazyInitializationException
+        List<Equipment> equpiment = bloodTransfusionCenterService.getTransfusionCenterEquipment(centerId);
+        List<Equipment> equipmentList = new ArrayList<>();
+        for (Equipment eq: equpiment) {
+
+
+            equipmentList.add(eq);
+
+        }
+        return new ResponseEntity<>(equipmentList, HttpStatus.OK);
     }
 
     @PutMapping(path = "/update",consumes = "application/json")
@@ -131,9 +171,16 @@ public class BloodTransfusionCenterController {
         return new ResponseEntity<>(new BloodTransfusionCenterDTO(center), HttpStatus.OK);
     }
 
-    /*@PostMapping(value="/search")
-    public ResponseEntity<BloodTransfusionCenterDTO> searchCenters(@RequestBody searchDTO){
+    @GetMapping()
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
+    public ResponseEntity<Integer> all(HttpServletRequest request) {
+        String email = tokenUtils.getEmailDirectlyFromHeader(request);
+        if (email == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
-    }*/
+        MedicalStaff medicalStaff = medicalStaffService.findOneM(email);
+        Integer bloodTransfusionCenterId = medicalStaff.getBloodTransfusionCenter().getId();
+        return new ResponseEntity<>(bloodTransfusionCenterId, HttpStatus.OK);
+    }
 
 }

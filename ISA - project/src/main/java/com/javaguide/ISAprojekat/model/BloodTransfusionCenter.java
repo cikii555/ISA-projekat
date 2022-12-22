@@ -31,6 +31,8 @@ public class BloodTransfusionCenter {
     @OneToMany(mappedBy = "bloodTransfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<BloodBank> bloodBanks;
     @OneToMany(mappedBy = "bloodTransfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Equipment> equipment;
+    @OneToMany(mappedBy = "bloodTransfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<MedicalStaff> centerAdministrators; // ovde glavni
 
   public BloodTransfusionCenter() {}

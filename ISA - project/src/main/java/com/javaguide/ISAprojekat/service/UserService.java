@@ -1,7 +1,9 @@
 package com.javaguide.ISAprojekat.service;
 
 import com.javaguide.ISAprojekat.dto.UserRegistrationDTO;
+import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
 import com.javaguide.ISAprojekat.model.Client;
+import com.javaguide.ISAprojekat.model.MedicalStaff;
 import com.javaguide.ISAprojekat.repository.ClientRepository;
 import com.javaguide.ISAprojekat.repository.RoleRepository;
 import org.springframework.stereotype.Service;
@@ -26,10 +28,18 @@ public class UserService {
         client.setRole(roleRepository.findByName("ROLE_CLIENT"));
         clientRepository.save(client);
     }
+    public Client save(Client client) {
+        return clientRepository.save(client);
+    }
     public void updateClient(Client client) {
         clientRepository.save(client);
     }
     public Client findByEmail(String email) {
         return clientRepository.findByEmail(email);
+    }
+
+    public Client findOne(Long id) {
+        return clientRepository.findById(id).orElseGet(null);
+
     }
 }

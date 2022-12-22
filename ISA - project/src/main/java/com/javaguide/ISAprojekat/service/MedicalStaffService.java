@@ -18,6 +18,10 @@ public class MedicalStaffService {
         return medicalStaffRepository.findById(id).orElseGet(null);
 
     }
+
+    public MedicalStaff findOneM(String email){
+        return medicalStaffRepository.findMedicalStaffByEmail(email);
+    }
     public List<MedicalStaff> findAll() {
         return medicalStaffRepository.findAll();
     }

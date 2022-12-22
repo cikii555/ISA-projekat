@@ -35,25 +35,28 @@ const routes: Routes = [
   }
 ]
 @NgModule({
-  declarations: [
-    ClientComponent,
-    HomePageClientComponent,
-    EditClientComponent,
-    SurveyPageComponent,
-    FutureAppointmentsComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    HttpClientModule,
-    MatCardModule,
-    MatSidenavModule,
-    MatDividerModule,
-  ]
+    declarations: [
+        ClientComponent,
+        HomePageClientComponent,
+        EditClientComponent,
+        SurveyPageComponent,
+        FutureAppointmentsComponent,
+    ],
+    exports: [
+        HomePageClientComponent
+    ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        FormsModule,
+        HttpClientModule,
+        MatCardModule,
+        MatSidenavModule,
+        MatDividerModule,
+    ]
 })
 export class ClientModule { }
