@@ -52,6 +52,9 @@ export class CenterAppointmentsComponent implements OnInit {
         alert("Appointment successfully scheduled!");
         this.router.navigate(['client/home']);
       });
+      this.appointmentService.sendVerificationMail(id).subscribe(res => {
+        alert("Verification email sent!");
+      });
     })
   }
 }

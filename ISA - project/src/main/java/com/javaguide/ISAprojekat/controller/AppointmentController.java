@@ -195,4 +195,23 @@ public class AppointmentController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
+    @GetMapping(value="/send-confirmation-mail/{appId}")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<HttpStatus> sendConfirmationMail(@PathVariable Long appId, HttpServletRequest request) {
+        String email = tokenUtils.getEmailDirectlyFromHeader(request);
+        if (email == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        Client client = userService.findByEmail(email);
+        Appointment appointment = appointmentService.findById(appId);
+        try {
+            String mess = "You have successfully scheduled appointment at " + appointment.getBloodTransfusionCenter().getName() + ". Your appointment starts at " +
+                    appointment.getStartTime().toString() + " and ends at " + appointment.getEndTime().toString() + ".";
+            emailSenderService.sendEmail(email, "Appointment scheduling notification", mess
+            );
+        } catch(Exception ignored){
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

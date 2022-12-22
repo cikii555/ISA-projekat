@@ -6,6 +6,7 @@ import com.javaguide.ISAprojekat.dto.UserTokenState;
 import com.javaguide.ISAprojekat.model.Client;
 import com.javaguide.ISAprojekat.model.User;
 import com.javaguide.ISAprojekat.security.TokenUtils;
+import com.javaguide.ISAprojekat.service.EmailSenderService;
 import com.javaguide.ISAprojekat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthentificationController {
+    @Autowired
+    private EmailSenderService emailSenderService;
     private TokenUtils tokenUtils;
 
     private UserService userService;
@@ -45,6 +48,36 @@ public class AuthentificationController {
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
+//        try {
+//            emailSenderService.sendRegistrationEmail(data.getEmail(), "Confirmation mail",
+//                    "Click here to activate your account: http://localhost:8080/auth/confirm-mail/" + data.getEmail()
+//            );
+//        } catch(Exception ignored){
+//            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+//        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping(value="/send-verification-mail/{email}")
+    public ResponseEntity<HttpStatus> sendAccountConfirmationMail(@PathVariable String email) {
+        try {
+            emailSenderService.sendRegistrationEmail(email, "Confirmation mail",
+                    "Click here to activate your account: http://localhost:8080/auth/confirm-mail/" + email
+            );
+        } catch(Exception ignored){
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value="/confirm-mail/{email}")
+    public ResponseEntity<HttpStatus> activateClientAccount(@PathVariable String email){
+        Client client = userService.findByEmail(email);
+        if (client == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        client.setActive(true);
+        userService.updateClient(client);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

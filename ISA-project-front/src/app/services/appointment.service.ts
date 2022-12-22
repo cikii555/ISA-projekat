@@ -50,6 +50,9 @@ export class AppointmentService {
   canDonate(): Observable<boolean>{
     return this.http.get<boolean>(this.apiHost + '/appointment/canDonate', {headers: this.headers});
   }
+  sendVerificationMail(id:any): Observable<any> {
+    return this.http.get<any>(this.apiHost + '/appointment/send-confirmation-mail/' + id, { headers: this.headers });
+  }
 
 }
 

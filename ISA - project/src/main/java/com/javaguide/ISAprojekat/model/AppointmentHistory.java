@@ -4,8 +4,11 @@ import javax.persistence.*;
 
 @Entity
 public class AppointmentHistory {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "my_seq_app_h", sequenceName = "my_seq_gen_app_h", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_app_h")
     private Long id;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "appointment_id", referencedColumnName = "id")
