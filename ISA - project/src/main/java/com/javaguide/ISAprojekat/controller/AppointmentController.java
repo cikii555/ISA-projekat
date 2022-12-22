@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -65,6 +66,26 @@ public class AppointmentController {
 
         emailSenderService.sendEmail(email,"nesto","nesto");
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping(value="/getAllAppointments/{}")
+    public ResponseEntity<ArrayList<AppointmentPresentationDTO>> GetAllAppointments() {
+        System.out.println(1);
+        try {
+            ArrayList<AppointmentPresentationDTO> a=appointmentService.GetAllByCenter(1);
+            return new ResponseEntity<>(a,HttpStatus.OK);
+        } catch (Exception ignored) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+    }
+    @GetMapping(value="/getBanksForDate/{dateTime}")
+    public ResponseEntity<ArrayList<TransfusionCenterDTO>> GetBanksForDate(@PathVariable String dateTime) {
+        LocalDateTime dateTime1=LocalDateTime.parse(dateTime);
+        try {
+            ArrayList<TransfusionCenterDTO> a=appointmentService.GetBloodBanksWithFreeSlots(dateTime1);
+            return new ResponseEntity<>(a,HttpStatus.OK);
+        } catch (Exception ignored) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
     }
     @PostMapping(consumes="application/json", value="/addAppointmentHistory")
     public ResponseEntity<HttpStatus> addAppointmentHistory(@RequestBody AppointmentDTO appointment) {
