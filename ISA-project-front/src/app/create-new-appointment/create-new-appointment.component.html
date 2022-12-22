@@ -18,6 +18,13 @@
               </div>
         
               <div>
+                <mat-form-field appearance="fill">
+                  <mat-label>Starting Time</mat-label>
+                  <input matInput [(ngModel)]="time" name="time">
+                </mat-form-field> 
+              </div>
+
+              <div>
               <mat-form-field appearance="fill">
                 <mat-label>Duration (in minutes)</mat-label>
                 <input matInput [(ngModel)]="dur" name="dur">
@@ -26,7 +33,7 @@
         </table>
     <div class="additional">
         <button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="Create()">
-            Save
+            Create
         </button>
     </div>
     </div>

@@ -31,4 +31,7 @@ export class TransfusionCenterServiceService {
   getOtherCenterAdmins(id:number):Observable<IAdmin[]>{
     return this.http.get<IAdmin[]>(this.apiHost+'/bloodtransfusioncenter/admins/'+id);
   }
+  getByCenterAdmin():Observable<any>{
+    return this.http.get(this.apiHost+'/bloodtransfusioncenter/staff');
+  }
 }
