@@ -1,0 +1,12 @@
+<div>
+  <mat-form-field appearance="outline" fxFlex="80" style="height:50px; margin-right:20px">
+    <mat-select [(ngModel)]="report.bloodType" (selectionChange)="changedBloodType(option)" placeholder="Choose room type">
+      <mat-option [value]="option" *ngFor="let option of blood"><span>{{getOptionLabel(option)}}</span></mat-option>
+
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline" fxFlex="20">
+    <input matInput placeholder="Search rooms" [(ngModel)]="report.quantity" type="number">
+  </mat-form-field>
+  <button (click)="addNewReport()">Finish report</button>
+</div>

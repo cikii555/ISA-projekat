@@ -8,27 +8,19 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
-import { ProfileAdminComponent } from './profile-admin/profile-admin.component';
-import { TransfusionCenterProfileComponent } from './transfusion-center-profile/transfusion-center-profile.component';
 import {MatCardModule} from "@angular/material/card";
-import { AdminCenterDashboardComponent } from './admin-center-dashboard/admin-center-dashboard.component';
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { PasswordComponentComponent } from './password-component/password-component.component';
 import {MatDividerModule} from "@angular/material/divider";
-import { ViewOtherAdminsComponent } from './view-other-admins/view-other-admins.component';
-import { SurveyPageComponent } from './survey-page/survey-page.component';
-import { EditClientComponent } from './edit-client/edit-client.component';
-import { HomePageClientComponent } from './home-page-client/home-page-client.component';
-import { TransfusionCenterPanelComponent } from './transfusion-center-panel/transfusion-center-panel.component';
 import { AuthInterception } from './login/auth.interceptor';
-import { ClientComponent } from './client/client.component';
-import { AdminComponent } from './admin/admin.component';
 import { ClientModule } from './client/client.module';
-import { FutureAppointmentsComponent } from './future-appointments/future-appointments.component';
 import { MatSortModule } from '@angular/material/sort';
+import { SearchBloodCenterComponent } from './search-blood-center/search-blood-center.component';
+import { SearchPatientAppointmentComponent } from './search-patient-appointment/search-patient-appointment.component';
+import { BloodDonationReportComponent } from './blood-donation-report/blood-donation-report.component';
+import { AppointmentPatientDetailsComponent } from './appointment-patient-details/appointment-patient-details.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import { CreateNewAppointmentComponent } from './create-new-appointment/create-new-appointment.component';
 
 @NgModule({
@@ -36,29 +28,41 @@ import { CreateNewAppointmentComponent } from './create-new-appointment/create-n
     AppComponent,
     LoginComponent,
     RegistrationComponent,
+    SearchBloodCenterComponent,
+    SearchPatientAppointmentComponent,
+    BloodDonationReportComponent,
+    AppointmentPatientDetailsComponent,
+  ],
 
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    HttpClientModule,
-    MatCardModule,
-    MatSidenavModule,
-    MatDividerModule,
-    ClientModule,
-    AdminModule,
-    SystemAdminModule,
-    MatSortModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        FormsModule,
+        HttpClientModule,
+        MatCardModule,
+        MatSidenavModule,
+        MatDividerModule,
+        ClientModule  ,
+        AdminModule,
+        SystemAdminModule,
+        MatCheckboxModule,
+        MatSortModule,
+    ],
+
+
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterception,
       multi: true
     }],
+
+
+
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

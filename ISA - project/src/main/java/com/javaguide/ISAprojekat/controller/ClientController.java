@@ -45,4 +45,14 @@ public class ClientController {
         userService.updateClient(client);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(path = "/penalties")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
+    public ResponseEntity<Client> changeClientPenalties(@PathVariable Long clientId){
+
+        Client client = userService.findOne(clientId);
+        client.setPenalty(client.getPenalty()+1);
+        userService.save(client);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

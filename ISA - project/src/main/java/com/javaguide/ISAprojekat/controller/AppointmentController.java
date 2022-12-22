@@ -1,4 +1,8 @@
 package com.javaguide.ISAprojekat.controller;
+import com.javaguide.ISAprojekat.dto.AppointmentDTO;
+import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
+import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
+import com.javaguide.ISAprojekat.model.*;
 import com.javaguide.ISAprojekat.dto.*;
 import com.javaguide.ISAprojekat.model.Appointment;
 import com.javaguide.ISAprojekat.model.AppointmentHistory;
@@ -26,21 +30,29 @@ public class AppointmentController {
     @Autowired
     private TokenUtils tokenUtils;
     @Autowired
-    private TransfusionCenterService bloodTransfusionCenterService;
+    private BloodTransfusionCenterService bloodTransfusionCenterService;
     @Autowired
     private SurveyService surveyService;
     private final UserService userService;
     private final AppointmentHistoryService appointmentHistoryService;
     private final AppointmentService appointmentService;
     private final EmailSenderService emailSenderService;
+    @Autowired
+    private TransfusionCenterService TransfusionCenterService;
+
+
 
 
     public AppointmentController(UserService userService, AppointmentHistoryService appointmentHistoryService
-                                ,EmailSenderService emailSenderService,AppointmentService appointmentService) {
-        this.appointmentService=appointmentService;
+            ,EmailSenderService emailSenderService,AppointmentService appointmentService,BloodTransfusionCenterService bloodTransfusionCenterService
+    ,TransfusionCenterService transfusionCenterService) {
+
         this.userService = userService;
         this.appointmentHistoryService = appointmentHistoryService;
         this.emailSenderService=emailSenderService;
+        this.appointmentService = appointmentService;
+        this.bloodTransfusionCenterService = bloodTransfusionCenterService;
+        this.TransfusionCenterService = transfusionCenterService;
     }
     @GetMapping()
     @PreAuthorize("hasRole('CLIENT')")
@@ -100,10 +112,58 @@ public class AppointmentController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    @GetMapping(value="/scheduled/{centerId}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
+    public ResponseEntity<List<AppointmentHistoryDTO>> getScheduledAppointments(@PathVariable  Integer centerId){
+    List<AppointmentHistoryDTO> newList = appointmentHistoryService.getAllByBloodTransfusionAppointment(centerId);
+
+    return new ResponseEntity<>(newList,HttpStatus.OK);
+
+    }
+
+    @PostMapping(consumes = "application/json",value="/report")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
+    public ResponseEntity<HttpStatus> addNewReport(@RequestBody Report report){
+
+        Report newReport = new Report();
+            newReport.setBloodType(report.getBloodType());
+            newReport.setQuantity(report.getQuantity());
+            List<BloodBank> bloodBankList = bloodTransfusionCenterService.getTransfusionCenterBloodBanks(1);
+            for(BloodBank bb:bloodBankList){
+                if(bb.getBloodType()==report.getBloodType()){
+                    bb.setQuantity(bb.getQuantity()+report.getQuantity());
+                }
+            }
+        List<Equipment> equipmentList = bloodTransfusionCenterService.getTransfusionCenterEquipment(1);
+            List<Equipment> usedEquipment = new ArrayList<>(report.getUsedEquipment());
+            for(Equipment equipment:equipmentList){
+                for(Equipment userq:usedEquipment){
+                    if(equipment.getId() == userq.getId()){
+                        equipment.setQuantity(equipment.getQuantity()- userq.getQuantity());
+                    }
+                }
+
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
+    @GetMapping(value="/search/firstname={name}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
+    public ResponseEntity<List<AppointmentHistoryDTO>> searchAppointmentsByClientName(@PathVariable String name){
+        return new ResponseEntity<>(appointmentHistoryService.searchByNameAppointmentHistory(name),HttpStatus.OK);
+    }
+    @GetMapping(value="/search/lastname={name}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
+    public ResponseEntity<List<AppointmentHistoryDTO>> searchAppointmentsByClientSurname(@PathVariable String name) {
+        return new ResponseEntity<>(appointmentHistoryService.searchBySurnameAppointmentHistory(name), HttpStatus.OK);
+    }
     @GetMapping(consumes="application/json", value="/center/{center}")
     @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<List<CenterAppointmentDTO>> getAppointmentsByCenter(@PathVariable String center) {
-        BloodTransfusionCenter centerT = bloodTransfusionCenterService.getByName(center);
+        BloodTransfusionCenter centerT = TransfusionCenterService.getByName(center);
         return new ResponseEntity<List<CenterAppointmentDTO>>(appointmentService.getAllByCenter(centerT), HttpStatus.OK);
     }
     @GetMapping(consumes="application/json", value="/canDonate")
@@ -133,5 +193,6 @@ public class AppointmentController {
         AppointmentHistory ah = new AppointmentHistory(appointment, client, false, true, false);
         appointmentHistoryService.saveAppointmentHistory(ah);
         return new ResponseEntity<>(HttpStatus.OK);
+
     }
 }

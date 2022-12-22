@@ -16,7 +16,7 @@ export class ViewOtherAdminsComponent implements OnInit {
   ngOnInit(): void {
     this.transfusionCenterService.getOtherCenterAdmins(1).subscribe(res => {
       this.listAdmins = res;
-      console.log(this.listAdmins.length)
+
     })
   }
 

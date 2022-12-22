@@ -16,8 +16,8 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_app")
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="medicalStaff_id")
+    @ManyToMany( cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
+    @JoinTable(name = "taking_blood", joinColumns = @JoinColumn(name = "appointment_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "staff_id", referencedColumnName = "id"))
     private Set<MedicalStaff> medicalStaff;
     @Column
     private LocalDateTime startTime;
@@ -73,4 +73,17 @@ public class Appointment {
     public Long getId() {
         return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<MedicalStaff> getMedicalStaff() {
+        return medicalStaff;
+    }
+
+    public void setMedicalStaff(Set<MedicalStaff> medicalStaff) {
+        this.medicalStaff = medicalStaff;
+    }
+
 }

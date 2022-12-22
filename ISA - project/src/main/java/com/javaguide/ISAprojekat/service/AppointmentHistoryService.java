@@ -1,6 +1,7 @@
 package com.javaguide.ISAprojekat.service;
 
 import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
+import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
 import com.javaguide.ISAprojekat.model.Appointment;
 import com.javaguide.ISAprojekat.model.AppointmentHistory;
 import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
@@ -47,6 +48,22 @@ public class AppointmentHistoryService {
         }
         return dtos;
     }
+    public List<AppointmentHistoryDTO> getAllByBloodTransfusionAppointment(Integer centerId){
+        ArrayList<AppointmentHistory> all = (ArrayList<AppointmentHistory>) appointmentHistoryRepository.findAll();
+        ArrayList<AppointmentHistory> appointmentHistories = new ArrayList<>();
+        List<AppointmentHistoryDTO> dtos = new ArrayList<>();
+        for(AppointmentHistory ah : all) {
+            if (ah.getAppointment().getId().equals(centerId) && ah.getAppointment().getStartTime().isAfter(LocalDateTime.now()) )
+                appointmentHistories.add(ah);
+        }
+        for(AppointmentHistory ah:appointmentHistories){
+            AppointmentHistoryDTO appointmentHistoryDTO = new AppointmentHistoryDTO(ah.getAppointment().getStartTime(),
+                    ah.getAppointment().getEndTime(), ah.getAppointment().getBloodTransfusionCenter().getName(), ah.getAppointment().getId(), ah.getClient().getFirstName(),
+                    ah.getClient().getLastName(),ah.getClient().getId(),ah.getId());
+            dtos.add(appointmentHistoryDTO);
+        }
+        return dtos;
+    }
     public void cancelAppointment(Long id){
         AppointmentHistory ah = appointmentHistoryRepository.getReferenceById(id);
         if(ah.getAppointment().getStartTime().isBefore(LocalDateTime.now().plusDays(1)))
@@ -58,6 +75,47 @@ public class AppointmentHistoryService {
         appointmentHistoryRepository.save(ah);
     }
 
+
+
+    public List<AppointmentHistoryDTO> searchBySurnameAppointmentHistory(String query) {
+
+        List<AppointmentHistory> appointmentHistories=  appointmentHistoryRepository.searchAppointmentHistoriesByClientSurname(query);
+        List<AppointmentHistoryDTO> dtos = new ArrayList<>();
+
+        for(AppointmentHistory ah:appointmentHistories){
+            AppointmentHistoryDTO appointmentHistoryDTO = new AppointmentHistoryDTO(ah.getAppointment().getStartTime(),  ah.getAppointment().getEndTime(), ah.getAppointment().getBloodTransfusionCenter().getName(), ah.getId(), ah.getClient().getFirstName(), ah.getClient().getLastName(),ah.getClient().getId(),ah.getId());
+            dtos.add(appointmentHistoryDTO);
+        }
+        return dtos;
+
+    }
+
+    public List<AppointmentHistoryDTO> searchByNameAppointmentHistory(String query) {
+        List<AppointmentHistory> appointmentHistories=  appointmentHistoryRepository.searchAppointmentHistoriesByClientName(query);
+        List<AppointmentHistoryDTO> dtos = new ArrayList<>();
+
+        for(AppointmentHistory ah:appointmentHistories){
+            AppointmentHistoryDTO appointmentHistoryDTO = new AppointmentHistoryDTO(ah.getAppointment().getStartTime(),
+                    ah.getAppointment().getEndTime(), ah.getAppointment().getBloodTransfusionCenter().getName(), ah.getAppointment().getId(), ah.getClient().getFirstName(),
+                    ah.getClient().getLastName(),ah.getClient().getId(),ah.getId());
+            dtos.add(appointmentHistoryDTO);
+        }
+        return dtos;
+    }
+
+    public List<AppointmentHistoryDTO> searchByFirstNameAndLastNameAppointmentHistory(String firstName, String lastName){
+        List<AppointmentHistory> appointmentHistories = appointmentHistoryRepository.searchByFirstAndOrLastName(firstName,lastName);
+        List<AppointmentHistoryDTO> dtos = new ArrayList<>();
+        for(AppointmentHistory ah:appointmentHistories){
+            AppointmentHistoryDTO appointmentHistoryDTO = new AppointmentHistoryDTO(ah.getAppointment().getStartTime(),  ah.getAppointment().getEndTime(), ah.getAppointment().getBloodTransfusionCenter().getName(), ah.getAppointment().getId(), ah.getClient().getFirstName(), ah.getClient().getLastName(),ah.getClient().getId(),ah.getId());
+            dtos.add(appointmentHistoryDTO);
+        }
+        return dtos;
+    }
+
+    public AppointmentHistory findOne(Long appHistoryId) {
+        return appointmentHistoryRepository.findById(appHistoryId).orElseGet(null);
+    }
     public Boolean canDonate(Client client) {
         ArrayList<AppointmentHistory> all = (ArrayList<AppointmentHistory>) appointmentHistoryRepository.findAll();
         ArrayList<AppointmentHistory> clients = new ArrayList<>();
@@ -70,5 +128,6 @@ public class AppointmentHistoryService {
                 return false;
         }
         return true;
+
     }
 }

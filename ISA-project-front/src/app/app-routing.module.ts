@@ -16,6 +16,9 @@ import {TransfusionCenterPanelComponent} from "./transfusion-center-panel/transf
 import { ClientComponent } from './client/client.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthorizationGuard } from './login/authorization.guard';
+import {BloodDonationAppointmentComponent} from "./blood-donation-appointment/blood-donation-appointment.component";
+import {BloodBanksComponent} from "./blood-banks/blood-banks.component";
+
 
 
 const routes: Routes = [
@@ -23,20 +26,43 @@ const routes: Routes = [
   { path: 'client', component: ClientComponent,
     data: {
     allowedRoles: ['CLIENT']
-    }, 
+    },
     canActivate: [AuthorizationGuard] },
-  { path: 'admin', component: SystemAdminComponent, 
+  { path: 'admin', component: SystemAdminComponent,
     data: {
     allowedRoles: ['ADMIN']
-    }, 
+    },
     canActivate: [AuthorizationGuard] },
 
-  { path: 'medical-staff', component: AdminComponent, 
+  { path: 'medical-staff', component: AdminComponent,
     data: {
     allowedRoles: ['MEDICALSTAFF']
-    }, 
+    },
     canActivate: [AuthorizationGuard] },
   { path: 'registration', component:RegistrationComponent},
+
+  {path:'centerprofile', component:TransfusionCenterProfileComponent},
+  {path:'admincenter',component:ProfileAdminComponent,children: [
+      {path: 'password',component: PasswordComponentComponent },
+      {path: 'edit',component: EditProfileComponent}
+    ]},
+  {path:'admin-center-dashboard',component:AdminCenterDashboardComponent},
+  {path:'admins', component:ViewOtherAdminsComponent},
+  { path: 'home-client', component:HomePageClientComponent},
+  { path: 'survey/:id', component:SurveyPageComponent},
+  {path:'edit',component:EditClientComponent},
+  {path:'tc',component:TransfusionCenterPanelComponent,children:[
+      {path:'centerprofile', component:TransfusionCenterProfileComponent},
+      {path:'admins', component:ViewOtherAdminsComponent},
+      {path:'createappointment', component:BloodDonationAppointmentComponent},
+      {path:'bloodbanks',component:BloodBanksComponent}
+    ]},
+
+
+
+
+
+
 ];
 
 @NgModule({

@@ -7,7 +7,7 @@ import { TransfusionCenter } from '../model/transfusionCenter.model';
   providedIn: 'root'
 })
 export class CenterService {
-  
+
   apiHost: string = 'http://localhost:8080';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -24,5 +24,8 @@ export class CenterService {
   }
   addSurvey(): Observable<String> {
     return this.http.post<String>(this.apiHost + '/center/addSurvey/', { headers: this.headers });
+  }
+  getBloodTransfusionCenterId(){
+    return this.http.get<number>(this.apiHost+'/api/bloodtransfusioncenter')
   }
 }

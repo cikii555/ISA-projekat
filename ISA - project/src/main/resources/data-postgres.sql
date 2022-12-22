@@ -56,6 +56,7 @@ INSERT INTO role (name) VALUES ('ROLE_CLIENT'),
                                ('ROLE_UNAUTH');
 
 
+
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'markomarkovic@gmail.com', 'admin','Marko', 'Markovic', 4, '0601231231', 439545, 'MALE',1,true, 2);
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'petarpetrovic@gmail.com', 'admin','Petar', 'Petrovic', 5, '0601231231', 439545, 'MALE',1,true, 2);
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 6, '0601231231', 439545, 'MALE',1,true, 2);
@@ -63,9 +64,11 @@ insert into medical_staff (id,email, password, first_name, last_name, address_id
 
 );
 
-insert into client (id, email, password, first_name, last_name, address_id, phone_number, jmbg, gender,
 
-                    is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'markomarkovic@gmail.com', 'admin','Marko', 'Markovic', 4, '0601231231', 439545, 'MALE',1,true, 1);
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'petarpetrovic@gmail.com', 'admin','Petar', 'Petrovic', 5, '0601231231', 439545, 'MALE',1,true, 3);
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 6, '0601231231', 439545, 'MALE',1,true, 3)
+
 values (nextval('my_seq_gen_user'), 'client@gmail.com', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq',
         'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 1 , 0, false, 'student', 'ftn', false);
 INSERT INTO public.users(
@@ -83,3 +86,4 @@ VALUES (nextval('my_seq_gen_app'), '2022-12-22T13:00:00', '2022-12-22T13:30:00',
 INSERT INTO public.appointment(
     id, start_time, end_time, taken, blood_transfusion_center_id)
 VALUES (nextval('my_seq_gen_app'), '2022-12-22T14:30:00', '2022-12-22T15:00:00', false, 1);
+
