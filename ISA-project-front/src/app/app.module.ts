@@ -36,7 +36,6 @@ import { CreateNewAppointmentComponent } from './create-new-appointment/create-n
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    CreateNewAppointmentComponent,
 
   ],
   imports: [

@@ -23,7 +23,7 @@ export class CreateNewAppointmentComponent implements OnInit {
   ngOnInit(): void {
     
   }
-  public pick:Date=new Date();
+  public datepicker:Date=new Date();
   public dur:number=0;
   public Appointment:newAppointment=new newAppointment;
 
