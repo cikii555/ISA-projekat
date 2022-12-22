@@ -1,4 +1,5 @@
 package com.javaguide.ISAprojekat.controller;
+import com.google.zxing.WriterException;
 import com.javaguide.ISAprojekat.dto.AppointmentDTO;
 import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
 import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
@@ -10,18 +11,23 @@ import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
 import com.javaguide.ISAprojekat.model.Client;
 import com.javaguide.ISAprojekat.security.TokenUtils;
 import com.javaguide.ISAprojekat.service.*;
+import com.javaguide.ISAprojekat.utils.QRCodeGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -39,7 +45,7 @@ public class AppointmentController {
     private final EmailSenderService emailSenderService;
     @Autowired
     private TransfusionCenterService TransfusionCenterService;
-
+    private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.png";
 
 
 
@@ -197,21 +203,30 @@ public class AppointmentController {
     }
     @GetMapping(value="/send-confirmation-mail/{appId}")
     @PreAuthorize("hasRole('CLIENT')")
-    public ResponseEntity<HttpStatus> sendConfirmationMail(@PathVariable Long appId, HttpServletRequest request) {
+    public ResponseEntity<HttpStatus> sendConfirmationMail(@PathVariable Long appId, HttpServletRequest request) throws MessagingException {
         String email = tokenUtils.getEmailDirectlyFromHeader(request);
         if (email == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
         Client client = userService.findByEmail(email);
         Appointment appointment = appointmentService.findById(appId);
+
+        byte[] image = new byte[0];
         try {
             String mess = "You have successfully scheduled appointment at " + appointment.getBloodTransfusionCenter().getName() + ". Your appointment starts at " +
                     appointment.getStartTime().toString() + " and ends at " + appointment.getEndTime().toString() + ".";
-            emailSenderService.sendEmail(email, "Appointment scheduling notification", mess
-            );
-        } catch(Exception ignored){
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+            // Generate and Return Qr Code in Byte Array
+            image = QRCodeGenerator.getQRCodeImage(mess,250,250);
+
+            // Generate and Save Qr Code Image in static/image folder
+            QRCodeGenerator.generateQRCodeImage(mess,250,250,QR_CODE_IMAGE_PATH);
+
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
         }
+        // Convert Byte Array into Base64 Encode String
+        String qrcode = Base64.getEncoder().encodeToString(image);
+        emailSenderService.sendQREmail(email, "Appointment scheduling notification");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
