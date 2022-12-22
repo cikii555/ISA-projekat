@@ -19,6 +19,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { TransfusionCenterPanelComponent } from '../transfusion-center-panel/transfusion-center-panel.component';
 import { ViewOtherAdminsComponent } from '../view-other-admins/view-other-admins.component';
+import { CreateNewAppointmentComponent } from '../create-new-appointment/create-new-appointment.component';
+import { MatDatepickerModule }  from '@angular/material/datepicker';
 
 const routes: Routes = [
   {
@@ -39,7 +41,8 @@ const routes: Routes = [
         {path:'tc',component:TransfusionCenterPanelComponent,children:[
           {path:'centerprofile', component:TransfusionCenterProfileComponent},
           {path:'admins', component:ViewOtherAdminsComponent},
-        ]}
+        ]},
+        {path:'new-appointment',component:CreateNewAppointmentComponent},
     ]
   }
 ]
@@ -64,6 +67,7 @@ const routes: Routes = [
     HttpClientModule,
     MatCardModule,
     MatSidenavModule,
+    MatDatepickerModule,
     MatDividerModule,
     RouterModule.forChild(routes),
   ]

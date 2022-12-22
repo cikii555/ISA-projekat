@@ -29,12 +29,14 @@ import { AdminComponent } from './admin/admin.component';
 import { ClientModule } from './client/client.module';
 import { FutureAppointmentsComponent } from './future-appointments/future-appointments.component';
 import { MatSortModule } from '@angular/material/sort';
+import { CreateNewAppointmentComponent } from './create-new-appointment/create-new-appointment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
+    CreateNewAppointmentComponent,
 
   ],
   imports: [
