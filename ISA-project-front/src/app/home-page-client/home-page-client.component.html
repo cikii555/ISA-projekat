@@ -79,7 +79,7 @@
         <th  (click)="sort('description')">Description</th>
         <th  (click)="sort('averageGrade')">Average grade</th>
         <th  (click)="sort('startTime')">Work hours</th>
-        <th class="out">Survey</th>
+        <th class="out"></th>
         <tr *ngFor="let center of centers | orderBy:key:reverse">
           <td > {{center.name}}</td>
           <td> {{center.street}}, {{center.streetNumber}}</td>
@@ -88,6 +88,6 @@
           <td> {{center.description}}</td>
           <td> {{center.averageGrade}}</td>
           <td > {{center.startTime}} - {{center.endTime}}</td>
-          <td> <button class="survey" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width:150px; margin-left: 40px;" (click)="survey(center)">Fill out survey</button></td>
+          <td> <button class="survey" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width:150px; margin-left: 40px;" (click)="Appointments(center)">Appointments</button></td>
         </tr>
 </table>

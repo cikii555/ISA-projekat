@@ -22,7 +22,7 @@ export class CenterService {
   searchCentersByCityName(query:string): Observable<TransfusionCenter[]> {
     return this.http.get<TransfusionCenter[]>(this.apiHost + '/api/bloodtransfusioncenter/search/city_name='+query, { headers: this.headers });
   }
-  addAppointmentHistory(center: String): Observable<String> {
-    return this.http.post<String>(this.apiHost + '/center/addAppointmentHistory/' + center, { headers: this.headers });
+  addSurvey(): Observable<String> {
+    return this.http.post<String>(this.apiHost + '/center/addSurvey/', { headers: this.headers });
   }
 }

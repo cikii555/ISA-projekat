@@ -1,9 +1,8 @@
 package com.javaguide.ISAprojekat.controller;
-import com.javaguide.ISAprojekat.dto.AppointmentDTO;
-import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
-import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
+import com.javaguide.ISAprojekat.dto.*;
 import com.javaguide.ISAprojekat.model.Appointment;
 import com.javaguide.ISAprojekat.model.AppointmentHistory;
+import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
 import com.javaguide.ISAprojekat.model.Client;
 import com.javaguide.ISAprojekat.security.TokenUtils;
 import com.javaguide.ISAprojekat.service.*;
@@ -25,6 +24,10 @@ import java.util.List;
 public class AppointmentController {
     @Autowired
     private TokenUtils tokenUtils;
+    @Autowired
+    private TransfusionCenterService bloodTransfusionCenterService;
+    @Autowired
+    private SurveyService surveyService;
     private final UserService userService;
     private final AppointmentHistoryService appointmentHistoryService;
     private final AppointmentService appointmentService;
@@ -74,6 +77,40 @@ public class AppointmentController {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping(consumes="application/json", value="/center/{center}")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<List<CenterAppointmentDTO>> getAppointmentsByCenter(@PathVariable String center) {
+        BloodTransfusionCenter centerT = bloodTransfusionCenterService.getByName(center);
+        return new ResponseEntity<List<CenterAppointmentDTO>>(appointmentService.getAllByCenter(centerT), HttpStatus.OK);
+    }
+    @GetMapping(consumes="application/json", value="/canDonate")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<Boolean> canClientDonate(HttpServletRequest request) {
+        String email = tokenUtils.getEmailDirectlyFromHeader(request);
+        if (email == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        Client client = userService.findByEmail(email);
+        Boolean filledOutSurvey = surveyService.canDonate(client);
+        Boolean didntDonate = appointmentHistoryService.canDonate(client);
+        return new ResponseEntity<Boolean>((filledOutSurvey && didntDonate), HttpStatus.OK);
+    }
+
+    @PostMapping(consumes="application/json", value="/schedule/{appId}")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<HttpStatus> scheduleAppointment(@PathVariable Long appId, HttpServletRequest request) {
+        String email = tokenUtils.getEmailDirectlyFromHeader(request);
+        if (email == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        Client client = userService.findByEmail(email);
+        Appointment appointment = appointmentService.findById(appId);
+        appointment.setTaken(true);
+        appointmentService.updateAppointment(appointment);
+        AppointmentHistory ah = new AppointmentHistory(appointment, client, false, true, false);
+        appointmentHistoryService.saveAppointmentHistory(ah);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

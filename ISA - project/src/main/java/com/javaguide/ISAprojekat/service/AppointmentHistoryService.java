@@ -27,8 +27,11 @@ public class AppointmentHistoryService {
     public void saveAppointmentHistory(Client client, Appointment appointment){
         AppointmentHistory aH = new AppointmentHistory(appointment, client, true, true, false);
         appointmentHistoryRepository.save(aH);
-
     }
+    public void saveAppointmentHistory(AppointmentHistory appointmentHistory){
+        appointmentHistoryRepository.save(appointmentHistory);
+    }
+
     public List<AppointmentHistoryDTO> getAllByClient(Integer clientId){
         ArrayList<AppointmentHistory> all = (ArrayList<AppointmentHistory>) appointmentHistoryRepository.findAll();
         ArrayList<AppointmentHistory> clients = new ArrayList<>();
@@ -53,5 +56,19 @@ public class AppointmentHistoryService {
         appointmentRepository.save(a);
         ah.setCanceled(true);
         appointmentHistoryRepository.save(ah);
+    }
+
+    public Boolean canDonate(Client client) {
+        ArrayList<AppointmentHistory> all = (ArrayList<AppointmentHistory>) appointmentHistoryRepository.findAll();
+        ArrayList<AppointmentHistory> clients = new ArrayList<>();
+        for(AppointmentHistory ah : all) {
+            if (ah.getClient().getId().equals(client.getId()) && ah.getAppointment().getStartTime().isAfter(LocalDateTime.now()) && !ah.isCanceled())
+                clients.add(ah);
+        }
+        for(AppointmentHistory ch:clients){
+            if(ch.isShowedUp() && ch.getAppointment().getStartTime().isAfter(LocalDateTime.now().minusMonths(6)))
+                return false;
+        }
+        return true;
     }
 }

@@ -21,9 +21,9 @@ export class SurveyPageComponent implements OnInit {
   constructor(private route:ActivatedRoute, private router:Router, private centerService:CenterService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.centerName = params['id'];
-    })
+    // this.route.params.subscribe((params: Params) => {
+    //   this.centerName = params['id'];
+    // })
   }
   sendSurvey(){
     if(this.q4 || this.q5 || this.q6 || this.q7 || this.q8 || this.q9 || this.q10){
@@ -31,9 +31,13 @@ export class SurveyPageComponent implements OnInit {
       return;
     } else {
       this.errorMess = 'OK';
-      this.centerService.addAppointmentHistory(this.centerName).subscribe(res => {
+      // this.centerService.addAppointmentHistory(this.centerName).subscribe(res => {
+      //   alert("Survey successfully sent!")
+      //   this.router.navigate(['/home-client']);
+      // });
+      this.centerService.addSurvey().subscribe(res => {
         alert("Survey successfully sent!")
-        this.router.navigate(['/home-client']);
+        this.router.navigate(['client/home']);
       });
     }
 

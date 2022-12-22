@@ -28,6 +28,7 @@ import { ClientComponent } from './client/client.component';
 import { AdminComponent } from './admin/admin.component';
 import { ClientModule } from './client/client.module';
 import { FutureAppointmentsComponent } from './future-appointments/future-appointments.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { FutureAppointmentsComponent } from './future-appointments/future-appoin
     MatDividerModule,
     ClientModule,
     AdminModule,
-    SystemAdminModule
+    SystemAdminModule,
+    MatSortModule,
   ],
   providers: [
     {
