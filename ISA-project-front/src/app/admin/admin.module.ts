@@ -24,6 +24,8 @@ import {BloodBanksComponent} from "../blood-banks/blood-banks.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {SearchPatientAppointmentComponent} from "../search-patient-appointment/search-patient-appointment.component";
 import {AppointmentPatientDetailsComponent} from "../appointment-patient-details/appointment-patient-details.component";
+import { CreateNewAppointmentComponent } from '../create-new-appointment/create-new-appointment.component';
+import { MatDatepickerModule }  from '@angular/material/datepicker';
 
 const routes: Routes = [
   {
@@ -49,10 +51,12 @@ const routes: Routes = [
             {path:'scheduled',component: SearchPatientAppointmentComponent,children:[
                 {path:'report/:id',component:BloodDonationAppointmentComponent},
                 {path:'start/:id',component:AppointmentPatientDetailsComponent}
-              ]}
+              ]},
+            {path:'new-appointment',component:CreateNewAppointmentComponent},
+
         ]}
-    ]
-  }
+      ]
+}
 ]
 
 @NgModule({

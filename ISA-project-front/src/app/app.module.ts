@@ -21,6 +21,7 @@ import { SearchPatientAppointmentComponent } from './search-patient-appointment/
 import { BloodDonationReportComponent } from './blood-donation-report/blood-donation-report.component';
 import { AppointmentPatientDetailsComponent } from './appointment-patient-details/appointment-patient-details.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { CreateNewAppointmentComponent } from './create-new-appointment/create-new-appointment.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     BloodDonationReportComponent,
     AppointmentPatientDetailsComponent,
 
+    CreateNewAppointmentComponent,
 
   ],
 

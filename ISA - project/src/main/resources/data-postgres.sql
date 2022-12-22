@@ -57,25 +57,23 @@ INSERT INTO role (name) VALUES ('ROLE_CLIENT'),
 
 
 
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'markomarkovic@gmail.com', 'admin','Marko', 'Markovic', 4, '0601231231', 439545, 'MALE',1,true, 2);
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'petarpetrovic@gmail.com', 'admin','Petar', 'Petrovic', 5, '0601231231', 439545, 'MALE',1,true, 2);
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 6, '0601231231', 439545, 'MALE',1,true, 2);
+insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (11,'dussanstanimirovic@gmail.com', '123','Dusan', 'Stanimirovic', 6, '0601231231', 439545, 'MALE',1,true, 2
+
+);
+
 
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'markomarkovic@gmail.com', 'admin','Marko', 'Markovic', 4, '0601231231', 439545, 'MALE',1,true, 1);
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'petarpetrovic@gmail.com', 'admin','Petar', 'Petrovic', 5, '0601231231', 439545, 'MALE',1,true, 3);
 insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id,is_active, role_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 6, '0601231231', 439545, 'MALE',1,true, 3)
-/*
 
-insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'markomarkovic@gmail.com', 'admin','Marko', 'Markovic', 1, '0601231231', 439545, 'MALE',1);
-insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'petarpetrovic@gmail.com', 'admin','Petar', 'Petrovic', 2, '0601231231', 439545, 'MALE',1);
-insert into medical_staff (id,email, password, first_name, last_name, address_id, phone_number, jmbg, gender,blood_transfusion_center_id) values (nextval('my_seq_gen_user'),'zoranzoranovic@gmail.com', 'admin','Zoran', 'Zoranovic', 3, '0601231231', 439545, 'MALE',1);
-
-                    is_active, role_id, penalty, graded_center, occupation, organization_information, filled_out_survey)
-<<<<<<< HEAD
-values (nextval('my_seq_gen_user'), 'client1@gmail.com', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq',
-        'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 2 , 0, false, 'student', 'ftn', false);
-
- */
-
-values (nextval('my_seq_gen_user'), 'dussanstanimirovic@gmail.com', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq',
-        'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 2 , 0, false, 'student', 'ftn', false);
+values (nextval('my_seq_gen_user'), 'client@gmail.com', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq',
+        'Marko', 'Markovic', 1, '0601231231', 439545, 'MALE', true, 1 , 0, false, 'student', 'ftn', false);
+INSERT INTO public.users(
+    id, email, first_name, gender, is_active, jmbg, last_name, password, phone_number, address_id, role_id)
+VALUES (11, 'dussanstanimirovic@gmail.com', 'ime', 'male', true, '643', 'prez', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq', '234', 1, 3);
 
 INSERT INTO public.appointment(id, start_time, end_time, taken, blood_transfusion_center_id)
 VALUES (nextval('my_seq_gen_app'), '2022-12-22T10:00:00', '2022-12-22T11:00:00', false, 1);
