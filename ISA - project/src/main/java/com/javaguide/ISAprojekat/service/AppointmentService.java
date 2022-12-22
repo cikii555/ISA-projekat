@@ -30,7 +30,7 @@ public class AppointmentService {
                 (transfusionCenterRepository.getBloodTransfusionCenterByName(appointmentDTO.getBloodTransfusionName()));
         appointmentRepository.save(appointment);
     }
- HEAD
+
     public List<CenterAppointmentDTO> getAllByCenter(BloodTransfusionCenter center){
         List<Appointment> all = appointmentRepository.findAll();
         List<CenterAppointmentDTO> centers = new ArrayList<>();
