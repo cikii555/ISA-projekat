@@ -82,7 +82,6 @@ const routes: Routes = [
     HttpClientModule,
     MatCardModule,
     MatSidenavModule, 
-    MatDatepickerModule,
     MatNativeDateModule,
     MatDividerModule,
     RouterModule.forChild(routes),
