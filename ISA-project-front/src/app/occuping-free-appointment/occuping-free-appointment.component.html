@@ -32,7 +32,8 @@
     </div>
     </div>
 </div>
-<table class="border-none">
+<div >
+<table class="border-none" *ngIf="show" >
     <th >Name</th>
     <th>City</th>
     <th  (click)="sort('averageGrade')">Average grade</th>
@@ -44,3 +45,5 @@
       <td> <button class="survey" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width:150px; margin-left: 40px;" (click)="reserve(center.name)">Reserve</button></td>
     </tr>
 </table>
+<p *ngIf="show2">There is no free apppointmant at the specified time<p>
+</div>

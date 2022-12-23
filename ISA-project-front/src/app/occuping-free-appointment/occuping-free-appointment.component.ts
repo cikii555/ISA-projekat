@@ -27,7 +27,8 @@ export class OccupingFreeAppointmentComponent implements OnInit {
   public pick:Date=new Date();
   public time:String="";
   public Appointment:newAppointment=new newAppointment;
-
+  public show:boolean=false;
+  public show2:boolean=false;
 
   key = 'id';
   reverse:boolean = false;
@@ -40,7 +41,8 @@ export class OccupingFreeAppointmentComponent implements OnInit {
     var a=this.time.split(":")
     this.pick.setHours(parseInt(a[0])+1);
     this.pick.setMinutes(+a[1]);
-    this.appointmentService.getBanks(this.pick).subscribe(res=>{this.centers=res;});
+    this.appointmentService.getBanks(this.pick).subscribe(res=>{this.centers=res;
+      if(this.centers.length!=0) this.show=true; else this.show2=true;});
   }
   reserve(name:String){
     var id:number;
