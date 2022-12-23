@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Appointment } from '../model/center-appointment.model';
 import { newAppointment } from '../create-new-appointment/create-new-appointment.component';
 import { prezAppointment } from '../schedule/schedule.component';
+import { TransfusionCenter } from '../model/transfusionCenter.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -55,6 +56,12 @@ export class AppointmentService {
   canDonate(): Observable<boolean>{
     return this.http.get<boolean>(this.apiHost + '/appointment/canDonate', {headers: this.headers});
   }
+  getBanks(date:Date):Observable<TransfusionCenter[]>{
+    var string = date.toISOString();
 
+    string = string.slice(0,-1);
+    console.log(string);
+    return this.http.get<TransfusionCenter[]>(this.apiHost+'/appointment/getBanksForDate/'+string);
+  }
 }
 

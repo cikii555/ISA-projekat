@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="card">
+        <h1 class="cardTitle">  Create Appointment  </h1>
+        <table style="margin-left: 70px;">
+            <div>
+                <mat-form-field appearance="fill" class="example-form-field">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="datepicker"[(ngModel)]="pick">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker>
+                      <mat-datepicker-actions>
+                        <button mat-button matDatepickerCancel>Cancel</button>
+                        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                      </mat-datepicker-actions>
+                    </mat-datepicker>
+                  </mat-form-field>
+              </div>
+        
+              <div>
+                <mat-form-field appearance="fill">
+                  <mat-label>Starting Time</mat-label>
+                  <input matInput [(ngModel)]="time" name="time">
+                </mat-form-field> 
+              </div>
+
+        </table>
+    <div class="additional">
+        <button class="confirmButton" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width: 100px;" (click)="find()">
+            Create
+        </button>
+    </div>
+    </div>
+</div>
+<table class="border-none">
+    <th >Name</th>
+    <th>City</th>
+    <th  (click)="sort('averageGrade')">Average grade</th>
+    <th class="out"></th>
+    <tr *ngFor="let center of centers | orderBy:key:reverse">
+      <td> {{center.name}}</td>
+      <td> {{center.city}}</td>
+      <td> {{center.averageGrade}}</td>
+      <td> <button class="survey" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width:150px; margin-left: 40px;" (click)="reserve()">Reserve</button></td>
+    </tr>
+</table>

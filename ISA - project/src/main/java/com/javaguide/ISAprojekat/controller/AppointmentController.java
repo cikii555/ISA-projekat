@@ -22,7 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+@CrossOrigin(origins = "http://localhost:4200")
 
 @RestController
 @RequestMapping(value = "/appointment", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -90,11 +92,12 @@ public class AppointmentController {
         }
     }
     @GetMapping(value="/getBanksForDate/{dateTime}")
-    public ResponseEntity<ArrayList<TransfusionCenterDTO>> GetBanksForDate(@PathVariable String dateTime) {
+        public ResponseEntity<ArrayList<TransfusionCenterDTO>> GetBanksForDate(@PathVariable String dateTime) {
         LocalDateTime dateTime1=LocalDateTime.parse(dateTime);
+        dateTime1.plusSeconds(1);
         try {
             ArrayList<TransfusionCenterDTO> a=appointmentService.GetBloodBanksWithFreeSlots(dateTime1);
-            return new ResponseEntity<>(a,HttpStatus.OK);
+                return new ResponseEntity<>(a,HttpStatus.OK);
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
