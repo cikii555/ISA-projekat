@@ -26,6 +26,7 @@ import {AppointmentPatientDetailsComponent} from "../appointment-patient-details
 import { CreateNewAppointmentComponent } from '../create-new-appointment/create-new-appointment.component';
 import { MatDatepickerModule }  from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ScheduleComponent } from '../schedule/schedule.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,7 @@ const routes: Routes = [
 
         ]},
         {path:'nesto',component:CreateNewAppointmentComponent},
+        {path:'schedule',component:ScheduleComponent},
 
       ]
 }
@@ -71,7 +73,9 @@ const routes: Routes = [
     TransfusionCenterPanelComponent,
     BloodBanksComponent,
     BloodDonationAppointmentComponent,
-    CreateNewAppointmentComponent
+    CreateNewAppointmentComponent,
+    ScheduleComponent,
+
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Appointment } from '../model/center-appointment.model';
 import { newAppointment } from '../create-new-appointment/create-new-appointment.component';
+import { prezAppointment } from '../schedule/schedule.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -41,7 +42,9 @@ export class AppointmentService {
   getAppointment(id:number):any{
 
   }
-
+  getAppointmensByCenter(id:any): Observable<prezAppointment[]> {
+    return this.http.get<prezAppointment[]>(this.apiHost + '/appointment/getAllAppointments/'+id);
+  }
 
   getCenterAppointments(id:any): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(this.apiHost + '/appointment/center/'+id, {headers: this.headers});
