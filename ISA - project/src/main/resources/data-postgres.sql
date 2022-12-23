@@ -70,6 +70,10 @@ values (nextval('my_seq_gen_user'), 'client@gmail.com', '$2a$10$Se9RxWx8NYpBrCvz
 INSERT INTO public.users(
     id, email, first_name, gender, is_active, jmbg, last_name, password, phone_number, address_id, role_id)
 VALUES (11, 'dussanstanimirovic@gmail.com', 'ime', 'male', true, '643', 'prez', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq', '234', 1, 3);
+INSERT INTO public.users(
+    id, email, first_name, gender, is_active, jmbg, last_name, password, phone_number, address_id, role_id)
+VALUES (12, 'dukistanimirovic@gmail.com', 'ime', 'male', true, '643', 'prez', '$2a$10$Se9RxWx8NYpBrCvzLjxyuul8D6oJhC6.W6srGYniLFqCiP/zOqupq', '234', 2, 1);
+
 
 INSERT INTO public.appointment(id, start_time, end_time, taken, blood_transfusion_center_id)
 VALUES (nextval('my_seq_gen_app'), '2022-12-22T10:00:00', '2022-12-22T11:00:00', false, 1);

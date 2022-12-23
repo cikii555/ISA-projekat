@@ -17,6 +17,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { SurveyPageComponent } from '../survey-page/survey-page.component';
 import { FutureAppointmentsComponent } from '../future-appointments/future-appointments.component';
+import { OccupingFreeAppointmentComponent } from '../occuping-free-appointment/occuping-free-appointment.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 const routes: Routes = [
@@ -33,6 +36,7 @@ const routes: Routes = [
         { path: 'survey', component:SurveyPageComponent},
         { path: 'future-appointments', component:FutureAppointmentsComponent},
         { path: 'appointments/:id', component: CenterAppointmentsComponent},
+        { path: 'occuping-appointment', component:OccupingFreeAppointmentComponent},
     ]
   }
 ]
@@ -44,7 +48,8 @@ const routes: Routes = [
         EditClientComponent,
         SurveyPageComponent,
         FutureAppointmentsComponent,
-      CenterAppointmentsComponent
+      CenterAppointmentsComponent,
+      OccupingFreeAppointmentComponent
     ],
     exports: [
         HomePageClientComponent
@@ -58,6 +63,8 @@ const routes: Routes = [
         MaterialModule,
         FormsModule,
         HttpClientModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         MatCardModule,
         MatSidenavModule,
         MatDividerModule,

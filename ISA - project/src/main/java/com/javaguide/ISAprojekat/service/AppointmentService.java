@@ -59,6 +59,7 @@ public class AppointmentService {
     }
 
     public ArrayList<TransfusionCenterDTO> GetBloodBanksWithFreeSlots(LocalDateTime dateTime){
+
         ArrayList<Long> bankIds= appointmentRepository.GetBloodBanksWithFreeSlots(dateTime);
         ArrayList<TransfusionCenterDTO> banks=new ArrayList<TransfusionCenterDTO>();
         for (Long bankId:bankIds) {
