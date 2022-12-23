@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:4200")
 
 @RestController
 @RequestMapping(value = "/appointment", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -78,7 +77,17 @@ public class AppointmentController {
         appointmentHistoryService.cancelAppointment(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @GetMapping(value="/sendemails/{appid}/{centerName}")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<HttpStatus> SendEmailBetter(@PathVariable Long appid,@PathVariable String centerName,HttpServletRequest request) {
+        String email= tokenUtils.getEmailDirectlyFromHeader(request);
+        if (email==null) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        Appointment a=appointmentService.findById(appid);
+        String s="You have successfully scheduled appointment at"+ centerName+ "Your appointment starts at" + a.getStartTime().toString() +"and ends at" + a.getEndTime().toString();
 
+        emailSenderService.sendEmail(email,"Reservation",s);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     @GetMapping(value="/sendemail/")
     public ResponseEntity<HttpStatus> SendEmail(HttpServletRequest request) {
         String email= tokenUtils.getEmailDirectlyFromHeader(request);
@@ -104,6 +113,17 @@ public class AppointmentController {
         try {
             ArrayList<TransfusionCenterDTO> a=appointmentService.GetBloodBanksWithFreeSlots(dateTime1);
                 return new ResponseEntity<>(a,HttpStatus.OK);
+        } catch (Exception ignored) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+    }
+    @GetMapping(value="/getAppointmentForDate/{dateTime}/{centerName}")
+    public ResponseEntity<Long> GetAppId(@PathVariable String dateTime,@PathVariable String centerName) {
+        LocalDateTime dateTime1=LocalDateTime.parse(dateTime);
+        dateTime1.plusSeconds(1);
+        try {
+            Long id=appointmentService.GetAppointID(dateTime1,centerName);
+            return new ResponseEntity<>(id,HttpStatus.OK);
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -189,9 +209,9 @@ public class AppointmentController {
         return new ResponseEntity<Boolean>((filledOutSurvey && didntDonate), HttpStatus.OK);
     }
 
-    @PostMapping(consumes="application/json", value="/schedule/{appId}")
+    @PostMapping(consumes="application/json", value="/schedule/")
     @PreAuthorize("hasRole('CLIENT')")
-    public ResponseEntity<HttpStatus> scheduleAppointment(@PathVariable Long appId, HttpServletRequest request) {
+    public ResponseEntity<HttpStatus> scheduleAppointment(@RequestBody Long appId, HttpServletRequest request) {
         String email = tokenUtils.getEmailDirectlyFromHeader(request);
         if (email == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

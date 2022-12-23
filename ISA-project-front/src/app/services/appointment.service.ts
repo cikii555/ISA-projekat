@@ -60,11 +60,25 @@ export class AppointmentService {
     return this.http.get<any>(this.apiHost + '/appointment/send-confirmation-mail/' + id, { headers: this.headers });
   }
   getBanks(date:Date):Observable<TransfusionCenter[]>{
+      var string = date.toISOString();
+
+      string = string.slice(0,-1);
+      console.log(string);
+    return this.http.get<TransfusionCenter[]>(this.apiHost+'/appointment/getBanksForDate/'+string);
+  }
+  getAppointmentID(date:Date,name:String):Observable<number>{
     var string = date.toISOString();
 
-    string = string.slice(0,-1);
-    console.log(string);
-    return this.http.get<TransfusionCenter[]>(this.apiHost+'/appointment/getBanksForDate/'+string);
+      string = string.slice(0,-1);
+      console.log(string);
+      return this.http.get<number>(this.apiHost+'/appointment/getAppointmentForDate/'+string+'/'+name);
+
+  }
+  scheduleAppointment(id:number){
+    return this.http.post(this.apiHost+'/appointment/schedule/',id,{headers: this.headers});
+  }
+  sendEmail(id:number,name:String){
+    return this.http.get(this.apiHost+'/appointment/sendemails/'+id+'/'+name ,{headers: this.headers});
   }
 }
 

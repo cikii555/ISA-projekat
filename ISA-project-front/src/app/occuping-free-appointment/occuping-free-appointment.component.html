@@ -41,6 +41,6 @@
       <td> {{center.name}}</td>
       <td> {{center.city}}</td>
       <td> {{center.averageGrade}}</td>
-      <td> <button class="survey" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width:150px; margin-left: 40px;" (click)="reserve()">Reserve</button></td>
+      <td> <button class="survey" mat-stroked-button app:backgroundTint="#e0e7ff" style="background-color:#e0e7ff; width:150px; margin-left: 40px;" (click)="reserve(center.name)">Reserve</button></td>
     </tr>
 </table>
