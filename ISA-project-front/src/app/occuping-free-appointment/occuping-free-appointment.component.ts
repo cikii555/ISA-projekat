@@ -42,5 +42,12 @@ export class OccupingFreeAppointmentComponent implements OnInit {
     this.pick.setMinutes(+a[1]);
     this.appointmentService.getBanks(this.pick).subscribe(res=>{this.centers=res;});
   }
-  reserve(){}
+  reserve(name:String){
+    var id:number;
+    this.appointmentService.getAppointmentID(this.pick,name).subscribe(res=>{
+      id=res;
+      this.appointmentService.scheduleAppointment(id).subscribe(
+        moc=>{this.appointmentService.sendEmail(id,name).subscribe(res=>{this.router.navigateByUrl('client/home');})});
+    })
+  }
 }

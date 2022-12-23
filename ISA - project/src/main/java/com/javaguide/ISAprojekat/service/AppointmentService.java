@@ -65,8 +65,11 @@ public class AppointmentService {
         for (Long bankId:bankIds) {
             BloodTransfusionCenter c= transfusionCenterRepository.getBloodTransfusionCenterById(bankId.intValue());
             banks.add(new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime()));
-
         }
         return banks;
+    }
+    public Long GetAppointID(LocalDateTime dateTime,String centerName){
+        Integer id=transfusionCenterRepository.getBloodTransfusionCenterByName(centerName).getId();
+        return appointmentRepository.GetByTime(dateTime,id);
     }
 }
