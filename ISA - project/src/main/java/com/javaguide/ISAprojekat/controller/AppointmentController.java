@@ -79,11 +79,11 @@ public class AppointmentController {
         emailSenderService.sendEmail(email,"nesto","nesto");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping(value="/getAllAppointments/{}")
-    public ResponseEntity<ArrayList<AppointmentPresentationDTO>> GetAllAppointments() {
-        System.out.println(1);
+    @GetMapping(value="/getAllAppointments/{id}")
+    public ResponseEntity<ArrayList<AppointmentPresentationDTO>> GetAllAppointments(@PathVariable int id) {
+        System.out.println(id);
         try {
-            ArrayList<AppointmentPresentationDTO> a=appointmentService.GetAllByCenter(1);
+            ArrayList<AppointmentPresentationDTO> a=appointmentService.GetAllByCenter(id);
             return new ResponseEntity<>(a,HttpStatus.OK);
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -160,6 +160,7 @@ public class AppointmentController {
     public ResponseEntity<List<AppointmentHistoryDTO>> searchAppointmentsByClientSurname(@PathVariable String name) {
         return new ResponseEntity<>(appointmentHistoryService.searchBySurnameAppointmentHistory(name), HttpStatus.OK);
     }
+
     @GetMapping(consumes="application/json", value="/center/{center}")
     @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<List<CenterAppointmentDTO>> getAppointmentsByCenter(@PathVariable String center) {
