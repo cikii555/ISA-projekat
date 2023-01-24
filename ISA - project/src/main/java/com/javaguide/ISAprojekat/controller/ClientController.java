@@ -19,13 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping(value="/clients")
 public class ClientController {
+    @Autowired
     private UserService userService;
 
-
-    @Autowired
-    ClientController( UserService _userService){
-        this.userService=_userService;
-    }
 
     @PutMapping( path="/update",consumes = "application/json")
     @PreAuthorize("hasRole('CLIENT')")

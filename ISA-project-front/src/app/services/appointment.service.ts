@@ -80,5 +80,8 @@ export class AppointmentService {
   sendEmail(id:number,name:String){
     return this.http.get(this.apiHost+'/appointment/sendemails/'+id+'/'+name ,{headers: this.headers});
   }
+  getAppointmentHistories():Observable<FutureAppointments[]> {
+    return this.http.get<FutureAppointments[]>(this.apiHost + '/appointment/appointmentHistories', {headers: this.headers});
+  }
 }
 

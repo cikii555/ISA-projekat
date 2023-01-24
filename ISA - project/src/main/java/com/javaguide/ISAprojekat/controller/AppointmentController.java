@@ -17,18 +17,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,27 +37,18 @@ public class AppointmentController {
     private BloodTransfusionCenterService bloodTransfusionCenterService;
     @Autowired
     private SurveyService surveyService;
-    private final UserService userService;
-    private final AppointmentHistoryService appointmentHistoryService;
-    private final AppointmentService appointmentService;
-    private final EmailSenderService emailSenderService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AppointmentHistoryService appointmentHistoryService;
+    @Autowired
+    private AppointmentService appointmentService;
+    @Autowired
+    private EmailSenderService emailSenderService;
     @Autowired
     private TransfusionCenterService TransfusionCenterService;
     private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.png";
 
-
-
-    public AppointmentController(UserService userService, AppointmentHistoryService appointmentHistoryService
-            ,EmailSenderService emailSenderService,AppointmentService appointmentService,BloodTransfusionCenterService bloodTransfusionCenterService
-    ,TransfusionCenterService transfusionCenterService) {
-
-        this.userService = userService;
-        this.appointmentHistoryService = appointmentHistoryService;
-        this.emailSenderService=emailSenderService;
-        this.appointmentService = appointmentService;
-        this.bloodTransfusionCenterService = bloodTransfusionCenterService;
-        this.TransfusionCenterService = transfusionCenterService;
-    }
     @GetMapping()
     @PreAuthorize("hasRole('CLIENT')")
     public ResponseEntity<List<AppointmentHistoryDTO>> all(HttpServletRequest request) {
@@ -98,7 +86,6 @@ public class AppointmentController {
     }
     @GetMapping(value="/getAllAppointments/{id}")
     public ResponseEntity<ArrayList<AppointmentPresentationDTO>> GetAllAppointments(@PathVariable int id) {
-        System.out.println(id);
         try {
             ArrayList<AppointmentPresentationDTO> a=appointmentService.GetAllByCenter(id);
             return new ResponseEntity<>(a,HttpStatus.OK);
@@ -131,8 +118,6 @@ public class AppointmentController {
     @PostMapping(consumes="application/json", value="/addAppointmentHistory")
     public ResponseEntity<HttpStatus> addAppointmentHistory(@RequestBody AppointmentDTO appointment) {
         appointment.setEndDate(appointment.getStartDate().plusMinutes(appointment.getDuration()));
-        System.out.println(appointment.getBloodTransfusionId());
-
         try {
             appointmentService.saveAppointment(appointment);
         } catch (Exception ignored) {
@@ -209,9 +194,9 @@ public class AppointmentController {
         return new ResponseEntity<Boolean>((filledOutSurvey && didntDonate), HttpStatus.OK);
     }
 
-    @PostMapping(consumes="application/json", value="/schedule/")
+    @PostMapping(consumes="application/json", value="/schedule/{appId}")
     @PreAuthorize("hasRole('CLIENT')")
-    public ResponseEntity<HttpStatus> scheduleAppointment(@RequestBody Long appId, HttpServletRequest request) {
+    public ResponseEntity<HttpStatus> scheduleAppointment(@PathVariable Long appId, HttpServletRequest request) {
         String email = tokenUtils.getEmailDirectlyFromHeader(request);
         if (email == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -223,7 +208,6 @@ public class AppointmentController {
         AppointmentHistory ah = new AppointmentHistory(appointment, client, false, true, false);
         appointmentHistoryService.saveAppointmentHistory(ah);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
     @GetMapping(value="/send-confirmation-mail/{appId}")
     @PreAuthorize("hasRole('CLIENT')")
@@ -252,5 +236,15 @@ public class AppointmentController {
         String qrcode = Base64.getEncoder().encodeToString(image);
         emailSenderService.sendQREmail(email, "Appointment scheduling notification");
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping(value="/appointmentHistories")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<List<AppointmentHistoryDTO>> getAppointmentHistories(HttpServletRequest request) {
+        String email = tokenUtils.getEmailDirectlyFromHeader(request);
+        if (email == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        Client client = userService.findByEmail(email);
+        return new ResponseEntity<List<AppointmentHistoryDTO>>(appointmentHistoryService.getAllHistoriesByClient(client.getId()), HttpStatus.OK);
     }
 }

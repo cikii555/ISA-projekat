@@ -2,9 +2,6 @@
     width: 50%;
     margin: auto;
     margin-top: 20px;
-    border-radius: 3px;
-    border: #DCD6CC 1px solid;
-    background-color: white;
 }
 th{
     font-size: 15px;
@@ -15,16 +12,15 @@ table {
     margin: auto;
     width: 100%;
     text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-collapse: separate;
     border-spacing: 0 10px;
-    background-color: #f0fdfa;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #bfdbfe;
+    border-radius: 10px;
   
   }
 
 .table-header {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: #f0fdfa;
     padding-bottom: 20px;
     padding-top: 20px;
     padding-left: 300px;

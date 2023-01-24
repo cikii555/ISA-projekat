@@ -20,6 +20,7 @@ import { FutureAppointmentsComponent } from '../future-appointments/future-appoi
 import { OccupingFreeAppointmentComponent } from '../occuping-free-appointment/occuping-free-appointment.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ClientHistoriesComponent } from '../client-histories/client-histories.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
         { path: 'future-appointments', component:FutureAppointmentsComponent},
         { path: 'appointments/:id', component: CenterAppointmentsComponent},
         { path: 'occuping-appointment', component:OccupingFreeAppointmentComponent},
+        { path: 'client-histories', component:ClientHistoriesComponent},
     ]
   }
 ]
@@ -49,7 +51,8 @@ const routes: Routes = [
         SurveyPageComponent,
         FutureAppointmentsComponent,
       CenterAppointmentsComponent,
-      OccupingFreeAppointmentComponent
+      OccupingFreeAppointmentComponent,  
+      ClientHistoriesComponent,
     ],
     exports: [
         HomePageClientComponent

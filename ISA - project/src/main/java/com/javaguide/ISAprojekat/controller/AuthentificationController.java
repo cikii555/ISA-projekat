@@ -1,5 +1,6 @@
 package com.javaguide.ISAprojekat.controller;
 
+import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
 import com.javaguide.ISAprojekat.dto.LoginDTO;
 import com.javaguide.ISAprojekat.dto.UserRegistrationDTO;
 import com.javaguide.ISAprojekat.dto.UserTokenState;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,27 +22,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthentificationController {
     @Autowired
     private EmailSenderService emailSenderService;
+    @Autowired
     private TokenUtils tokenUtils;
-
+    @Autowired
     private UserService userService;
-
+    @Autowired
     private AuthenticationManager authenticationManager;
 
-
-    @Autowired
-    public AuthentificationController(TokenUtils tokenUtils, UserService userService,
-                                      AuthenticationManager authenticationManager) {
-        super();
-        this.tokenUtils = tokenUtils;
-        this.userService = userService;
-        this.authenticationManager = authenticationManager;
-    }
     @PostMapping(consumes="application/json", value="/register/client")
     public ResponseEntity<HttpStatus> registerClient(@RequestBody UserRegistrationDTO data) {
         try {
@@ -48,13 +43,6 @@ public class AuthentificationController {
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
-//        try {
-//            emailSenderService.sendRegistrationEmail(data.getEmail(), "Confirmation mail",
-//                    "Click here to activate your account: http://localhost:8080/auth/confirm-mail/" + data.getEmail()
-//            );
-//        } catch(Exception ignored){
-//            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-//        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -83,7 +71,6 @@ public class AuthentificationController {
     }
     @GetMapping(value="/register/{email}")
     public ResponseEntity<Client> emailExists(@PathVariable String email) {
-//        String email = tokenUtils.getEmailDirectlyFromHeader(request);
         if (email == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         Client client = userService.findByEmail(email);
@@ -93,7 +80,6 @@ public class AuthentificationController {
     }
 
     @PostMapping(value="/login")
-    //@CrossOrigin(origins = ServerConfig.FRONTEND_ORIGIN)
     public ResponseEntity<UserTokenState> login(@RequestBody LoginDTO loginData) {
         Authentication authentication;
         try {
@@ -102,8 +88,6 @@ public class AuthentificationController {
         } catch (Exception ignored) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-//                loginData.getEmail(), loginData.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         User user = (User) authentication.getPrincipal();
 
@@ -114,5 +98,15 @@ public class AuthentificationController {
         String jwt = tokenUtils.generateToken(user.getEmail(), userRole);
         int expiresIn = tokenUtils.getExpiredIn();
         return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, userRole));
+    }
+    @GetMapping(value="/loggedInClient")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<Client> getLoggedInClient(HttpServletRequest request) {
+        String email = tokenUtils.getEmailDirectlyFromHeader(request);
+        if (email == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        Client client = userService.findByEmail(email);
+        return new ResponseEntity<Client>(client, HttpStatus.OK);
     }
 }

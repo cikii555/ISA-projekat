@@ -45,8 +45,6 @@ public class EmailSenderService {
     }
     @Async
     public void sendQREmail(String toEmail,String subject) throws MessagingException {
-        //SimpleMailMessage message=new SimpleMailMessage();
-        //message.setFrom("isa.hospitall@gmail.com");
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
         helper.setFrom("isa.hospitall@gmail.com");
