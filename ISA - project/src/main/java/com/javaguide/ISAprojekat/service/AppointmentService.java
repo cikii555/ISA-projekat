@@ -64,7 +64,7 @@ public class AppointmentService {
         ArrayList<TransfusionCenterDTO> banks=new ArrayList<TransfusionCenterDTO>();
         for (Long bankId:bankIds) {
             BloodTransfusionCenter c= transfusionCenterRepository.getBloodTransfusionCenterById(bankId.intValue());
-            banks.add(new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime()));
+            banks.add(new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime(), c.getAddress().getLon(), c.getAddress().getLat()));
         }
         return banks;
     }
