@@ -72,22 +72,6 @@ export class HomePageClientComponent implements OnInit {
       ],
       target: 'map'
     });
-    /*
-    const markerSource = new SourceVector();
-    var markerStyle = new Style({
-      image: new Icon( ({
-        anchor: [0.5, 1],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'pixels',
-        opacity: 1,
-        scale: [0.10,0.10], 
-        src: 'https://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-Free-Download-PNG.png'
-      }))
-    });
-    var markers = new Vector({
-      source: markerSource,
-      style: markerStyle
-    }); */
     this.map.addLayer(this.markers);
   }
   key = 'id';
