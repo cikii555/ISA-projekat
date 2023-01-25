@@ -32,12 +32,25 @@ export class HomePageClientComponent implements OnInit {
   public low:number=0;
   public high:number=5;
   map: Map;
+  markerSource = new SourceVector();
+  markerStyle = new Style({
+    image: new Icon(/** @type {olx.style.IconOptions} */ ({
+      anchor: [0.5, 1],
+      anchorXUnits: 'fraction',
+      anchorYUnits: 'pixels',
+      opacity: 1,
+      scale: [0.08,0.08], 
+      src: 'https://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-Free-Download-PNG.png'
+    }))
+  });
+  markers = new Vector({
+    source: this.markerSource,
+    style: this.markerStyle
+  });
 
 
   public centers: TransfusionCenter[] = [];
   displayedColumns: string[] = ['Name','Street and number', 'City', 'Country', 'Discription', 'Average grade', 'Work hours'];
-  // @ViewChild('empTbSort') empTbSort = new MatSort();
-  //@ViewChild(MatSort) sort: MatSort;
   constructor(private _liveAnnouncer: LiveAnnouncer, private centerService: CenterService, private router:Router) {
   }
 
@@ -46,12 +59,11 @@ export class HomePageClientComponent implements OnInit {
       this.centers = res;
       this.base=res;
       this.dataSource = new MatTableDataSource(this.centers);
-      //this.dataSource.data = this.centers;
     })
     this.map = new Map({
       view: new ol.View({
         center: transform([19.833549,45.267136], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 15,
+        zoom: 13,
       }),
       layers: [
         new TileLayer({
@@ -60,6 +72,23 @@ export class HomePageClientComponent implements OnInit {
       ],
       target: 'map'
     });
+    /*
+    const markerSource = new SourceVector();
+    var markerStyle = new Style({
+      image: new Icon( ({
+        anchor: [0.5, 1],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        opacity: 1,
+        scale: [0.10,0.10], 
+        src: 'https://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-Free-Download-PNG.png'
+      }))
+    });
+    var markers = new Vector({
+      source: markerSource,
+      style: markerStyle
+    }); */
+    this.map.addLayer(this.markers);
   }
   key = 'id';
   reverse:boolean = false;
@@ -109,23 +138,11 @@ export class HomePageClientComponent implements OnInit {
     
   }
   ShowOnMap(center:any){
-    const markerSource = new SourceVector();
-    var markerStyle = new Style({
-      image: new Icon(/** @type {olx.style.IconOptions} */ ({
-        anchor: [0.5, 46],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'pixels',
-        opacity: 0.75,
-        src: 'https://openlayers.org/en/v4.6.4/examples/data/icon.png'
-      }))
-    });
-    var markers = new Vector({
-      source: markerSource,
-      style: markerStyle
-    });
-    this.map.addLayer(markers);
-    var marker = new ol.Feature(new Point(transform([19.833549,45.267136], 'EPSG:4326', 'EPSG:3857')));
-    markers.getSource()?.addFeature(marker); 
+    if(this.markerSource.getFeatures()!=null){
+      this.markerSource.clear();
+    }
+    var marker = new ol.Feature(new Point(transform([center.lon,center.lat], 'EPSG:4326', 'EPSG:3857')));
+    this.markers.getSource()?.addFeature(marker); 
   }
 
   
