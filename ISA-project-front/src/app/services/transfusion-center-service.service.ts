@@ -34,4 +34,7 @@ export class TransfusionCenterServiceService {
   getBloodTransfusionCenters():Observable<any>{
     return this.http.get<any>(this.apiHost+'/bloodtransfusioncenter/blood-centers')
   }
+  getByCenterAdmin():Observable<any>{
+    return this.http.get(this.apiHost+'/bloodtransfusioncenter/staff');
+  }
 }

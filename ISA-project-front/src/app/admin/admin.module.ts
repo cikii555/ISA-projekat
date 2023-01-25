@@ -21,10 +21,14 @@ import { TransfusionCenterPanelComponent } from '../transfusion-center-panel/tra
 import { ViewOtherAdminsComponent } from '../view-other-admins/view-other-admins.component';
 import {BloodDonationAppointmentComponent} from "../blood-donation-appointment/blood-donation-appointment.component";
 import {BloodBanksComponent} from "../blood-banks/blood-banks.component";
-import {MatDatepickerModule} from "@angular/material/datepicker";
 import {SearchPatientAppointmentComponent} from "../search-patient-appointment/search-patient-appointment.component";
 import {AppointmentPatientDetailsComponent} from "../appointment-patient-details/appointment-patient-details.component";
 import {BloodDonationReportComponent} from "../blood-donation-report/blood-donation-report.component";
+import { CreateNewAppointmentComponent } from '../create-new-appointment/create-new-appointment.component';
+import { MatDatepickerModule }  from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ScheduleComponent } from '../schedule/schedule.component';
+
 
 const routes: Routes = [
   {
@@ -55,9 +59,13 @@ const routes: Routes = [
                   {path:'report/:id',component:BloodDonationReportComponent},
                       ]}
               ]}
-        ]}
-    ]
-  }
+
+        ]},
+        {path:'nesto',component:CreateNewAppointmentComponent},
+        {path:'schedule',component:ScheduleComponent},
+
+      ]
+}
 ]
 
 @NgModule({
@@ -70,7 +78,10 @@ const routes: Routes = [
     EditProfileComponent,
     TransfusionCenterPanelComponent,
     BloodBanksComponent,
-    BloodDonationAppointmentComponent
+    BloodDonationAppointmentComponent,
+    CreateNewAppointmentComponent,
+    ScheduleComponent,
+
   ],
   imports: [
     CommonModule,
@@ -82,6 +93,7 @@ const routes: Routes = [
     HttpClientModule,
     MatCardModule,
     MatSidenavModule,
+    MatNativeDateModule,
     MatDividerModule,
     RouterModule.forChild(routes),
     MatDatepickerModule,

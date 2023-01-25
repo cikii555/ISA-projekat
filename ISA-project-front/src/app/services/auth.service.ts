@@ -1,3 +1,4 @@
+import { Client } from './../model/client.model';
 import { Login } from './../model/login.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -14,6 +15,9 @@ export class AuthService {
   constructor(private http: HttpClient) { }
   signIn(login:Login): Observable<any> {
     return this.http.post<Login>(this.apiHost + '/auth/login', login);
+  }
+  getLoggedInClient():Observable<any>{
+    return this.http.get<Client>(this.apiHost + '/auth/loggedInClient', { headers: this.headers });
   }
   isAuthorized(allowedRoles: string[]): boolean {
     // check if the list of allowed roles is empty, if empty, authorize the user to access the page

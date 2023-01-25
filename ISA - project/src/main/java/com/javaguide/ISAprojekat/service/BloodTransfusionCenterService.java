@@ -125,7 +125,7 @@ public class BloodTransfusionCenterService {
         List<TransfusionCenterDTO> dtos = new ArrayList<>();
 
         for(BloodTransfusionCenter c:centers){
-            TransfusionCenterDTO dto = new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime());
+            TransfusionCenterDTO dto = new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime(), c.getAddress().getLon(), c.getAddress().getLat());
             dtos.add(dto);
         }
         return dtos;
@@ -137,7 +137,7 @@ public class BloodTransfusionCenterService {
         List<TransfusionCenterDTO> dtos = new ArrayList<>();
 
         for(BloodTransfusionCenter c:centers){
-            TransfusionCenterDTO dto = new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime());
+            TransfusionCenterDTO dto = new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime(), c.getAddress().getLon(), c.getAddress().getLat());
             dtos.add(dto);
         }
         return dtos;

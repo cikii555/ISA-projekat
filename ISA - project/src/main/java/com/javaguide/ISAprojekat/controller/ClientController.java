@@ -12,18 +12,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 //@CrossOrigin(origins = "http://localhost:4200")
 
 @RestController
 @RequestMapping(value="/clients")
 public class ClientController {
+    @Autowired
     private UserService userService;
 
-
-    @Autowired
-    ClientController( UserService _userService){
-        this.userService=_userService;
-    }
 
     @PutMapping( path="/update",consumes = "application/json")
     @PreAuthorize("hasRole('CLIENT')")

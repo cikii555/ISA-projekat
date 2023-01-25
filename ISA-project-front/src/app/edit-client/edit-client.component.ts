@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { RegistrationService } from './../services/registration.service';
 import { Component, OnInit } from '@angular/core';
 import { RegClient } from '../model/regClient.model';
@@ -12,10 +13,11 @@ export class EditClientComponent implements OnInit {
   public validEmail :any = 'OK';
   public validInfo : any = 'OK';
   public UpdateClient: RegClient=new RegClient();
+  penalties: number = 0;
 
-  constructor(private registrationService:RegistrationService, private router: Router) { }
+  constructor(private registrationService:RegistrationService, private authService: AuthService, private router: Router) { }
   ngOnInit(): void {
-    this.registrationService.getClient("client@gmail.com").subscribe(res => {
+    this.authService.getLoggedInClient().subscribe(res => {
       this.UpdateClient.password=res.password;
       this.UpdateClient.email=res.email;
       this.UpdateClient.firstName=res.firstName;
@@ -25,6 +27,7 @@ export class EditClientComponent implements OnInit {
       this.UpdateClient.gender=res.gender;
       this.UpdateClient.occupation=res.occupation;
       this.UpdateClient.organizationInformation=res.organizationInformation;
+      this.penalties = res.penalty;
     })
   }
   Edit() {
@@ -34,7 +37,7 @@ export class EditClientComponent implements OnInit {
     //   return;
     // }
     this.registrationService.updateClient(this.UpdateClient).subscribe(res => {
-      alert("Registration request successfully sent!")
+      alert("Profile successfully updated!")
       this.router.navigate(['/']);
     });
         

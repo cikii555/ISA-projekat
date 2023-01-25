@@ -6,6 +6,8 @@ import com.javaguide.ISAprojekat.repository.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,7 +22,7 @@ public class SurveyService {
     public Boolean canDonate(Client client) {
         List<Survey> all = surveyRepository.findAll();
         for(Survey s:all){
-            if(s.getClient().getId().equals(client.getId()))
+            if(s.getClient().getId().equals(client.getId()) && s.getDateTaken().isAfter(LocalDate.now().minusMonths(2)))
                 return true;
         }
         return false;

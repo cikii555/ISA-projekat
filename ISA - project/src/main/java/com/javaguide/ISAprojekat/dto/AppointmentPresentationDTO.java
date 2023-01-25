@@ -3,33 +3,33 @@ package com.javaguide.ISAprojekat.dto;
 import java.time.LocalDateTime;
 
 public class AppointmentPresentationDTO {
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private String startDate;
+    private String endDate;
     private Boolean taken;
 
     public AppointmentPresentationDTO(){
 
     }
     public AppointmentPresentationDTO(LocalDateTime startDate, LocalDateTime endDate,Boolean taken) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = startDate.toString();
+        this.endDate = endDate.toString();
         this.taken=taken;
     }
 
-    public LocalDateTime getStartDate() {
+    public String  getStartDate() {
         return startDate;
     }
 
     public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
+        this.startDate = startDate.toString();
     }
 
-    public LocalDateTime getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
     public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
+        this.endDate = endDate.toString();
     }
 
 

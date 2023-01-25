@@ -2,6 +2,7 @@ package com.javaguide.ISAprojekat.dto;
 
 import com.javaguide.ISAprojekat.model.WorkHours;
 
+import javax.persistence.Column;
 import java.time.LocalTime;
 
 public class TransfusionCenterDTO {
@@ -14,11 +15,13 @@ public class TransfusionCenterDTO {
     public double averageGrade;
     public String startTime;
     public String endTime;
+    public String lon;
+    public String lat;
 
     public TransfusionCenterDTO() {
     }
 
-    public TransfusionCenterDTO(String name, String country, String city, String street, String streetNumber, String description, double averageGrade, LocalTime startTime, LocalTime endTime) {
+    public TransfusionCenterDTO(String name, String country, String city, String street, String streetNumber, String description, double averageGrade, LocalTime startTime, LocalTime endTime, String lon, String lat) {
         this.name = name;
         this.country = country;
         this.city = city;
@@ -28,5 +31,7 @@ public class TransfusionCenterDTO {
         this.averageGrade = averageGrade;
         this.startTime = startTime.toString();
         this.endTime = endTime.toString();
+        this.lon = lon;
+        this.lat = lat;
     }
 }

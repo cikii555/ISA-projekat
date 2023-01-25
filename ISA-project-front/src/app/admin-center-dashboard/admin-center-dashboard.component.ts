@@ -23,6 +23,12 @@ this.router.navigateByUrl('medical-staff/tc')
 goToNewAppointment(){
 this.router.navigateByUrl('createappointment')
 }
+goToSchedule(){
+  this.router.navigateByUrl('medical-staff/schedule');
+}
+goToNewAppointmentSlot(){
+this.router.navigateByUrl('medical-staff/nesto');
+}
 goToProfile(){
 this.router.navigateByUrl('medical-staff/admincenter')
 }

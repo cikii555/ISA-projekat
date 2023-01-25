@@ -27,7 +27,7 @@ public class AppointmentService {
     public void saveAppointment(AppointmentDTO appointmentDTO) {
         Appointment appointment = new Appointment(appointmentDTO);
         appointment.setBloodTransfusionCenter
-                (transfusionCenterRepository.getBloodTransfusionCenterByName(appointmentDTO.getBloodTransfusionName()));
+                (transfusionCenterRepository.getBloodTransfusionCenterById(appointmentDTO.getBloodTransfusionId().intValue()));
         appointmentRepository.save(appointment);
     }
 
@@ -59,13 +59,17 @@ public class AppointmentService {
     }
 
     public ArrayList<TransfusionCenterDTO> GetBloodBanksWithFreeSlots(LocalDateTime dateTime){
+
         ArrayList<Long> bankIds= appointmentRepository.GetBloodBanksWithFreeSlots(dateTime);
         ArrayList<TransfusionCenterDTO> banks=new ArrayList<TransfusionCenterDTO>();
         for (Long bankId:bankIds) {
             BloodTransfusionCenter c= transfusionCenterRepository.getBloodTransfusionCenterById(bankId.intValue());
-            banks.add(new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime()));
-
+            banks.add(new TransfusionCenterDTO(c.getName(), c.getAddress().getCountry(), c.getAddress().getCity(), c.getAddress().getStreet(), c.getAddress().getStreetNumber(), c.getDescription(), c.getAverageGrade(), c.getWorkHours().getStartTime(), c.getWorkHours().getEndTime(), c.getAddress().getLon(), c.getAddress().getLat()));
         }
         return banks;
+    }
+    public Long GetAppointID(LocalDateTime dateTime,String centerName){
+        Integer id=transfusionCenterRepository.getBloodTransfusionCenterByName(centerName).getId();
+        return appointmentRepository.GetByTime(dateTime,id);
     }
 }

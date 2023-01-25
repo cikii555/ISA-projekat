@@ -41,3 +41,17 @@ th,td {
   .border-none tr td:last-child {
     border-right: none;
   }
+  .map-container{
+    margin-top: 40px;
+    margin-left: 70px;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #bfdbfe;
+    width: 90%;
+    height: 600px;
+  }
+  .map {
+    margin-left: 140px;
+    width: 80%;
+    height: 600px;
+  }

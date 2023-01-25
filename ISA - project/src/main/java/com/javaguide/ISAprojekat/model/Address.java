@@ -25,8 +25,6 @@ public class Address {
 
     @Column(name = "lat")
     private String lat;
-   // @OneToOne(mappedBy = "address")
-   // private BloodTransfusionCenter bloodTransfusionCenter;
 
     public Address() {
     }
@@ -49,56 +47,6 @@ public class Address {
     public String getCountry() {
         return country;
     }
-
-//<<<<<<< HEAD
-//    public void setCountry(String country) {
-//        this.country = country;
-//    }
-//
-//=======
-//>>>>>>> HomePageClient
-//    public String getCity() {
-//        return city;
-//    }
-//
-//<<<<<<< HEAD
-//    public void setCity(String city) {
-//        this.city = city;
-//    }
-//
-//=======
-//>>>>>>> HomePageClient
-//    public String getStreet() {
-//        return street;
-//    }
-//
-//<<<<<<< HEAD
-//    public void setStreet(String street) {
-//        this.street = street;
-//    }
-//
-//=======
-//>>>>>>> HomePageClient
-//    public String getStreetNumber() {
-//        return streetNumber;
-//    }
-//
-//<<<<<<< HEAD
-//    public void setStreetNumber(String streetNumber) {
-//        this.streetNumber = streetNumber;
-//=======
-//    public String getLon() {
-//        return lon;
-//    }
-//
-//    public String getLat() {
-//        return lat;
-//    }
-//
-//    public BloodTransfusionCenter getBloodTransfusionCenter() {
-//        return bloodTransfusionCenter;
-//}
-//>>>>>>> HomePageClient
 
     public void setCountry(String country) {
         this.country = country;
@@ -144,11 +92,4 @@ public class Address {
         this.lat = lat;
     }
 
-//    public BloodTransfusionCenter getBloodTransfusionCenter() {
-//        return bloodTransfusionCenter;
-//    }
-//
-//    public void setBloodTransfusionCenter(BloodTransfusionCenter bloodTransfusionCenter) {
-//        this.bloodTransfusionCenter = bloodTransfusionCenter;
-//    }
 }

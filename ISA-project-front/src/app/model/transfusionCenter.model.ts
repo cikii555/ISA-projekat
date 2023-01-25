@@ -10,6 +10,8 @@ export class TransfusionCenter {
     public averageGrade:number = 0;
     public startTime:String = '';
     public endTime: String = '';
+    public lon:String = '';
+    public lat:String = '';
 
     public constructor(obj?: any) {
         if (obj) {
@@ -22,6 +24,8 @@ export class TransfusionCenter {
             this.averageGrade = obj.averageGrade;
             this.startTime = obj.startTime;
             this.endTime = obj.endTime;
+            this.lon = obj.lon;
+            this.lat = obj.lat;
         }
     }
 }

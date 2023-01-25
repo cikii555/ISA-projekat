@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="table-header">
+        <p class="table-title">Appointment histories</p>
+    </div>
+    <table class="border-none">
+        <th class="out" (click)="sort('startTime')">Starting</th>
+        <th  (click)="sort('endTime')">Ending</th>
+        <th (click)="sort('bloodCenterName')" class="out">Blood transfusion center</th>
+        <tr *ngFor="let appointment of appointments | orderBy:key:reverse">
+          <td > {{appointment.startTime}}</td>
+          <td> {{appointment.endTime}}</td>
+          <td> {{appointment.bloodCenterName}}</td>
+        </tr>
+    </table>
+    </div>
+

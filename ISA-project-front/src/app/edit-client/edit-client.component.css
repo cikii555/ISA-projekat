@@ -55,8 +55,22 @@
     background-color: #bfdbfe;
     border-radius: 10px;
 }
+.card-penalties{
+    height: 80px;
+    margin-left: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #bfdbfe;
+    border-radius: 10px;
+}
+.cardTitle-penalties{
+    margin-top: 30px;
+    margin-left: 100px;
+    font-weight: 800;
+    font-size: 20px;
+    width: 350px;
+    color: rgb(0, 0, 0);
+}
 .container{
-   align-items: center;
    display: flex;
    justify-content: center
 }

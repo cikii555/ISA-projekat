@@ -46,6 +46,21 @@ public class AppointmentHistoryService {
         }
         return dtos;
     }
+    public List<AppointmentHistoryDTO> getAllHistoriesByClient(Integer clientId){
+        ArrayList<AppointmentHistory> all = (ArrayList<AppointmentHistory>) appointmentHistoryRepository.findAll();
+        ArrayList<AppointmentHistory> clients = new ArrayList<>();
+        List<AppointmentHistoryDTO> dtos = new ArrayList<>();
+        for(AppointmentHistory ah : all) {
+            if (ah.getClient().getId().equals(clientId) && ah.isShowedUp())
+                clients.add(ah);
+        }
+        for(AppointmentHistory ah:clients){
+            AppointmentHistoryDTO dto = new AppointmentHistoryDTO(ah.getAppointment().getStartTime(),
+                    ah.getAppointment().getEndTime(), ah.getAppointment().getBloodTransfusionCenter().getName(), ah.getAppointment().getId(), ah.getId());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
     public List<AppointmentHistoryDTO> getAllByBloodTransfusionAppointmentScheduled(Integer centerId){
         ArrayList<AppointmentHistory> all = (ArrayList<AppointmentHistory>) appointmentHistoryRepository.findAll();
         ArrayList<AppointmentHistory> appointmentHistories = new ArrayList<>();

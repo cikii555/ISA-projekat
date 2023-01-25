@@ -22,7 +22,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/center", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TransfusionCenterController {
@@ -30,53 +29,34 @@ public class TransfusionCenterController {
     private TokenUtils tokenUtils;
     @Autowired
     private SurveyService surveyService;
-    private final TransfusionCenterService transfusionCenterService;
-    private final UserService userService;
-    private final AppointmentHistoryService appointmentHistoryService;
+    @Autowired
+    private TransfusionCenterService transfusionCenterService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AppointmentHistoryService appointmentHistoryService;
 
-    public TransfusionCenterController(TransfusionCenterService transfusionCenterService, UserService userService, AppointmentHistoryService appointmentHistoryService) {
-        this.transfusionCenterService = transfusionCenterService;
-        this.userService = userService;
-        this.appointmentHistoryService = appointmentHistoryService;
-    }
     @GetMapping()
     public ResponseEntity<List<TransfusionCenterDTO>> all() {
         return new ResponseEntity<List<TransfusionCenterDTO>>(transfusionCenterService.getAll(), HttpStatus.OK);
     }
-//    @PostMapping(consumes="application/json", value="/addAppointmentHistory/{center}")
-//    @PreAuthorize("hasRole('CLIENT')")
-//    public ResponseEntity<HttpStatus> addAppointmentHistory(@PathVariable String center) {
-//        BloodTransfusionCenter centerT = transfusionCenterService.getByName(center);
-//        Client client = userService.findByEmail("client@gmail.com");
-//        Appointment appointment = new Appointment();
-//        appointment.setStartTime(LocalDateTime.now());
-//        appointment.setEndTime(LocalDateTime.now().plusHours(1));
-//        appointment.setTaken(true);
-//        appointment.setBloodTransfusionCenter(centerT);
-//        try {
-//            appointmentHistoryService.saveAppointmentHistory(client, appointment);
-//        } catch (Exception ignored) {
-//            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
-//        }
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-@PostMapping(consumes="application/json", value="/addSurvey")
-@PreAuthorize("hasRole('CLIENT')")
-public ResponseEntity<HttpStatus> addSurvey(HttpServletRequest request) {
-    String email = tokenUtils.getEmailDirectlyFromHeader(request);
-    if (email == null)
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
-    Client client = userService.findByEmail(email);
-    LocalDate taken = LocalDate.now();
-    Survey survey = new Survey(client, taken);
-    try {
-        surveyService.saveSurvey(survey);
-    } catch (Exception ignored) {
-        return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+    @PostMapping(consumes="application/json", value="/addSurvey")
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<HttpStatus> addSurvey(HttpServletRequest request) {
+        String email = tokenUtils.getEmailDirectlyFromHeader(request);
+        if (email == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        Client client = userService.findByEmail(email);
+        LocalDate taken = LocalDate.now();
+        Survey survey = new Survey(client, taken);
+        try {
+            surveyService.saveSurvey(survey);
+        } catch (Exception ignored) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    return new ResponseEntity<>(HttpStatus.OK);
-}
 }

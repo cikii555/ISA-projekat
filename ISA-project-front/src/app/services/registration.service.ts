@@ -24,5 +24,8 @@ export class RegistrationService {
   updateClient(userUpdate: UpdateClient): Observable<RegClient> {
     return this.http.put<RegClient>('http://localhost:8080/clients/update' , userUpdate);
   }
+  sendVerificationMail(email: String): Observable<RegClient> {
+    return this.http.get<RegClient>(this.apiHost + '/send-verification-mail/' + email, { headers: this.headers });
+  }
   
 }
