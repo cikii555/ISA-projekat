@@ -42,7 +42,8 @@ export class OccupingFreeAppointmentComponent implements OnInit {
     this.pick.setHours(parseInt(a[0])+1);
     this.pick.setMinutes(+a[1]);
     this.appointmentService.getBanks(this.pick).subscribe(res=>{this.centers=res;
-      if(this.centers.length!=0) this.show=true; else this.show2=true;});
+      if(this.centers.length!=0) {this.show=true;this.show2=false;} else 
+      {this.show2=true; this.show=false}});
   }
   reserve(name:String){
     var id:number;
