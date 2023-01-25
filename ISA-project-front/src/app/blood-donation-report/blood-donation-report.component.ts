@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {CenterService} from "../services/center.service";
+import {ActivatedRoute, Params} from "@angular/router";
+import {AppointmentService} from "../services/appointment.service";
 enum BloodTypes {
   A_POS,
   A_NEG,
@@ -20,11 +23,15 @@ export class BloodDonationReportComponent implements OnInit {
   report={
     bloodType:'',
     quantity:0,
-    equipment:'',
-    equantity:0
+    syringes_qunatity:0,
+    centerId:0,
+    bags_quantity:0,
+    historyId:0
+
+
 
   }
-  constructor() { }
+  constructor(private centerService:CenterService,private route:ActivatedRoute,private appointmentService:AppointmentService) { }
   getOptionLabel(option: BloodTypes) {
     switch (option) {
       case BloodTypes.A_POS:
@@ -48,12 +55,21 @@ export class BloodDonationReportComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.centerService.getBloodTransfusionCenterId().subscribe(res=>{
+      this.report.centerId = res
+      console.log(this.report.centerId+"hahahhahahha")
+    })
+    this.route.params.subscribe((params: Params) => {
+      this.report.historyId = params['idm'];
+      });
+
   }
   changedBloodType(type:any){
 
   }
   addNewReport(){
 
+  this.appointmentService.finishReport(this.report)
   }
 
 

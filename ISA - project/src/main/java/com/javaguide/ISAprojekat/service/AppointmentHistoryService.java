@@ -1,11 +1,9 @@
 package com.javaguide.ISAprojekat.service;
 
 import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
+import com.javaguide.ISAprojekat.dto.ReportDTO;
 import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
-import com.javaguide.ISAprojekat.model.Appointment;
-import com.javaguide.ISAprojekat.model.AppointmentHistory;
-import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
-import com.javaguide.ISAprojekat.model.Client;
+import com.javaguide.ISAprojekat.model.*;
 import com.javaguide.ISAprojekat.repository.AppointmentHistoryRepository;
 import com.javaguide.ISAprojekat.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +46,12 @@ public class AppointmentHistoryService {
         }
         return dtos;
     }
-    public List<AppointmentHistoryDTO> getAllByBloodTransfusionAppointment(Integer centerId){
+    public List<AppointmentHistoryDTO> getAllByBloodTransfusionAppointmentScheduled(Integer centerId){
         ArrayList<AppointmentHistory> all = (ArrayList<AppointmentHistory>) appointmentHistoryRepository.findAll();
         ArrayList<AppointmentHistory> appointmentHistories = new ArrayList<>();
         List<AppointmentHistoryDTO> dtos = new ArrayList<>();
         for(AppointmentHistory ah : all) {
-            if (ah.getAppointment().getId().equals(centerId) && ah.getAppointment().getStartTime().isAfter(LocalDateTime.now()) )
+            if (ah.getAppointment().getBloodTransfusionCenter().getId().equals(centerId) && ah.getAppointment().getStartTime().isAfter(LocalDateTime.now()) && ah.getAppointmentStatus() == AppointmentStatus.SCHEDULED )
                 appointmentHistories.add(ah);
         }
         for(AppointmentHistory ah:appointmentHistories){
@@ -64,6 +62,7 @@ public class AppointmentHistoryService {
         }
         return dtos;
     }
+
     public void cancelAppointment(Long id){
         AppointmentHistory ah = appointmentHistoryRepository.getReferenceById(id);
         if(ah.getAppointment().getStartTime().isBefore(LocalDateTime.now().plusDays(1)))
@@ -115,6 +114,9 @@ public class AppointmentHistoryService {
 
     public AppointmentHistory findOne(Long appHistoryId) {
         return appointmentHistoryRepository.findById(appHistoryId).orElseGet(null);
+    }
+    public List<AppointmentHistory> findAll(){
+        return appointmentHistoryRepository.findAll();
     }
     public Boolean canDonate(Client client) {
         ArrayList<AppointmentHistory> all = (ArrayList<AppointmentHistory>) appointmentHistoryRepository.findAll();

@@ -3,6 +3,8 @@ package com.javaguide.ISAprojekat.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
+
 @Entity
 public class Equipment {
     @Id
@@ -16,9 +18,9 @@ public class Equipment {
     @JoinColumn(name="blood_transfusion_center_id",referencedColumnName = "id")
     @JsonIgnore
     private BloodTransfusionCenter bloodTransfusionCenter;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="report_id",referencedColumnName = "id")
-    private Report report;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "equipment_report", joinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "report_id", referencedColumnName = "id"))
+    private Set<Report> report;
 
     public Equipment(Long id, String name, double quantity, BloodTransfusionCenter bloodTransfusionCenter) {
         this.id = id;
@@ -62,11 +64,11 @@ public class Equipment {
         this.bloodTransfusionCenter = bloodTransfusionCenter;
     }
 
-    public Report getReport() {
+    public Set<Report> getReport() {
         return report;
     }
 
-    public void setReport(Report report) {
+    public void setReport(Set<Report> report) {
         this.report = report;
     }
 }

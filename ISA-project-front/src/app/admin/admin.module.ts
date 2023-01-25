@@ -24,6 +24,7 @@ import {BloodBanksComponent} from "../blood-banks/blood-banks.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {SearchPatientAppointmentComponent} from "../search-patient-appointment/search-patient-appointment.component";
 import {AppointmentPatientDetailsComponent} from "../appointment-patient-details/appointment-patient-details.component";
+import {BloodDonationReportComponent} from "../blood-donation-report/blood-donation-report.component";
 
 const routes: Routes = [
   {
@@ -46,9 +47,13 @@ const routes: Routes = [
           {path:'admins', component:ViewOtherAdminsComponent},
             {path:'createappointment', component:BloodDonationAppointmentComponent},
             {path:'bloodbanks',component:BloodBanksComponent},
-            {path:'scheduled',component: SearchPatientAppointmentComponent,children:[
-                {path:'report/:id',component:BloodDonationAppointmentComponent},
-                {path:'start/:id',component:AppointmentPatientDetailsComponent}
+            {path:'scheduled/:id/start/:ids',component:AppointmentPatientDetailsComponent},
+            {path:'scheduled/:id/start/:ids/report/:idm',component:BloodDonationReportComponent},
+            {path:'scheduled/:id',component: SearchPatientAppointmentComponent,children:[
+
+                {path:'start/:id',component:AppointmentPatientDetailsComponent,children:[
+                  {path:'report/:id',component:BloodDonationReportComponent},
+                      ]}
               ]}
         ]}
     ]

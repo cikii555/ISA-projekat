@@ -22,7 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/appointment", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -117,35 +119,39 @@ public class AppointmentController {
     @GetMapping(value="/scheduled/{centerId}")
     @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<List<AppointmentHistoryDTO>> getScheduledAppointments(@PathVariable  Integer centerId){
-    List<AppointmentHistoryDTO> newList = appointmentHistoryService.getAllByBloodTransfusionAppointment(centerId);
+    List<AppointmentHistoryDTO> newList = appointmentHistoryService.getAllByBloodTransfusionAppointmentScheduled(centerId);
 
     return new ResponseEntity<>(newList,HttpStatus.OK);
+
+    }
+    @GetMapping(value="/history/{appHisId}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
+    public ResponseEntity<AppointmentHistoryDTO> getAppHistory(@PathVariable Long appHisId){
+        AppointmentHistory app =appointmentHistoryService.findOne(appHisId);
+
+        if (app == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new AppointmentHistoryDTO(app), HttpStatus.OK);
 
     }
 
     @PostMapping(consumes = "application/json",value="/report")
     @PreAuthorize("hasRole('MEDICALSTAFF')")
-    public ResponseEntity<HttpStatus> addNewReport(@RequestBody Report report){
+    public ResponseEntity<HttpStatus> addNewReport(@RequestBody ReportDTO report){
 
-        Report newReport = new Report();
+            Report newReport = new Report();
             newReport.setBloodType(report.getBloodType());
             newReport.setQuantity(report.getQuantity());
-            List<BloodBank> bloodBankList = bloodTransfusionCenterService.getTransfusionCenterBloodBanks(1);
-            for(BloodBank bb:bloodBankList){
-                if(bb.getBloodType()==report.getBloodType()){
-                    bb.setQuantity(bb.getQuantity()+report.getQuantity());
-                }
-            }
-        List<Equipment> equipmentList = bloodTransfusionCenterService.getTransfusionCenterEquipment(1);
-            List<Equipment> usedEquipment = new ArrayList<>(report.getUsedEquipment());
-            for(Equipment equipment:equipmentList){
-                for(Equipment userq:usedEquipment){
-                    if(equipment.getId() == userq.getId()){
-                        equipment.setQuantity(equipment.getQuantity()- userq.getQuantity());
-                    }
-                }
+            List<Equipment> usedEqu = bloodTransfusionCenterService.EquipmentUsedForBloodDonation(report);
+            newReport.setUsedEquipment(new HashSet<>(usedEqu));
+            bloodTransfusionCenterService.saveReport(newReport);
+            bloodTransfusionCenterService.UpdateBloodTransfusionCenterBloodBanksAndEquipment(report);
+            AppointmentHistory appointmentHistory = appointmentHistoryService.findOne(report.getHistoryId());
+            appointmentHistory.setAppointmentStatus(AppointmentStatus.FINISHED);
+            appointmentHistoryService.saveAppointmentHistory(appointmentHistory);
 
-            }
             return new ResponseEntity<>(HttpStatus.OK);
 
     }

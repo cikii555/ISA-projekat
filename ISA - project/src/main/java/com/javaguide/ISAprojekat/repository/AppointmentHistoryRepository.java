@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 public interface AppointmentHistoryRepository extends JpaRepository<AppointmentHistory, Long> {
 
-    @Query(value = "SELECT * FROM appointment_history ap inner join client c ON ap.client_id=c.id where LOWER(c.firstName) like LOWER(concat('%',:query,'%'))",nativeQuery = true)
+    @Query(value = "SELECT * FROM appointment_history ap inner join client c ON ap.client_id=c.id where LOWER(c.first_name) like LOWER(concat('%',:query,'%'))",nativeQuery = true)
     public ArrayList<AppointmentHistory> searchAppointmentHistoriesByClientName(String query);
 
-    @Query(value = "SELECT * FROM appointment_history ap inner join client c ON ap.client_id=c.id where LOWER(c.lastName) like LOWER(concat('%',:query,'%'))",nativeQuery = true)
+    @Query(value = "SELECT * FROM appointment_history ap inner join client c ON ap.client_id=c.id where LOWER(c.last_Name) like LOWER(concat('%',:query,'%'))",nativeQuery = true)
     public ArrayList<AppointmentHistory> searchAppointmentHistoriesByClientSurname(String query);
 
-    @Query(value="SELECT * FROM appointment_history ap inner join client c ON ap.client_id=c.id where (:firstName is null or c.firstName = :firstName)"
-            +" and (:lastName is null or c.lastName = :lastName)",nativeQuery = true)
+    @Query(value="SELECT * FROM appointment_history ap inner join client c ON ap.client_id=c.id where LOWER(:firstName is null or c.first_name = :firstName)"
+            +" and LOWER(:lastName is null or c.last_name = :lastName)",nativeQuery = true)
     ArrayList<AppointmentHistory> searchByFirstAndOrLastName(@Param("firstName") String firstName,
                                                   @Param("lastName") String lastName);
 

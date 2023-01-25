@@ -10,16 +10,16 @@ export class BloodDonationAppointmentService {
 
 
   constructor( private  http:HttpClient) { }
-  apiHost: string = 'http://localhost:8080/api';
+  apiHost: string = 'http://localhost:8080/';
   headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 
   addNewAppointment(newappointment:any){
     console.log("hahahah")
-     return this.http.post<any>(this.apiHost+'/appointment/add', newappointment)
+     return this.http.post<any>(this.apiHost+'appointment/add', newappointment)
   }
   getScheduledAppointments(centerId:any):Observable<any>{
-    return this.http.get<any>(this.apiHost+'/appointment/scheduled/'+centerId)
+    return this.http.get<any>(this.apiHost+'appointment/scheduled/'+centerId)
   }
 
 }

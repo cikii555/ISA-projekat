@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {AppointmentService} from "../services/appointment.service";
+import {CenterService} from "../services/center.service";
 @Component({
   selector: 'app-admin-center-dashboard',
   templateUrl: './admin-center-dashboard.component.html',
@@ -7,9 +9,13 @@ import {Router} from '@angular/router';
 })
 export class AdminCenterDashboardComponent implements OnInit {
 
-  constructor(private router: Router) { }
-
+  constructor(private router: Router,private appointmentService:AppointmentService,private centerService:CenterService) { }
+  centerId:any
   ngOnInit(): void {
+    this.centerService.getBloodTransfusionCenterId().subscribe(res=>{
+      this.centerId = res
+      console.log(this.centerId+"hahahhahahha")
+    })
   }
 goToTCPage(){
 this.router.navigateByUrl('medical-staff/tc')

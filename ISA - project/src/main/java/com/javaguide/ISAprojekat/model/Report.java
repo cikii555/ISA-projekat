@@ -14,7 +14,8 @@ public class Report {
     @Column
     private double quantity;
     //odkomentarisati kad se bude radila cela tabela
-    @OneToMany(mappedBy = "report", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+    @JoinTable(name = "equipment_report", joinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "report_id", referencedColumnName = "id"))
     private Set<Equipment> usedEquipment;
 
     public Report(Long id, BloodType bloodType, double quantity, Set<Equipment> usedEquipment) {

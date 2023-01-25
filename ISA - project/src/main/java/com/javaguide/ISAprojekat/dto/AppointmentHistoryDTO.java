@@ -1,5 +1,7 @@
 package com.javaguide.ISAprojekat.dto;
 
+import com.javaguide.ISAprojekat.model.AppointmentHistory;
+
 import java.time.LocalDateTime;
 
 public class AppointmentHistoryDTO {
@@ -13,7 +15,7 @@ public class AppointmentHistoryDTO {
 
     private String patientSurname;
 
-private Integer clientId;
+    private Integer clientId;
     public AppointmentHistoryDTO(LocalDateTime startTime, LocalDateTime endTime, String bloodCenterName, Long appointmentId, Long historyId) {
         this.startTime = startTime.toString();
         this.endTime = endTime.toString();
@@ -22,7 +24,9 @@ private Integer clientId;
         this.historyId = historyId;
     }
 
-    public AppointmentHistoryDTO(LocalDateTime startTime, LocalDateTime endTime, String bloodCenterName, Long appointmentId, String patientName, String patientSurname,Integer id,Long ahId) {
+    public AppointmentHistoryDTO(LocalDateTime startTime, LocalDateTime endTime, String bloodCenterName,
+                                 Long appointmentId, String patientName, String patientSurname,
+                                 Integer id,Long ahId) {
         this.startTime = startTime.toString();
         this.endTime = endTime.toString();
         this.bloodCenterName = bloodCenterName;
@@ -31,6 +35,21 @@ private Integer clientId;
         this.patientSurname = patientSurname;
         this.clientId = id;
         this.historyId = ahId;
+    }
+    public AppointmentHistoryDTO(AppointmentHistory appointmentHistory){
+        this(appointmentHistory.getAppointment().getStartTime(), appointmentHistory.getAppointment().getEndTime(),
+                appointmentHistory.getAppointment().getBloodTransfusionCenter().getName(),
+                appointmentHistory.getAppointment().getId(),appointmentHistory.getClient().getFirstName(),
+                appointmentHistory.getClient().getLastName(),appointmentHistory.getClient().getId(),
+                appointmentHistory.getId());
+    }
+
+    public Integer getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 
     public String getPatientName() {

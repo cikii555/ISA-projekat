@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {BloodDonationAppointmentService} from "../services/blood-donation-appointment.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {AppointmentService} from "../services/appointment.service";
@@ -13,7 +13,7 @@ import {CenterService} from "../services/center.service";
 })
 export class SearchPatientAppointmentComponent implements OnInit {
 
-  constructor(private router:Router,private appointmentService: BloodDonationAppointmentService,private appService:AppointmentService,private centerService:CenterService)
+  constructor(private router:Router,private route: ActivatedRoute, private appointmentService: BloodDonationAppointmentService,private appService:AppointmentService,private centerService:CenterService)
     { }
   displayedColumns: string[] = ['name', 'surname', 'date', 'time'];
   dataSource = new MatTableDataSource<any>();
@@ -23,19 +23,22 @@ export class SearchPatientAppointmentComponent implements OnInit {
   public base:any
   public appointments:any
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.appointmentService.getScheduledAppointments(params['id']).subscribe(res => {
+        this.dataSource = res;
+        console.log(this.dataSource)
+      });
+    })
 
-    this.appointmentService.getScheduledAppointments(this.centerId).subscribe(res=>{
-      this.dataSource = res
-    })
-    this.centerService.getBloodTransfusionCenterId().subscribe(res=>{
-      this.centerId = res
-      console.log(this.centerId+"hahahhahahha")
-    })
+
+
   }
 
   StartAppointment(row:any){
     console.log(row)
-    this.router.navigateByUrl('/start/'+row.id)
+    console.log(this.route)
+    this.router.navigate(['./start/'+row.historyId], {relativeTo: this.route});
+
   }
   searchItems(Search:string){
     if(Search===null)

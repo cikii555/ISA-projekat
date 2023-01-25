@@ -19,6 +19,9 @@ public class AppointmentHistory {
     private boolean passSurvey;
     @Column
     private boolean isCanceled;
+
+    @Column
+    private AppointmentStatus appointmentStatus;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "report_id", referencedColumnName = "id")
     private Report report;
@@ -36,6 +39,14 @@ public class AppointmentHistory {
 
     public AppointmentHistory() {
 
+    }
+
+    public AppointmentStatus getAppointmentStatus() {
+        return appointmentStatus;
+    }
+
+    public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
     }
 
     public Long getId() {

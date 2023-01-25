@@ -38,7 +38,7 @@ public class UserService {
         return clientRepository.findByEmail(email);
     }
 
-    public Client findOne(Long id) {
+    public Client findOne(Integer id) {
         return clientRepository.findById(id).orElseGet(null);
 
     }

@@ -46,13 +46,25 @@ public class ClientController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(path = "/penalties")
+    @GetMapping(path = "/penalties/{clientId}")
     @PreAuthorize("hasRole('MEDICALSTAFF')")
-    public ResponseEntity<Client> changeClientPenalties(@PathVariable Long clientId){
+    public ResponseEntity<Client> changeClientPenalties(@PathVariable Integer clientId){
 
         Client client = userService.findOne(clientId);
         client.setPenalty(client.getPenalty()+1);
         userService.save(client);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(path = "/can/{clientId}")
+    @PreAuthorize("hasRole('MEDICALSTAFF')")
+    public ResponseEntity canClientDonateBlood(@PathVariable Integer clientId){
+
+        Client client = userService.findOne(clientId);
+         boolean can = client.isFilledOutSurvey();
+
+        return new ResponseEntity<>(can,HttpStatus.OK);
+    }
+
+
 }

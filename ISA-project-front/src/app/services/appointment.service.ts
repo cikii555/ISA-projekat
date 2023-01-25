@@ -34,7 +34,7 @@ export class AppointmentService {
   }
 
   getAppointmentHistory(id:number){
-    return this.http.get(this.apiHost+'/appointment/apphis'+id)
+    return this.http.get(this.apiHost+'/appointment/history/'+id)
   }
   getAppointment(id:number):any{
 
@@ -49,6 +49,17 @@ export class AppointmentService {
   }
   canDonate(): Observable<boolean>{
     return this.http.get<boolean>(this.apiHost + '/appointment/canDonate', {headers: this.headers});
+  }
+
+  didntShowUp(clientId:any){
+    return this.http.get<any>(this.apiHost+'/clients/penalties/'+clientId)
+  }
+
+  canClientDonateBlood(clientId:any){
+    return this.http.get<any>(this.apiHost+'/clients/can/'+clientId)
+  }
+  finishReport(report:any){
+    this.http.post(this.apiHost+'/appointment/report',report)
   }
 
 }

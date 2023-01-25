@@ -37,6 +37,14 @@ public class Client extends User{
         this.setActive(false);
     }
 
+    public boolean isFilledOutSurvey() {
+        return filledOutSurvey;
+    }
+
+    public void setFilledOutSurvey(boolean filledOutSurvey) {
+        this.filledOutSurvey = filledOutSurvey;
+    }
+
     public int getPenalty() {
         return penalty;
     }
