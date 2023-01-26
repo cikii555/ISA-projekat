@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Login } from '../model/login.model';
+import { catchError, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   SignIn() {
-    this.authService.signIn(this.login).subscribe(res => {
-      console.log(res);
-      console.log(res.accessToken);
-      console.log(res.role);
+    this.authService.signIn(this.login).pipe(catchError(res => {
+      alert("Wrong email or password!")
+      return EMPTY
+    })).subscribe(res => {
       let role = res.role
       localStorage.setItem('token', res.accessToken);
       localStorage.setItem('role', role);

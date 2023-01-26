@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,8 @@ import java.util.HashSet;
 import java.util.Base64;
 import java.util.List;
 import java.util.Set;
+import java.util.NoSuchElementException;
+
 
 @RestController
 @RequestMapping(value = "/appointment", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -211,10 +214,13 @@ public class AppointmentController {
 
         Client client = userService.findByEmail(email);
         Appointment appointment = appointmentService.findById(appId);
-        appointment.setTaken(true);
-        appointmentService.updateAppointment(appointment);
-        AppointmentHistory ah = new AppointmentHistory(appointment, client, false, true, false);
-        appointmentHistoryService.saveAppointmentHistory(ah);
+        try{
+            appointmentService.scheduleAppointment(appointment);
+        } catch(ObjectOptimisticLockingFailureException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+       AppointmentHistory ah = new AppointmentHistory(appointment, client, false, true, false);
+       appointmentHistoryService.saveAppointmentHistory(ah);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping(value="/send-confirmation-mail/{appId}")
