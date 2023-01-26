@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Appointment } from '../model/center-appointment.model';
 import { AppointmentService } from '../services/appointment.service';
-import {MatSort, Sort} from '@angular/material/sort';
+import { catchError, EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-center-appointments',
@@ -48,7 +48,11 @@ export class CenterAppointmentsComponent implements OnInit {
         alert("You dont fill out the requirements to donate blood.");
         return;
       }
-      this.appointmentService.takeAppointment(id).subscribe(res => {
+      this.appointmentService.takeAppointment(id).pipe(catchError(res => {
+        alert("This appointment is taken, try again!")
+        return EMPTY
+      }))
+      .subscribe(res => {
         alert("Appointment successfully scheduled!");
         this.router.navigate(['client/home']);
       });

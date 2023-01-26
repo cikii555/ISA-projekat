@@ -52,7 +52,7 @@ import { OccupingFreeAppointmentComponent } from './occuping-free-appointment/oc
         AdminModule,
         SystemAdminModule,
         MatCheckboxModule,
-        MatSortModule,
+        MatSortModule
     ],
 
 

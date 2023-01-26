@@ -30,6 +30,10 @@ public class Appointment {
     @JoinColumn(name="bloodTransfusionCenter_id")
     private BloodTransfusionCenter bloodTransfusionCenter;
 
+    @Version
+    @Column(columnDefinition = "integer DEFAULT 0", nullable = false)
+    private Integer version;
+
     public Appointment() {
     }
     public Appointment(AppointmentDTO appointmentDTO) {
@@ -76,6 +80,14 @@ public class Appointment {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public Set<MedicalStaff> getMedicalStaff() {

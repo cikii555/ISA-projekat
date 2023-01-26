@@ -5,10 +5,16 @@ import com.javaguide.ISAprojekat.dto.CenterAppointmentDTO;
 import com.javaguide.ISAprojekat.dto.AppointmentPresentationDTO;
 import com.javaguide.ISAprojekat.dto.TransfusionCenterDTO;
 import com.javaguide.ISAprojekat.model.Appointment;
+import com.javaguide.ISAprojekat.model.AppointmentHistory;
 import com.javaguide.ISAprojekat.model.BloodTransfusionCenter;
+import com.javaguide.ISAprojekat.model.Client;
+import com.javaguide.ISAprojekat.repository.AppointmentHistoryRepository;
 import com.javaguide.ISAprojekat.repository.AppointmentRepository;
 import com.javaguide.ISAprojekat.repository.TransfusionCenterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,14 +22,12 @@ import java.util.List;
 
 @Service
 public class AppointmentService {
-    private final AppointmentRepository appointmentRepository;
-    private final TransfusionCenterRepository transfusionCenterRepository;
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+    @Autowired
+    private TransfusionCenterRepository transfusionCenterRepository;
 
-    public AppointmentService(AppointmentRepository _appointmentRepository, TransfusionCenterRepository transfusionCenterRepository){
-        appointmentRepository=_appointmentRepository;
-        this.transfusionCenterRepository = transfusionCenterRepository;
 
-    }
     public void saveAppointment(AppointmentDTO appointmentDTO) {
         Appointment appointment = new Appointment(appointmentDTO);
         appointment.setBloodTransfusionCenter
@@ -47,6 +51,11 @@ public class AppointmentService {
 
     public Appointment updateAppointment(Appointment appointment) {
         return appointmentRepository.save(appointment);
+    }
+    @Transactional(readOnly = false)
+    public void scheduleAppointment(Appointment appointment) {
+        appointment.setTaken(true);
+        appointmentRepository.save(appointment);
     }
     public ArrayList<AppointmentPresentationDTO> GetAllByCenter(Integer centerId){
         ArrayList<Appointment> app =appointmentRepository.GetAllByCenter(centerId);
