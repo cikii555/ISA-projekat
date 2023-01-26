@@ -8,30 +8,30 @@ public class ReportDTO {
 
     private double quantity;
 
-    private double syringes_qunatity;
+    private double syringes_quantity;
     private double bags_quantity;
     private Long historyId;
 
-    private Integer ceneterId;
+    private Integer centerId;
 
-    public ReportDTO(BloodType bloodType, double quantity, double syringes_qunatity, double bags_quantity, Long historyId,Integer centerId) {
+    public ReportDTO(BloodType bloodType, double quantity, double syringes_quantity, double bags_quantity, Long historyId,Integer centerId) {
         this.bloodType = bloodType;
         this.quantity = quantity;
-        this.syringes_qunatity = syringes_qunatity;
+        this.syringes_quantity = syringes_quantity;
         this.bags_quantity = bags_quantity;
         this.historyId = historyId;
-        this.ceneterId = centerId;
+        this.centerId = centerId;
     }
 
     public ReportDTO() {
     }
 
     public Integer getCeneterId() {
-        return ceneterId;
+        return centerId;
     }
 
-    public void setCeneterId(Integer ceneterId) {
-        this.ceneterId = ceneterId;
+    public void setCeneterId(Integer centerId) {
+        this.centerId = centerId;
     }
 
     public BloodType getBloodType() {
@@ -50,12 +50,12 @@ public class ReportDTO {
         this.quantity = quantity;
     }
 
-    public double getSyringes_qunatity() {
-        return syringes_qunatity;
+    public double getSyringes_quantity() {
+        return syringes_quantity;
     }
 
     public void setSyringes_qunatity(double syringes_qunatity) {
-        this.syringes_qunatity = syringes_qunatity;
+        this.syringes_quantity = syringes_quantity;
     }
 
     public double getBags_quantity() {

@@ -1,4 +1,5 @@
 package com.javaguide.ISAprojekat.controller;
+import com.beust.jcommander.internal.Console;
 import com.google.zxing.WriterException;
 import com.javaguide.ISAprojekat.dto.AppointmentDTO;
 import com.javaguide.ISAprojekat.dto.AppointmentHistoryDTO;
@@ -154,7 +155,8 @@ public class AppointmentController {
     @PostMapping(consumes = "application/json",value="/report")
     @PreAuthorize("hasRole('MEDICALSTAFF')")
     public ResponseEntity<HttpStatus> addNewReport(@RequestBody ReportDTO report){
-
+            System.out.println(report);
+            System.out.println("hahahahhaha");
             Report newReport = new Report();
             newReport.setBloodType(report.getBloodType());
             newReport.setQuantity(report.getQuantity());

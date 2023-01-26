@@ -64,14 +64,15 @@ export class AppointmentService {
     return this.http.get<TransfusionCenter[]>(this.apiHost+'/appointment/getBanksForDate/'+string);
   }
   didntShowUp(clientId:any){
-    return this.http.get<any>(this.apiHost+'/clients/penalties/'+clientId)
+     this.http.get<any>(this.apiHost+'/clients/penalties/'+clientId)
   }
 
   canClientDonateBlood(clientId:any){
-    return this.http.get<any>(this.apiHost+'/clients/can/'+clientId)
+      return this.http.get<boolean>(this.apiHost+'/clients/can/'+clientId)
   }
   finishReport(report:any){
-    this.http.post(this.apiHost+'/appointment/report',report)
+    console.log("jesi li usao")
+      return this.http.post<any>(this.apiHost+'/appointment/report',report)
   }
 
   getAppointmentID(date:Date,name:String):Observable<number>{

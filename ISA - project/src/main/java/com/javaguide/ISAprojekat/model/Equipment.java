@@ -8,7 +8,9 @@ import java.util.Set;
 @Entity
 public class Equipment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    @SequenceGenerator(name = "my_seq_gen_user", sequenceName = "my_seq_gen_user", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_user")
     private Long id;
     @Column
     private String name;

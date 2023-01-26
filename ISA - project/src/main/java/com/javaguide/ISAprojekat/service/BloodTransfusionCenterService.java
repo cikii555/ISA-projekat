@@ -105,7 +105,7 @@ public class BloodTransfusionCenterService {
     public List<Equipment> EquipmentUsedForBloodDonation(ReportDTO report){
         Equipment eq = new Equipment();
         eq.setName("syringes");
-        eq.setQuantity(report.getSyringes_qunatity());
+        eq.setQuantity(report.getSyringes_quantity());
         Equipment equ = new Equipment();
         equ.setName("blood_bags");
         equ.setQuantity(report.getBags_quantity());

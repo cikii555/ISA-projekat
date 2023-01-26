@@ -24,7 +24,11 @@ public class Report {
         this.quantity = quantity;
         this.usedEquipment = usedEquipment;
     }
-
+    public Report (Long id, BloodType bloodType, double qunatity){
+        this.id = id;
+        this.bloodType = bloodType;
+        this.quantity = quantity;
+    }
     public Report() {
     }
 

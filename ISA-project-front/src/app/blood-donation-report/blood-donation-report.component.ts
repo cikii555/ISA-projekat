@@ -21,12 +21,12 @@ export class BloodDonationReportComponent implements OnInit {
   option:any
   blood =[BloodTypes.O_NEG,BloodTypes.O_POS,BloodTypes.A_NEG,BloodTypes.A_POS,BloodTypes.AB_NEG,BloodTypes.AB_POS,BloodTypes.B_POS,BloodTypes.B_NEG]
   report={
-    bloodType:'',
-    quantity:0,
-    syringes_qunatity:0,
-    centerId:0,
-    bags_quantity:0,
-    historyId:0
+    bloodType : 0,
+    quantity : 5,
+    syringes_quantity : 5,
+    bags_quantity: 5,
+    historyId : 1,
+    centerId : 1
 
 
 
@@ -68,8 +68,8 @@ export class BloodDonationReportComponent implements OnInit {
 
   }
   addNewReport(){
-
-  this.appointmentService.finishReport(this.report)
+  console.log(this.report)
+  this.appointmentService.finishReport(this.report).subscribe()
   }
 
 

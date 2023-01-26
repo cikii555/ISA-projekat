@@ -11,12 +11,28 @@ public class BloodDonationAppointmentDTO {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private Set<MedicalStaff> medicalStaff;
+    private int bloodTransfusionCenterId;
 
 
     public BloodDonationAppointmentDTO(LocalDateTime startDateTime, LocalDateTime endDateTime, Set<MedicalStaff> medicalStaff) {
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.medicalStaff = medicalStaff;
+    }
+
+    public BloodDonationAppointmentDTO(LocalDateTime startDateTime, LocalDateTime endDateTime, Set<MedicalStaff> medicalStaff, int bloodTransfusionCenterId) {
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.medicalStaff = medicalStaff;
+        this.bloodTransfusionCenterId = bloodTransfusionCenterId;
+    }
+
+    public int getBloodTransfusionCenterId() {
+        return bloodTransfusionCenterId;
+    }
+
+    public void setBloodTransfusionCenterId(int bloodTransfusionCenterId) {
+        this.bloodTransfusionCenterId = bloodTransfusionCenterId;
     }
 
     public BloodDonationAppointmentDTO() {

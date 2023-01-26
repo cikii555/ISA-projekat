@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MedicalStaffServiceService} from "../services/medical-staff-service.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {MedicalStaff} from "../model/medical-staff.model";
 import {FormControl} from "@angular/forms";
 import {BloodDonationAppointmentService} from "../services/blood-donation-appointment.service";
+import {AppointmentService} from "../services/appointment.service";
 
 
 interface Appointment {
@@ -12,9 +13,10 @@ interface Appointment {
 }
 export interface NewAppointment{
   date: any;
-  starttime:any;
-  endtime:any;
-  staff:any
+  startDateTime:any;
+  endDateTime:any;
+  medicalStaff:any;
+  bloodTransfusionCenterId:any
 }
 
 @Component({
@@ -24,7 +26,10 @@ export interface NewAppointment{
 })
 export class BloodDonationAppointmentComponent implements OnInit {
 
-  constructor( private medicalStaffService:MedicalStaffServiceService,private router:Router, private bloodAppointment:BloodDonationAppointmentService) { }
+  constructor( private medicalStaffService:MedicalStaffServiceService,private router:Router,
+               private bloodAppointment:BloodDonationAppointmentService,
+               private appointmentService:AppointmentService,
+               private route: ActivatedRoute) { }
   medicalStaff:MedicalStaff[]=[]
   id:number
   time:any
@@ -32,9 +37,10 @@ export class BloodDonationAppointmentComponent implements OnInit {
 
    newapp: NewAppointment = {
     date: '',
-    starttime: '',
-     endtime:'',
-    staff :[]
+    startDateTime: '',
+     endDateTime:'',
+    medicalStaff :[],
+     bloodTransfusionCenterId:0
 
 }
   medicalStaffSelected = new FormControl('');
@@ -48,12 +54,19 @@ export class BloodDonationAppointmentComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
 
-    this.medicalStaffService.getMedicalStaff(1).subscribe(res=>{
-      this.medicalStaff = res;
-      console.log(this.medicalStaffSelected.value)
-      this.medicalStaffSelected.valueChanges.subscribe(data => console.log(data));
+        this.newapp.bloodTransfusionCenterId = params['id'];
+
+      this.medicalStaffService.getMedicalStaff(this.newapp.bloodTransfusionCenterId).subscribe(res=>{
+        this.medicalStaff = res;
+        console.log(this.medicalStaffSelected.value)
+        this.medicalStaffSelected.valueChanges.subscribe(data => console.log(data));
+      })
     })
+
+
+
     console.log(this.medicalStaffSelected.value)
 
   }
@@ -63,7 +76,7 @@ pickedTime(event:any){
   console.log(this.time)
 }
 AddNewAppointment(){
-  this.newapp.staff = this.medicalStaffSelected.value
+  this.newapp.medicalStaff = this.medicalStaffSelected.value
   let stringified = JSON.stringify(this.newapp.date);
   console.log(stringified)
   stringified = stringified.split('T')[0]+'"';
@@ -76,11 +89,11 @@ AddNewAppointment(){
 
   console.log(dt);
   console.log(dte);
-  this.newapp.starttime = dt
-  this.newapp.endtime = dte
+  this.newapp.startDateTime = dt
+  this.newapp.endDateTime = dte
 
-  this.medicalStaffSelected.valueChanges.subscribe(data => this.newapp.staff = data);
-  console.log(this.newapp.staff)
+  this.medicalStaffSelected.valueChanges.subscribe(data => this.newapp.medicalStaff = data);
+  console.log(this.newapp.medicalStaff)
   this.bloodAppointment.addNewAppointment(this.newapp).subscribe()
 }
 

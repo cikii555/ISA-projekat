@@ -10,7 +10,7 @@ public class MedicalStaff extends User{
     @JoinColumn(name="blood_transfusion_center_id",referencedColumnName = "id")
     @JsonIgnore
     private BloodTransfusionCenter bloodTransfusionCenter;
-    @ManyToMany( cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToMany( cascade = {CascadeType.MERGE,CascadeType.DETACH})
     @JoinTable(name = "taking_blood", joinColumns = @JoinColumn(name = "appointment_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "staff_id", referencedColumnName = "id"))
     private Set<Appointment> appointments;
 

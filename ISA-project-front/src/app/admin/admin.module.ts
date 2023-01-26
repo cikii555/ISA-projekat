@@ -49,7 +49,7 @@ const routes: Routes = [
         {path:'tc',component:TransfusionCenterPanelComponent,children:[
           {path:'centerprofile', component:TransfusionCenterProfileComponent},
           {path:'admins', component:ViewOtherAdminsComponent},
-            {path:'createappointment', component:BloodDonationAppointmentComponent},
+            {path:'createappointment/:id', component:BloodDonationAppointmentComponent},
             {path:'bloodbanks',component:BloodBanksComponent},
             {path:'scheduled/:id/start/:ids',component:AppointmentPatientDetailsComponent},
             {path:'scheduled/:id/start/:ids/report/:idm',component:BloodDonationReportComponent},

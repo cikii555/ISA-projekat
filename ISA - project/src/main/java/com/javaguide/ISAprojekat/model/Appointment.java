@@ -12,12 +12,11 @@ import java.util.Set;
 @Entity
 public class Appointment {
     @Id
-    @SequenceGenerator(name = "my_seq_gen_app", sequenceName = "my_seq_gen_app", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "my_seq_gen_app", sequenceName = "my_seq_gen_app", initialValue = 6, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq_gen_app")
     private Long id;
 
-    @ManyToMany( cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
-    @JoinTable(name = "taking_blood", joinColumns = @JoinColumn(name = "appointment_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "staff_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "appointments")
     private Set<MedicalStaff> medicalStaff;
     @Column
     private LocalDateTime startTime;
