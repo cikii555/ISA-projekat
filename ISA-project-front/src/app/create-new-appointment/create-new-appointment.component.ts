@@ -28,7 +28,7 @@ export class CreateNewAppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.centerService.getBloodTransfusionCenterId().subscribe(res=>{
-      this.centerId = res;})
+      this.centerId = 1;})
   }
 
   public time:String="";
@@ -45,7 +45,7 @@ export class CreateNewAppointmentComponent implements OnInit {
 
     this.Appointment.startDate=this.datepicker;
 
-    this.Appointment.bloodTransfusionId=this.centerId;
+    this.Appointment.bloodTransfusionId="1";
     this.appointmentService.addAppointment(this.Appointment).subscribe(res =>{this.router.navigateByUrl('medical-staff/admin-center-dashboard');})
   }
 };
