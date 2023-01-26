@@ -35,11 +35,21 @@ public class Appointment {
 
     public Appointment() {
     }
+
     public Appointment(AppointmentDTO appointmentDTO) {
         this.setStartTime(appointmentDTO.getStartDate());
         this.setEndTime(appointmentDTO.getEndDate());
         this.taken=false;
     }
+
+    public Appointment(Set<MedicalStaff> medicalStaff, LocalDateTime startTime, LocalDateTime endTime, boolean taken, BloodTransfusionCenter bloodTransfusionCenter) {
+        this.medicalStaff = medicalStaff;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.taken = taken;
+        this.bloodTransfusionCenter = bloodTransfusionCenter;
+    }
+
 
     public LocalDateTime getStartTime() {
         return startTime;

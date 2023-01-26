@@ -5,6 +5,8 @@ import {MedicalStaff} from "../model/medical-staff.model";
 import {FormControl} from "@angular/forms";
 import {BloodDonationAppointmentService} from "../services/blood-donation-appointment.service";
 import {AppointmentService} from "../services/appointment.service";
+import {ToastrService} from "ngx-toastr";
+import {catchError, EMPTY} from "rxjs";
 
 
 interface Appointment {
@@ -29,7 +31,8 @@ export class BloodDonationAppointmentComponent implements OnInit {
   constructor( private medicalStaffService:MedicalStaffServiceService,private router:Router,
                private bloodAppointment:BloodDonationAppointmentService,
                private appointmentService:AppointmentService,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute,
+               private toastService:ToastrService) { }
   medicalStaff:MedicalStaff[]=[]
   id:number
   time:any
@@ -75,17 +78,17 @@ pickedTime(event:any){
   this.time = (event.source.value).split('-')
   console.log(this.time)
 }
-AddNewAppointment(){
+AddNewAppointment() {
   this.newapp.medicalStaff = this.medicalStaffSelected.value
   let stringified = JSON.stringify(this.newapp.date);
   console.log(stringified)
-  stringified = stringified.split('T')[0]+'"';
+  stringified = stringified.split('T')[0] + '"';
   console.log(stringified)
   //console.log(this.newapp.startime)
   this.newapp.date = stringified
-  var time_t = "09:56 AM" ;
-  var dt = new Date(stringified+this.time[0]);
-  var dte = new Date(stringified+this.time[1])
+  var time_t = "09:56 AM";
+  var dt = new Date(stringified + this.time[0]);
+  var dte = new Date(stringified + this.time[1])
 
   console.log(dt);
   console.log(dte);
@@ -94,7 +97,16 @@ AddNewAppointment(){
 
   this.medicalStaffSelected.valueChanges.subscribe(data => this.newapp.medicalStaff = data);
   console.log(this.newapp.medicalStaff)
-  this.bloodAppointment.addNewAppointment(this.newapp).subscribe()
-}
+  this.bloodAppointment.addNewAppointment(this.newapp).pipe(catchError(res => {
+    const error = res.error
+    this.toastService.error(error.Message)
+    return EMPTY
+  })).subscribe(res => {
+    this.toastService.success("Successfully created appointment")
+    setTimeout(() => {
+      this.router.navigateByUrl(('medical-staff/admin-center-dashboard'))
+    }, 1000)
+  })
 
+}
 }

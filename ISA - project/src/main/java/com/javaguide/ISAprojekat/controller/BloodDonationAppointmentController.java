@@ -29,8 +29,6 @@ public class BloodDonationAppointmentController {
 
     @PostMapping( value="/add")
     public ResponseEntity<BloodDonationAppointmentDTO> saveAppointment(@RequestBody BloodDonationAppointmentDTO bloodDonationAppointmentDTO) {
-        System.out.println(bloodDonationAppointmentDTO.getEndDateTime()+"caooooooooooo");
-        System.out.println(bloodDonationAppointmentDTO.getMedicalStaff().size()+"ahhahahah");
         Appointment bloodDonationApp = new Appointment();
         BloodTransfusionCenter center = bloodTransfusionCenterService.findOne(bloodDonationAppointmentDTO.getBloodTransfusionCenterId());
         bloodDonationApp.setStartTime(bloodDonationAppointmentDTO.getStartDateTime());

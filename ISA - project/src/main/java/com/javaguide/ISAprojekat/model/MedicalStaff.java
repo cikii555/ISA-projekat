@@ -17,6 +17,11 @@ public class MedicalStaff extends User{
     public MedicalStaff() {
     }
 
+    public MedicalStaff(int id,String password, String email, String firstName, String lastName, String phoneNumber,  String jmbg, String gender) {
+        super(id,password, email, firstName, lastName, phoneNumber, jmbg, gender);
+
+    }
+
     public BloodTransfusionCenter getBloodTransfusionCenter() {
         return bloodTransfusionCenter;
     }

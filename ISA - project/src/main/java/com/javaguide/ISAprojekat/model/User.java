@@ -59,6 +59,28 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public User(String password, String email, String firstName, String lastName, String phoneNumber, String jmbg, String gender, Role role) {
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.jmbg = jmbg;
+        this.gender = gender;
+        this.role = role;
+    }
+
+    public User(Integer id,String password, String email, String firstName, String lastName, String phoneNumber, String jmbg, String gender) {
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.jmbg = jmbg;
+        this.gender = gender;
+        this.id = id;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<Role> authorities = new ArrayList<>();

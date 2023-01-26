@@ -44,7 +44,11 @@ public class BloodTransfusionCenter {
   this.averageGrade = averageGrade;
  }
 
- public Integer getId() {
+    public BloodTransfusionCenter(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
   return id;
  }
 
